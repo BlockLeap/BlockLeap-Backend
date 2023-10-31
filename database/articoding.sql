@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2023 a las 12:53:19
+-- Tiempo de generación: 31-10-2023 a las 16:32:21
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -33,6 +33,14 @@ CREATE TABLE `level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `level`
+--
+
+INSERT INTO `level` (`id`, `level`) VALUES
+(1, '{\"name\":\"1\",\"rows\":5,\"columns\":5,\"objects\":[]}'),
+(2, '{\"name\":\"1\",\"rows\":3,\"columns\":6,\"objects\":[]}');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -50,7 +58,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT de la tabla `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
