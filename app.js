@@ -5,30 +5,31 @@ const path = require("path");
 const mysql = require("mysql");
 const configuration = require("./database/configuration");
 
-const DAONivel = require("./js/daos/daoNivel");
+const levelDAO = require("./js/daos/levelDAO");
 
 const pool = mysql.createPool(configuration.connection);
 
-let daoNivel = new DAONivel(pool);
+let levelDao = new levelDAO(pool);
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-const nivel = {
+const level = {
   name: "1",
-  rows: 5,
-  columns: 5,
+  rows: 3,
+  columns: 6,
   objects: [],
 };
 
 app.get("/", function (request, response) {
-  daoNivel.createLevel(JSON.stringify(nivel));
-  response.render("index");
+  levelDao.createLevel(JSON.stringify(level));
+  let a = levelDao.getLevelById(1);
+  response.render("index", { level: a });
 });
 
 app.listen(3000, function (error) {
-  if (error) console.log("El servidor no se ha podido conectar");
-  else console.log("Servidor ejecutandose en el puerto", 3000);
+  if (error) console.log("The server could not be connected");
+  else console.log("Server listening port", 3000);
 });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2023 a las 18:31:05
+-- Tiempo de generación: 30-10-2023 a las 12:53:19
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -24,29 +24,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `nivel`
+-- Estructura de tabla para la tabla `level`
 --
 
-CREATE TABLE `nivel` (
+CREATE TABLE `level` (
   `id` int(11) NOT NULL,
-  `nivel` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`nivel`))
+  `level` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`level`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `nivel`
---
-
-INSERT INTO `nivel` (`id`, `nivel`) VALUES
-(1, '{\"name\":\"1\",\"rows\":5,\"columns\":5,\"objects\":[]}');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `nivel`
+-- Indices de la tabla `level`
 --
-ALTER TABLE `nivel`
+ALTER TABLE `level`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54,10 +47,10 @@ ALTER TABLE `nivel`
 --
 
 --
--- AUTO_INCREMENT de la tabla `nivel`
+-- AUTO_INCREMENT de la tabla `level`
 --
-ALTER TABLE `nivel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
