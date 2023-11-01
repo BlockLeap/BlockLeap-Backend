@@ -1,0 +1,17 @@
+.navbar {
+    position: fixed;
+    width: 100%;
+    background-color: #fffc42c3;
+}
+
+.row {
+    width: 100%;
+}
+
+.access {
+    background-color: #ffdd00;
+}
+
+.rim {
+    border: 0.2rem solid black;
+}
