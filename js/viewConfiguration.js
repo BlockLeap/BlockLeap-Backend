@@ -1,6 +1,6 @@
 "use strict";
 
-// En este archivo vamos a guardar los normbres de las vistas
+// En este archivo guardamos los normbres de las vistas
 
 module.exports = {
   index: "index",

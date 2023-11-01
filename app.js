@@ -2,14 +2,16 @@
 
 const express = require("express");
 const path = require("path");
+const levelRouter = require("./router/levelRouter");
 
 const app = express();
 
+app.use("/level", levelRouter);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
-const levelRouter = require("./router/levelRouter");
-app.use("/level", levelRouter);
+app.use(express.static(path.join(__dirname, "public")));
+app.use("./css", express.static(path.resolve(__dirname, "public/css")));
+app.use("./images", express.static(path.resolve(__dirname, "public/images")));
 
 app.get("/", function (request, response) {
   response.redirect("/level/start");
