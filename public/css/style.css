@@ -1,9 +1,25 @@
-.navbar {
-    position: fixed;
-    width: 100%;
-    background-color: #fffc42c3;
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .row {
     width: 100%;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.below {
+    margin-top: 4rem;
+    height: 100rem;
 }
