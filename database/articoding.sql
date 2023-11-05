@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2023 a las 16:32:21
+-- Tiempo de generación: 03-11-2023 a las 11:35:04
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -18,47 +18,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `articoding`
---
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `level`
---
-
-CREATE TABLE `level` (
-  `id` int(11) NOT NULL,
-  `level` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`level`))
+CREATE TABLE `category` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `level`
---
+CREATE TABLE `user` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `level` (`id`, `level`) VALUES
-(1, '{\"name\":\"1\",\"rows\":5,\"columns\":5,\"objects\":[]}'),
-(2, '{\"name\":\"1\",\"rows\":3,\"columns\":6,\"objects\":[]}');
+--data es el nivel en json
+CREATE TABLE `comunity` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `author` int(11) NOT NULL,
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`)),
+  `name` varchar(20) NOT NULL,
+  FOREIGN KEY (`author`) REFERENCES `user`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Índices para tablas volcadas
---
+--level es el nivel en json
+CREATE TABLE `level` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `level` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`level`)),
+  `category` int(11) NOT NULL,
+   FOREIGN KEY (`category`) REFERENCES `category`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Indices de la tabla `level`
---
-ALTER TABLE `level`
-  ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `level`
---
-ALTER TABLE `level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
