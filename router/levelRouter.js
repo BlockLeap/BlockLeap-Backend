@@ -5,7 +5,7 @@ const LevelController = require("../controller/levelController");
 
 const levelController = new LevelController();
 
-// Operación de prueba para ver si funciona
+// Página principal
 levelRouter.get("/start", levelController.start);
 
 // levelRouter.get("/levelById/:id", levelController.getLevelById);
