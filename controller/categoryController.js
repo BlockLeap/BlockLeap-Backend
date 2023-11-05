@@ -9,13 +9,10 @@ class categoryController {
     this.categoryDAO = factoria.getCategoryDAO();
   }
 
-  start = async (request, response) => {
-    response.render(views.index);
-  };
-
   getCategories = async (request, response) => {
     let categories = new Array();
     categories = await this.categoryDAO.getCategories();
+    console.log(categories);
     response.render(views.index);
   };
 
