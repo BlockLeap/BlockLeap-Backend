@@ -25,11 +25,11 @@ app.get("/community", function(request,response){
   .then(result => {
     result = JSON.parse(JSON.stringify(result));
     console.log(result); // Aquí obtendrás el resultado una vez que la promesa se resuelva.
+    response.render("community", {result: result});
   })
   .catch(error => {
     console.error(error); // Manejar errores si la promesa es rechazada.
   });
-  //response.render("community", {});
 });
 
 app.listen(3000, function (error) {
