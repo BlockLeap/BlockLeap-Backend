@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2023 a las 13:17:40
+-- Tiempo de generación: 07-11-2023 a las 13:45:05
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -29,21 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL
+  `name` varchar(20) NOT NULL,
+  `description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Introducción'),
-(2, 'Variables'),
-(3, 'Tipos de datos'),
-(4, 'Operadores básicos'),
-(5, 'Bucles'),
-(6, 'Condiciones'),
-(7, 'Funciones');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES
+(1, 'Introducción', 'Comienza a jugar y aprende como funciona la aplicación.'),
+(2, 'Variables', 'Aprende a almacenar y usar datos. Crea nuevas variables y utilízalas en tu código.'),
+(3, 'Tipos de datos', 'Aprende a usar distintos tipos de datos en tu código como números, letras o palabras.'),
+(4, 'Operadores básicos', 'Aprende las distintas operaciones que puedes hacer con los distintos tipos de datos.'),
+(5, 'Bucles', ''),
+(6, 'Condiciones', ''),
+(7, 'Funciones', '');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,7 @@ CREATE TABLE `community` (
 
 CREATE TABLE `level` (
   `id` int(11) NOT NULL,
-  `level` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`level`)),
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
