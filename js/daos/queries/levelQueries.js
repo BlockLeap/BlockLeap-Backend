@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  createLevel: `INSERT INTO level(level) VALUES(?)`,
+  createLevel: `INSERT INTO level(data, category) VALUES(?, ?)`,
 
-  getLevelById: `SELECT * FROM level WHERE id like ?`,
+  getLevelsByCategory: `SELECT * FROM level WHERE category like ?`,
 };

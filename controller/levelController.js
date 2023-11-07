@@ -9,15 +9,10 @@ class levelController {
     this.levelDAO = factoria.getLevelDAO();
   }
 
-  start = async (request, response) => {
-    response.render(views.index);
-  };
-
-  // TODO obtener el nivel de los parámetros del request
-  getLevelById = async (request, response) => {
-    let level = await this.levelDAO.getLevelById(1);
-    let information = JSON.stringify(level);
-    console.log(information);
+  // TODO obtener la categoría de los parámetros del request
+  getLevelsByCategory = async (request, response) => {
+    let levels = await this.levelDAO.getLevelByCategory(1);
+    console.log(levels);
     response.render(views.index);
   };
 }

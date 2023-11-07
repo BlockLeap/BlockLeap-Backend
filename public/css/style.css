@@ -15,10 +15,29 @@ a:hover {
 
 .navbar {
     position: fixed;
+    z-index: 1;
     width: 100%;
     border-bottom-left-radius: 0.75rem;
 }
 
 .below {
-    height: 100rem;
+    padding-top: 5rem;
+}
+
+.card {
+    width: 100%;
+    background-color: whitesmoke;
+    border-style: none;
+    margin: 1.5rem;
+    border-radius: 2rem;
+}
+
+.card-img-top {
+    border-radius: 2rem;
+}
+
+.card-text {
+    font-weight: 700;
+    font-size: large;
+    text-align: right;
 }
