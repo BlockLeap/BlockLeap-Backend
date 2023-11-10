@@ -4,17 +4,14 @@ const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
 
 class categoryController {
-  #categories;
-
   constructor() {
     const factoria = new DAOFactory();
     this.categoryDAO = factoria.getCategoryDAO();
   }
 
   getCategories = async (request, response) => {
-    this.#categories = await this.categoryDAO.getCategories();
-    console.log(this.#categories);
-    response.render(views.index, { categories: this.#categories });
+    let categories = await this.categoryDAO.getCategories();
+    response.render(views.index, { categories: categories });
   };
 
   // TODO obtener la categoría de los parámetros del request

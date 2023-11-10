@@ -12,19 +12,16 @@
     <body class="bg-secondary">
         <%- include("navbar") %>
         <div class="container-fluid below">
-            <% categories.forEach((category) => { %>
+            <% levels.forEach((level) => { %>
                 <div class="row">
-                    <a class="card border-dark" href="/level/levelByCategory/<%= category.id %>">
-                        <h5 class="card-header card-title text-dark">
-                            <%= category.name %>
-                        </h5>
-                        <div class="card-body text-dark">
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                Niveles: <%= category.levels %>
-                            </h6>
-                            <%= category.description %>
+                    <div class="card border-dark">
+                        <div class="card-header">
+                            <%= level.id %>
                         </div>
-                    </a>
+                        <div class="card-body">
+                            <%= level.category %>
+                        </div>
+                    </div>
                 </div>
             <% }) %>
         </div>

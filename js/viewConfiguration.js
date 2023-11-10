@@ -4,6 +4,7 @@
 
 module.exports = {
   index: "index",
+  levels: "levels",
   // register: "register",
   // login: "login",
 };
