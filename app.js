@@ -5,12 +5,13 @@ const path = require("path");
 
 const levelRouter = require("./router/levelRouter");
 const categoryRouter = require("./router/categoryRouter");
-
+const communityRouter = require("./router/communityRouter");
 const app = express();
 
 app.use("/category", categoryRouter);
 app.use("/level", levelRouter);
 
+app.use("/community", communityRouter);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));

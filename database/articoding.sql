@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
@@ -103,6 +103,13 @@ ALTER TABLE `community`
 -- Indices de la tabla `level`
 --
 ALTER TABLE `level`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category` (`category`);
+
+--
+-- Indices de la tabla `user`
+--
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category` (`category`);
 

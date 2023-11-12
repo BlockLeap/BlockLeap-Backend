@@ -2,6 +2,7 @@ const { getPool } = require("../../database/configuration");
 
 const levelDAO = require("./levelDAO");
 const categoryDAO = require("./categoryDAO");
+const communityDAO = require("./communityDAO");
 
 class DAOFactory {
   getLevelDAO() {
@@ -10,6 +11,9 @@ class DAOFactory {
 
   getCategoryDAO() {
     return new categoryDAO(getPool());
+  }
+  getCommunityDAO() {
+    return new communityDAO(getPool());
   }
 }
 

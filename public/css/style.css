@@ -34,3 +34,13 @@ a:hover {
 .card:hover {
     background-color: lavender;
 }
+
+.card-img-top {
+    border-radius: 2rem 0;
+}
+
+.card-text {
+    font-weight: 700;
+    font-size: large;
+    text-align: right;
+}
