@@ -10,8 +10,8 @@ const app = express();
 
 app.use("/category", categoryRouter);
 app.use("/level", levelRouter);
-
 app.use("/community", communityRouter);
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
