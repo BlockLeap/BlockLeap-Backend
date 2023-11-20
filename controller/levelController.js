@@ -5,12 +5,13 @@ const DAOFactory = require("../js/daos/DAOFactory");
 
 class levelController {
   constructor() {
-    const factoria = new DAOFactory();
-    this.levelDAO = factoria.getLevelDAO();
+    const factory = new DAOFactory();
+    this.levelDAO = factory.getLevelDAO();
   }
 
   getLevelsByCategory = async (request, response) => {
     let levels = await this.levelDAO.getLevelsByCategory(request.params.id);
+    console.log(levels);
     response.render(views.levels, { levels: levels });
   };
 }

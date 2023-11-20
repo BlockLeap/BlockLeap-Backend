@@ -5,19 +5,22 @@ const DAOFactory = require("../js/daos/DAOFactory");
 
 class categoryController {
   constructor() {
-    const factoria = new DAOFactory();
-    this.categoryDAO = factoria.getCategoryDAO();
+    const factory = new DAOFactory();
+    this.categoryDAO = factory.getCategoryDAO();
+    this.levelDAO = factory.getLevelDAO();
   }
 
   getCategories = async (request, response) => {
     let categories = await this.categoryDAO.getCategories();
+    categories.forEach((category) => {
+      this.levelDAO.getLevelsByCategory(category.id).then(console.log());
+      console.log(levels);
+    });
     response.render(views.index, { categories: categories });
   };
 
-  // TODO obtener la categoría de los parámetros del request
   getCategoryById = async (request, response) => {
-    let category = await this.categoryDAO.getCategorylById(1);
-    console.log(category);
+    let category = await this.categoryDAO.getCategoryById(request.params.id);
     response.render(views.index, { categories: category });
   };
 }

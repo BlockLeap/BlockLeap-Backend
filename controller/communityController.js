@@ -7,8 +7,8 @@ class communityController {
   #levels;
 
   constructor() {
-    const factoria = new DAOFactory();
-    this.communityDAO = factoria.getCommunityDAO();
+    const factory = new DAOFactory();
+    this.communityDAO = factory.getCommunityDAO();
   }
 
   getLevels = async (request, response) => {
@@ -16,7 +16,6 @@ class communityController {
     this.#levels = JSON.parse(JSON.stringify(this.#levels));
     response.render(views.community, { result: this.#levels });
   };
-
 }
 
 module.exports = communityController;
