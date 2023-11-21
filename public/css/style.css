@@ -25,6 +25,11 @@ a:hover {
     padding-top: 5rem;
 }
 
+.card-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .card {
     width: 100%;
     background-color: whitesmoke;
