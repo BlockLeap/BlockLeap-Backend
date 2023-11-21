@@ -12,10 +12,6 @@ class categoryController {
 
   getCategories = async (request, response) => {
     let categories = await this.categoryDAO.getCategories();
-    categories.forEach((category) => {
-      this.levelDAO.getLevelsByCategory(category.id).then(console.log());
-      console.log(levels);
-    });
     response.render(views.index, { categories: categories });
   };
 

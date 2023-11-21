@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2023 a las 17:05:36
+-- Tiempo de generación: 21-11-2023 a las 17:39:28
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -89,6 +89,7 @@ CREATE TABLE `level` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `category` int(11) NOT NULL,
+  `self` int(11) NOT NULL,
   `name` varchar(25) NOT NULL,
   `data` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -167,7 +168,8 @@ ALTER TABLE `group`
 ALTER TABLE `level`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user` (`user`,`category`),
-  ADD KEY `category` (`category`);
+  ADD KEY `category` (`category`),
+  ADD KEY `self` (`self`);
 
 --
 -- Indices de la tabla `play`
@@ -240,7 +242,8 @@ ALTER TABLE `assigned`
 --
 ALTER TABLE `level`
   ADD CONSTRAINT `level_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `level_ibfk_2` FOREIGN KEY (`category`) REFERENCES `category` (`id`);
+  ADD CONSTRAINT `level_ibfk_2` FOREIGN KEY (`category`) REFERENCES `category` (`id`),
+  ADD CONSTRAINT `level_ibfk_3` FOREIGN KEY (`self`) REFERENCES `level` (`id`);
 
 --
 -- Filtros para la tabla `play`
