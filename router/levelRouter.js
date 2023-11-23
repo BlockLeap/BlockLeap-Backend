@@ -5,9 +5,8 @@ const LevelController = require("../controller/levelController");
 
 const levelController = new LevelController();
 
-// Página principal
-levelRouter.get("/levelByCategory/:id", levelController.getLevelsByCategory);
+levelRouter.get("/all", levelController.getCategories);
 
-// levelRouter.get("/levelById/:id", levelController.getLevelById);
+levelRouter.get("/levelsByCategory/:id", levelController.getLevelsByCategory);
 
 module.exports = levelRouter;

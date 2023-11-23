@@ -7,6 +7,10 @@ class userDAO extends BaseDAO {
   constructor(pool) {
     super(pool);
   }
+
+  async getUserById(id) {
+    return await this.query(userQueries.getUserById, [id]);
+  }
 }
 
 module.exports = userDAO;

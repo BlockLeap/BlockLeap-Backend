@@ -5,7 +5,7 @@
 module.exports = {
   index: "index",
   levels: "levels",
-  community: "community",
+  profile: "profile",
   // register: "register",
   // login: "login",
 };
