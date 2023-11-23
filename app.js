@@ -4,13 +4,11 @@ const express = require("express");
 const path = require("path");
 
 const levelRouter = require("./router/levelRouter");
-const categoryRouter = require("./router/categoryRouter");
-const communityRouter = require("./router/communityRouter");
+const userRouter = require("./router/userRouter");
 const app = express();
 
-app.use("/category", categoryRouter);
 app.use("/level", levelRouter);
-app.use("/community", communityRouter);
+app.use("/user", userRouter);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -20,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (request, response) {
-  response.redirect("/category/all");
+  response.redirect("/level/all");
 });
 
 app.listen(3000, function (error) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2023 a las 17:39:28
+-- Tiempo de generación: 23-11-2023 a las 17:03:11
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -90,9 +90,17 @@ CREATE TABLE `level` (
   `user` int(11) NOT NULL,
   `category` int(11) NOT NULL,
   `self` int(11) NOT NULL,
-  `name` varchar(25) NOT NULL,
+  `title` varchar(50) NOT NULL,
   `data` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `level`
+--
+
+INSERT INTO `level` (`id`, `user`, `category`, `self`, `title`, `data`) VALUES
+(1, 1, 1, 1, 'El secreto de Pascual', 0),
+(2, 2, 1, 2, 'Vigila por donde pisas', 0);
 
 -- --------------------------------------------------------
 
@@ -131,6 +139,14 @@ CREATE TABLE `user` (
   `role` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `role`, `password`) VALUES
+(1, 'Diego', 'Estudiante', '1234'),
+(2, 'Samuel', 'Admin', '12345');
 
 --
 -- Índices para tablas volcadas
@@ -211,13 +227,13 @@ ALTER TABLE `group`
 -- AUTO_INCREMENT de la tabla `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

@@ -15,6 +15,10 @@ class levelDAO extends BaseDAO {
   async getLevelsByCategory(id) {
     return await this.query(levelQueries.getLevelsByCategory, [id]);
   }
+
+  async getCommunityLevels() {
+    return await this.query(levelQueries.getCommunityLevels);
+  }
 }
 
 module.exports = levelDAO;

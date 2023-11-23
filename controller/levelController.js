@@ -15,6 +15,11 @@ class levelController {
     response.render(views.index, { categories: categories });
   };
 
+  getCommunityLevels = async (request, response) => {
+    let levels = await this.levelDAO.getCommunityLevels();
+    response.render(views.community, { levels: levels });
+  };
+
   getLevelsByCategory = async (request, response) => {
     let levels = await this.levelDAO.getLevelsByCategory(request.params.id);
     console.log(levels);
