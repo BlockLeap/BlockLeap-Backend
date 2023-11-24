@@ -13,7 +13,7 @@ class categoryDAO extends BaseDAO {
   }
 
   async getCategoryById(id) {
-    return await this.query(categoryQueries.getCategoriesById, [id]);
+    return await this.query(categoryQueries.getCategoryById, [id]);
   }
 }
 

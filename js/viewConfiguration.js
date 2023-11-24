@@ -5,9 +5,8 @@
 module.exports = {
   index: "index",
   levels: "levels",
+  community: "community",
+  profile: "profile",
   // register: "register",
   // login: "login",
-  community: "community"
 };
-
-//https://github.com/Articoding-Web/Backend/blob/principal/controller/categoryController.js

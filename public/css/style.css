@@ -18,10 +18,16 @@ a:hover {
     z-index: 1;
     width: 100%;
     border-bottom-left-radius: 0.75rem;
+    box-shadow: 0rem 0rem 1rem black;
 }
 
 .below {
     padding-top: 5rem;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .card {
@@ -29,14 +35,11 @@ a:hover {
     background-color: whitesmoke;
     margin: 1.5rem;
     border-radius: 1rem;
+    border: none;
 }
 
 .card:hover {
     background-color: lavender;
-}
-
-.card-img-top {
-    border-radius: 2rem 0;
 }
 
 .card-text {
