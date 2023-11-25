@@ -36,17 +36,6 @@ class levelController {
     response.render(views.index, { categories: this.#categories });
   };
 
-  // apiRouter.get("/destinations", function (req, res, next) {
-  //   Dao.getDestinos(function (err, destinations) {
-  //       if (err) {
-  //           next(err);
-  //       }
-  //       else {
-  //           sendEjs(res, "destination-grid", { destinations });
-  //       }
-  //   });
-  // });
-
   getCategories = async (request, response) => {
     this.#categories = await this.categoryDAO.getCategories();
     this.sendEjs(response, "categories", { categories: this.#categories });
