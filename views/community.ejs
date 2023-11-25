@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/images/logo.png" rel="shortcut icon">
-    <title>Community</title>
-</head>
-<body class="bg-secondary">
-    <%- include("navbar") %>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-          <% levels.forEach(function(level) { %>
-          <div class="col">
-            <div class="card">
-              <img class="card-img-top" src="/images/logo.png" alt="level">
-              <div class="card-body">
-                <h3 class="card-title"><%= level.title %></h3>
-                <p class="card-text">Autor: <%= level.name %></p>
+  <head>
+      <%- include("fragments/header") %>
+  </head>
+  <body class="bg-secondary">
+      <%- include("fragments/navbar") %>
+      <div class="container">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+            <% levels.forEach(function(level) { %>
+            <div class="col">
+              <div class="card">
+                <img class="card-img-top" src="/images/logo.png" alt="level">
+                <div class="card-body">
+                  <h3 class="card-title"><%= level.title %></h3>
+                  <p class="card-text">Autor: <%= level.name %></p>
+                </div>
               </div>
             </div>
+            <% }); %>
           </div>
-          <% }); %>
-        </div>
-    </div>
-</body>
+      </div>
+  </body>
 </html>

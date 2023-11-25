@@ -12,7 +12,7 @@ class userController {
   getUserById = async (request, response) => {
     let user = await this.userDAO.getUserById(request.params.id);
     console.log(user);
-    response.render(views.profile, { user: user });
+    response.render(views.profile, { user });
   };
 }
 

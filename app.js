@@ -3,10 +3,13 @@
 const express = require("express");
 const path = require("path");
 
+const apiRouter = require("./router/apiRouter");
 const levelRouter = require("./router/levelRouter");
 const userRouter = require("./router/userRouter");
+
 const app = express();
 
+app.use("/api", apiRouter);
 app.use("/level", levelRouter);
 app.use("/user", userRouter);
 
@@ -18,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (request, response) {
-  response.redirect("/level/all");
+  response.redirect("/api/categories");
 });
 
 app.listen(3000, function (error) {
