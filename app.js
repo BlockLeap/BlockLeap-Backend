@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (request, response) {
-  response.redirect("/api/categories");
+  response.redirect("level/categories");
 });
 
 app.listen(3000, function (error) {

@@ -33,7 +33,7 @@ class levelController {
   }
 
   categories = async (request, response) => {
-    response.render(views.index, { categories: this.#categories });
+    response.render(views.index);
   };
 
   getCategories = async (request, response) => {
