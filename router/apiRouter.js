@@ -9,5 +9,5 @@ const levelController = new LevelController();
 const userController = new UserController();
 
 apiRouter.get("/categories", levelController.getCategories);
-
+apiRouter.post("/level", levelController.createLevel);
 module.exports = apiRouter;

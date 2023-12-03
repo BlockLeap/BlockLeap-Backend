@@ -8,8 +8,8 @@ class levelDAO extends BaseDAO {
     super(pool);
   }
 
-  async createLevel(data, category) {
-    return await this.query(levelQueries.createLevel, [data, category]);
+  async createLevel(level) {
+    return await this.query(levelQueries.createLevel, [level.user, level.category, level.title, level.data]);
   }
 
   async getLevelsByCategory(id) {
