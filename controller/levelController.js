@@ -2,9 +2,6 @@
 
 const path = require("path");
 const ejs = require("ejs");
-const multer = require('multer');
-const storage = multer.memoryStorage(); // Almacenar los datos en memoria en lugar de en archivos
-const upload = multer({ storage: storage });
 
 const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
