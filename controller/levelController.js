@@ -1,16 +1,11 @@
 "use strict";
 
-const path = require("path");
-const ejs = require("ejs");
-
 const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
-const { response } = require("express");
-
-const fragments = path.join(__dirname, "../views/fragments");
 
 class levelController {
   #categories;
+  #all;
 
   constructor() {
     const factory = new DAOFactory();
@@ -18,28 +13,42 @@ class levelController {
     this.categoryDAO = factory.getCategoryDAO();
   }
 
-  sendEjs(response, name, data) {
-    ejs.renderFile(
-      path.join(fragments, `${name}.ejs`),
-      data,
-      {},
-      function (error, template) {
-        if (error) {
-          console.log(error);
-          next(error);
-        }
-        response.send(template);
-      }
-    );
-  }
-
-  categories = async (request, response) => {
-    response.render(views.index);
+  getCategories = async () => {
+    this.#all = document.getElementById("categories");
+    this.principal();
   };
 
-  getCategories = async (request, response) => {
-    this.#categories = await this.categoryDAO.getCategories();
-    this.sendEjs(response, "categories", { categories: this.#categories });
+  principal = async () => {
+    this.#all.innerHTML = categories();
+  };
+
+  categories = () => {
+    this.#categories = this.categoryDAO.getCategories();
+    let view = "";
+    for (category of categories) view += category(category);
+    return view;
+  };
+
+  category = (category) => {
+    let view = `
+      <div class="col">
+        <div class="card border-dark d-flex flex-column h-100">
+          <a href="/level/levelsByCategory/${category.id}">
+            <h5 class="card-header card-title text-dark">
+              ${category.name}
+            </h5>
+            <div class="card-body text-dark">
+              <h6 class="card-subtitle mb-2 text-muted">
+                <!-- TODO: Calcular el número de niveles de la categoría -->
+                Niveles: ${levels}
+              </h6>
+              ${category.description}
+            </div>
+          </a>
+        </div>
+      </div>
+    `;
+    return view;
   };
 
   createLevel = async (request, response) => {
