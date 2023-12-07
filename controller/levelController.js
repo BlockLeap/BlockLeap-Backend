@@ -5,31 +5,27 @@ const DAOFactory = require("../js/daos/DAOFactory");
 
 class levelController {
   #categories;
+  #levels;
   #all;
 
   constructor() {
     const factory = new DAOFactory();
     this.levelDAO = factory.getLevelDAO();
     this.categoryDAO = factory.getCategoryDAO();
+    this.#levels = 3;
   }
 
-  getCategories = async () => {
-    this.#all = document.getElementById("categories");
-    this.principal();
-  };
-
-  principal = async () => {
-    this.#all.innerHTML = categories();
-  };
-
-  categories = () => {
-    this.#categories = this.categoryDAO.getCategories();
+  getCategories = async (request, response) => {
+    this.#categories = await this.categoryDAO.getCategories();
+    console.log(this.#categories);
     let view = "";
-    for (category of categories) view += category(category);
-    return view;
+    this.#categories.forEach((category) => {
+      view += this.categoryDiv(category);
+    });
+    response.send(view);
   };
 
-  category = (category) => {
+  categoryDiv = (category) => {
     let view = `
       <div class="col">
         <div class="card border-dark d-flex flex-column h-100">
@@ -40,7 +36,7 @@ class levelController {
             <div class="card-body text-dark">
               <h6 class="card-subtitle mb-2 text-muted">
                 <!-- TODO: Calcular el número de niveles de la categoría -->
-                Niveles: ${levels}
+                Niveles: ${this.#levels}
               </h6>
               ${category.description}
             </div>
