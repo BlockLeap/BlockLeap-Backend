@@ -10,4 +10,6 @@ levelRouter
   .get("/categories", levelController.getCategories)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory);
 
+levelRouter.post("/create", levelController.createLevel);
+levelRouter.get("/:id", levelController.getLevelByid);
 module.exports = levelRouter;
