@@ -4,9 +4,7 @@ const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
 
 class levelController {
-  #categories;
   #levels;
-  #all;
 
   constructor() {
     const factory = new DAOFactory();
@@ -16,13 +14,12 @@ class levelController {
   }
 
   getCategories = async (request, response) => {
-    this.#categories = await this.categoryDAO.getCategories();
-    console.log(this.#categories);
-    let view = "";
-    this.#categories.forEach((category) => {
+    const categories = await this.categoryDAO.getCategories();
+    response.json(categories);
+    /*let view = "";
+    categories.forEach((category) => {
       view += this.categoryDiv(category);
-    });
-    response.send(view);
+    });*/
   };
 
   categoryDiv = (category) => {
