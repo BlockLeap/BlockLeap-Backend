@@ -53,6 +53,12 @@ class levelController {
     await this.levelDAO.createLevel();
   };
 
+  getLevelByid = async (request, response) =>{
+    const id = request.params.id;
+    let level = this.levelDAO.getLevelbyId(id);
+    response.json(level);
+  };
+
   getCommunityLevels = async (request, response) => {
     let levels = await this.levelDAO.getCommunityLevels();
     response.render(views.community, { levels });

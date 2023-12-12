@@ -10,6 +10,10 @@ class levelDAO extends BaseDAO {
 
   async createLevel(level) {
     return await this.query(levelQueries.createLevel, [level.user, level.category, level.title, level.data]);
+  } 
+
+  async getLevelbyId(id){
+    return await this.query(levelQueries.getLevelById, [id]);
   }
 
   async getLevelsByCategory(id) {
