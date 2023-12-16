@@ -50,10 +50,10 @@ class levelController {
     level.category = request.body.category;
     level.title = request.body.title;
     level.data = request.body.data;
-    await this.levelDAO.createLevel();
+    await this.levelDAO.createLevel(level);
   };
 
-  getLevelByid = async (request, response) =>{
+  getLevelById = async (request, response) => {
     const id = request.params.id;
     let level = this.levelDAO.getLevelbyId(id);
     response.json(level);
