@@ -1,45 +1,47 @@
 "use strict";
 
-const path = require("path");
-const ejs = require("ejs");
-
 const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
-const { response } = require("express");
-
-const fragments = path.join(__dirname, "../views/fragments");
 
 class levelController {
-  #categories;
+  #levels;
 
   constructor() {
     const factory = new DAOFactory();
     this.levelDAO = factory.getLevelDAO();
     this.categoryDAO = factory.getCategoryDAO();
+    this.#levels = 3;
   }
-
-  sendEjs(response, name, data) {
-    ejs.renderFile(
-      path.join(fragments, `${name}.ejs`),
-      data,
-      {},
-      function (error, template) {
-        if (error) {
-          console.log(error);
-          next(error);
-        }
-        response.send(template);
-      }
-    );
-  }
-
-  categories = async (request, response) => {
-    response.render(views.index);
-  };
 
   getCategories = async (request, response) => {
-    this.#categories = await this.categoryDAO.getCategories();
-    this.sendEjs(response, "categories", { categories: this.#categories });
+    const categories = await this.categoryDAO.getCategories();
+    response.json(categories);
+    /*let view = "";
+    categories.forEach((category) => {
+      view += this.categoryDiv(category);
+    });*/
+  };
+
+  categoryDiv = (category) => {
+    let view = `
+      <div class="col">
+        <div class="card border-dark d-flex flex-column h-100">
+          <a href="/level/levelsByCategory/${category.id}">
+            <h5 class="card-header card-title text-dark">
+              ${category.name}
+            </h5>
+            <div class="card-body text-dark">
+              <h6 class="card-subtitle mb-2 text-muted">
+                <!-- TODO: Calcular el número de niveles de la categoría -->
+                Niveles: ${this.#levels}
+              </h6>
+              ${category.description}
+            </div>
+          </a>
+        </div>
+      </div>
+    `;
+    return view;
   };
 
   createLevel = async (request, response) => {
@@ -48,7 +50,13 @@ class levelController {
     level.category = request.body.category;
     level.title = request.body.title;
     level.data = request.body.data;
-    await this.levelDAO.createLevel();
+    await this.levelDAO.createLevel(level);
+  };
+
+  getLevelById = async (request, response) => {
+    const id = request.params.id;
+    let level = this.levelDAO.getLevelbyId(id);
+    response.json(level);
   };
 
   getCommunityLevels = async (request, response) => {
