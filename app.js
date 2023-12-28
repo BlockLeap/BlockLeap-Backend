@@ -6,6 +6,7 @@ const cors = require("cors"); // Importa el middleware CORS
 
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
+const { runInNewContext } = require("vm");
 
 const app = express();
 
@@ -18,19 +19,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/level", levelRouter);
-app.use("/user", userRouter);
+app.use("/api/level", levelRouter);
+app.use("/api/user", userRouter);
 
 app.get("/", function (request, response) {
   response.redirect("level/categories");
 });
 
-// app.get("/login", function (request, response){
-//   console.log("Servidor funciona")
-//   response.send("Recibido");
-// })
-
-app.listen(3000, function (error) {
+app.listen(3001, function (error) {
   if (error) console.log("The server could not be connected");
-  else console.log("Server listening port", 3000);
+  else console.log("Server listening port", 3001);
 });

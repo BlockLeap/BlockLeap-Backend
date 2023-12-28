@@ -14,6 +14,11 @@ class userController {
     console.log(user);
     response.render(views.profile, { user });
   };
+
+  registerUser = async (request, response) =>{
+    console.log(request.body);
+  }
+
 }
 
 module.exports = userController;
