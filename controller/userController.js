@@ -2,6 +2,7 @@
 
 const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
+const bcrypt = require("bcrypt");
 
 class userController {
   constructor() {
@@ -16,8 +17,18 @@ class userController {
   };
 
   registerUser = async (request, response) =>{
-    console.log(request.body);
-  }
+    try{
+      let user = {};
+      user.name = request.body.userName;
+      user.role = "Estudiante";
+      user.password = bcrypt.hashSync(request.body.userPassword,11);
+      let result = await this.userDAO.createUser(user);
+      response.json(result.insertID);
+    }catch(error) {
+      console.error('Error al registrar usuario:', error);
+      response.status(500).json({ error: 'Error interno al registrar usuario'});
+    }
+  };
 
 }
 

@@ -22,8 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 
-app.get("/", function (request, response) {
-  response.redirect("level/categories");
+app.use((error, request, response, next) => {
+  console.error('Error inesperado:', error.message);
+  response.status(500).json({ error: 'Error interno del servidor' });
 });
 
 app.listen(3001, function (error) {
