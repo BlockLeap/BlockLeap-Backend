@@ -1,9 +1,8 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
 const categoryQueries = require("./queries/categoryQueries");
 
-class categoryDAO extends BaseDAO {
+class categoryDAO {
   constructor(pool) {
     super(pool);
   }

@@ -1,16 +1,8 @@
-const mysql = require("mysql");
+const { Sequelize } = require("sequelize");
 
-const connection = {
+const sequelize = new Sequelize("articoding", "root", "", {
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "articoding",
-};
+  dialect: "mysql",
+});
 
-const pool = mysql.createPool(connection);
-
-exports.getPool = () => {
-  return pool;
-};
-
-exports.connection = connection;
+exports.sequelize = sequelize;
