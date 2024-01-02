@@ -1,6 +1,6 @@
 "use strict";
 
-const categoryQueries = require("./queries/categoryQueries");
+const Category = require("../../database/model/category");
 
 class categoryDAO {
   sequelize;
@@ -10,11 +10,17 @@ class categoryDAO {
   }
 
   async getCategories() {
-    return await this.query(categoryQueries.getCategories);
+    await Category.sync();
+    return await Category.findAll();
   }
 
   async getCategoryById(id) {
-    return await this.query(categoryQueries.getCategoryById, [id]);
+    await Category.sync();
+    return await Category.findAll({
+      where: {
+        id: id,
+      },
+    });
   }
 }
 
