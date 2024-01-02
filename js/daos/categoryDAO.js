@@ -3,8 +3,10 @@
 const categoryQueries = require("./queries/categoryQueries");
 
 class categoryDAO {
-  constructor(pool) {
-    super(pool);
+  sequelize;
+
+  constructor(sequelize) {
+    this.sequelize = sequelize;
   }
 
   async getCategories() {

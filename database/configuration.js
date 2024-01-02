@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize("articoding", "root", "", {
   host: "localhost",
@@ -344,4 +344,4 @@ sequelize.define(
   }
 );
 
-exports.sequelize = sequelize;
+module.exports = sequelize;

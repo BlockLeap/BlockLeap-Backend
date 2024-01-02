@@ -6,9 +6,10 @@ const LevelController = require("../controller/levelController");
 
 const levelController = new LevelController();
 
-levelRouter.get("/categories", levelController.getCategories);
-levelRouter.get("/levelsByCategory/:id", levelController.getLevelsByCategory);
-levelRouter.post("/create", levelController.createLevel);
-levelRouter.get("/:id", levelController.getLevelById);
+levelRouter
+  .get("/categories", levelController.getCategories)
+  .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
+  .get("/:id", levelController.getLevelById)
+  .post("/create", levelController.createLevel);
 
 module.exports = levelRouter;

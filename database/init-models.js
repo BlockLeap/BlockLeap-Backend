@@ -18,28 +18,31 @@ function initModels(sequelize) {
   var set = _set(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
 
-  level.belongsTo(category, { as: "category_category", foreignKey: "category"});
-  category.hasMany(level, { as: "levels", foreignKey: "category"});
-  assigned.belongsTo(group, { as: "group_group", foreignKey: "group"});
-  group.hasMany(assigned, { as: "assigneds", foreignKey: "group"});
-  set.belongsTo(group, { as: "group_group", foreignKey: "group"});
-  group.hasMany(set, { as: "sets", foreignKey: "group"});
-  access.belongsTo(level, { as: "level_level", foreignKey: "level"});
-  level.hasMany(access, { as: "accesses", foreignKey: "level"});
-  assigned.belongsTo(level, { as: "level_level", foreignKey: "level"});
-  level.hasMany(assigned, { as: "assigneds", foreignKey: "level"});
-  level.belongsTo(level, { as: "self_level", foreignKey: "self"});
-  level.hasMany(level, { as: "levels", foreignKey: "self"});
-  play.belongsTo(level, { as: "level_level", foreignKey: "level"});
-  level.hasMany(play, { as: "plays", foreignKey: "level"});
-  access.belongsTo(user, { as: "user_user", foreignKey: "user"});
-  user.hasMany(access, { as: "accesses", foreignKey: "user"});
-  level.belongsTo(user, { as: "user_user", foreignKey: "user"});
-  user.hasMany(level, { as: "levels", foreignKey: "user"});
-  play.belongsTo(user, { as: "user_user", foreignKey: "user"});
-  user.hasMany(play, { as: "plays", foreignKey: "user"});
-  set.belongsTo(user, { as: "user_user", foreignKey: "user"});
-  user.hasMany(set, { as: "sets", foreignKey: "user"});
+  level.belongsTo(category, {
+    as: "category_category",
+    foreignKey: "category",
+  });
+  category.hasMany(level, { as: "levels", foreignKey: "category" });
+  assigned.belongsTo(group, { as: "group_group", foreignKey: "group" });
+  group.hasMany(assigned, { as: "assigneds", foreignKey: "group" });
+  set.belongsTo(group, { as: "group_group", foreignKey: "group" });
+  group.hasMany(set, { as: "sets", foreignKey: "group" });
+  access.belongsTo(level, { as: "level_level", foreignKey: "level" });
+  level.hasMany(access, { as: "accesses", foreignKey: "level" });
+  assigned.belongsTo(level, { as: "level_level", foreignKey: "level" });
+  level.hasMany(assigned, { as: "assigneds", foreignKey: "level" });
+  level.belongsTo(level, { as: "self_level", foreignKey: "self" });
+  level.hasMany(level, { as: "levels", foreignKey: "self" });
+  play.belongsTo(level, { as: "level_level", foreignKey: "level" });
+  level.hasMany(play, { as: "plays", foreignKey: "level" });
+  access.belongsTo(user, { as: "user_user", foreignKey: "user" });
+  user.hasMany(access, { as: "accesses", foreignKey: "user" });
+  level.belongsTo(user, { as: "user_user", foreignKey: "user" });
+  user.hasMany(level, { as: "levels", foreignKey: "user" });
+  play.belongsTo(user, { as: "user_user", foreignKey: "user" });
+  user.hasMany(play, { as: "plays", foreignKey: "user" });
+  set.belongsTo(user, { as: "user_user", foreignKey: "user" });
+  user.hasMany(set, { as: "sets", foreignKey: "user" });
 
   return {
     access,
@@ -52,6 +55,7 @@ function initModels(sequelize) {
     user,
   };
 }
+
 module.exports = initModels;
 module.exports.initModels = initModels;
 module.exports.default = initModels;

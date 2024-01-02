@@ -1,18 +1,24 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
 const levelQueries = require("./queries/levelQueries");
 
-class levelDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+class levelDAO {
+  sequelize;
+
+  constructor(sequelize) {
+    this.sequelize = sequelize;
   }
 
   async createLevel(level) {
-    return await this.query(levelQueries.createLevel, [level.user, level.category, level.title, level.data]);
-  } 
+    return await this.query(levelQueries.createLevel, [
+      level.user,
+      level.category,
+      level.title,
+      level.data,
+    ]);
+  }
 
-  async getLevelbyId(id){
+  async getLevelbyId(id) {
     return await this.query(levelQueries.getLevelById, [id]);
   }
 
