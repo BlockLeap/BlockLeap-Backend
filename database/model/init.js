@@ -8,7 +8,7 @@ var _play = require("./play");
 var _set = require("./set");
 var _user = require("./user");
 
-function initModels(sequelize) {
+function init(sequelize) {
   var access = _access(sequelize, DataTypes);
   var assigned = _assigned(sequelize, DataTypes);
   var category = _category(sequelize, DataTypes);
@@ -56,6 +56,6 @@ function initModels(sequelize) {
   };
 }
 
-module.exports = initModels;
-module.exports.initModels = initModels;
-module.exports.default = initModels;
+module.exports = init;
+module.exports.init = init;
+module.exports.default = init;
