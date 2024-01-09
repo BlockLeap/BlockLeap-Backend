@@ -1,7 +1,5 @@
 "use strict";
 
-const userQueries = require("./queries/userQueries");
-
 class userDAO {
   sequelize;
 

@@ -1,7 +1,5 @@
 "use strict";
 
-const levelQueries = require("./queries/levelQueries");
-
 class levelDAO {
   sequelize;
 

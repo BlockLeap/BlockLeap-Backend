@@ -1,7 +1,5 @@
 "use strict";
 
-const setQueries = require("./queries/setQueries");
-
 class setDAO {
   sequelize;
 

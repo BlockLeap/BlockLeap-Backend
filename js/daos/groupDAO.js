@@ -1,7 +1,5 @@
 "use strict";
 
-const groupQueries = require("./queries/groupQueries");
-
 class groupDAO {
   sequelize;
 

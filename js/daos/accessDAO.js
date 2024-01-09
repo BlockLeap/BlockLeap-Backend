@@ -1,7 +1,5 @@
 "use strict";
 
-const accessQueries = require("./queries/accessQueries");
-
 class accessDAO {
   sequelize;
 

@@ -1,11 +1,18 @@
+require("dotenv").config();
+
 const { Sequelize } = require("sequelize");
 
 const init = require("./model/init");
 
-const sequelize = new Sequelize("articoding", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  process.env.DB_SCHEMA,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+  }
+);
 
 init(sequelize);
 

@@ -1,6 +1,6 @@
 "use strict";
 
-const port = 3001;
+require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
@@ -28,7 +28,7 @@ app.use((error, request, response, next) => {
   response.status(500).json({ error: "Error interno del servidor" });
 });
 
-app.listen(port, function (error) {
+app.listen(process.env.DB_PORT, function (error) {
   if (error) console.log("The server could not be connected");
-  else console.log("Server listening port", port);
+  else console.log("Server listening port", process.env.DB_PORT);
 });

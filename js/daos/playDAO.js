@@ -1,7 +1,5 @@
 "use strict";
 
-const playQueries = require("./queries/playQueries");
-
 class playDAO {
   sequelize;
 
