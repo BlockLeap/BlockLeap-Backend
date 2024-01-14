@@ -1,5 +1,3 @@
-const sequelize = require("../../database/configuration");
-
 const levelDAO = require("./levelDAO");
 const categoryDAO = require("./categoryDAO");
 const accessDAO = require("./accessDAO");
@@ -11,35 +9,35 @@ const userDAO = require("./userDAO");
 
 class DAOFactory {
   getLevelDAO() {
-    return new levelDAO(sequelize);
+    return new levelDAO();
   }
 
   getCategoryDAO() {
-    return new categoryDAO(sequelize);
+    return new categoryDAO();
   }
 
   getAccessDAO() {
-    return new accessDAO(sequelize);
+    return new accessDAO();
   }
 
   getPlayDAO() {
-    return new playDAO(sequelize);
+    return new playDAO();
   }
 
   getAssignedDAO() {
-    return new assignedDAO(sequelize);
+    return new assignedDAO();
   }
 
   getGroupDAO() {
-    return new groupDAO(sequelize);
+    return new groupDAO();
   }
 
   getSetDAO() {
-    return new setDAO(sequelize);
+    return new setDAO();
   }
 
   getUserDAO() {
-    return new userDAO(sequelize);
+    return new userDAO();
   }
 }
 

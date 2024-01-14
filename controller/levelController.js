@@ -14,13 +14,17 @@ class levelController {
   }
 
   getCategories = async (request, response) => {
+    console.log("He llegado");
     const categories = await this.categoryDAO.getCategories();
+    console.log(categories);
     response.json(categories);
     /*let view = "";
     categories.forEach((category) => {
       view += this.categoryDiv(category);
     });*/
   };
+
+  // ESTO DE ABAJO HAY QUE PASARLO AL CLIENTE
 
   categoryDiv = (category) => {
     let view = `

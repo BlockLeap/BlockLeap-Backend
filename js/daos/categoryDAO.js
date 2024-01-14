@@ -1,17 +1,17 @@
 "use strict";
 
-const Category = require("../../database/model/category");
+const sequelize = require("../../database/configuration");
 
 class categoryDAO {
-  sequelize;
+  category;
 
-  constructor(sequelize) {
-    this.sequelize = sequelize;
+  constructor() {
+    this.category = sequelize.models.category;
   }
 
   async getCategories() {
-    await Category.sync();
-    return await Category.findAll();
+    await this.category.sync();
+    return await this.category.findAll();
   }
 
   async getCategoryById(id) {
