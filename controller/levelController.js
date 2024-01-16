@@ -47,32 +47,6 @@ class levelController {
     `;
     return view;
   };
-
-  createLevel = async (request, response) => {
-    let level = {};
-    level.user = request.body.user;
-    level.category = request.body.category;
-    level.title = request.body.title;
-    level.data = request.body.data;
-    await this.levelDAO.createLevel(level);
-  };
-
-  getLevelById = async (request, response) => {
-    const id = request.params.id;
-    let level = this.levelDAO.getLevelbyId(id);
-    response.json(level);
-  };
-
-  getCommunityLevels = async (request, response) => {
-    let levels = await this.levelDAO.getCommunityLevels();
-    response.render(views.community, { levels });
-  };
-
-  getLevelsByCategory = async (request, response) => {
-    let levels = await this.levelDAO.getLevelsByCategory(request.params.id);
-    console.log(levels);
-    response.render(views.levels, { levels });
-  };
 }
 
 module.exports = levelController;
