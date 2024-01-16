@@ -1,22 +1,17 @@
 "use strict";
 
+const sequelize = require("../../database/configuration");
+
 class userDAO {
-  sequelize;
+  user;
 
-  constructor(sequelize) {
-    this.sequelize = sequelize;
+  constructor() {
+    this.user = sequelize.models.user;
   }
 
-  async getUserById(id) {
-    return await this.query(userQueries.getUserById, [id]);
-  }
-
-  async createUser(user) {
-    return await this.query(userQueries.createUser, [
-      user.name,
-      user.role,
-      user.password,
-    ]);
+  async getUsers() {
+    await this.user.sync();
+    return await this.user.findAll();
   }
 }
 

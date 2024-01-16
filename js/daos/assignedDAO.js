@@ -1,10 +1,17 @@
 "use strict";
 
-class assignedDAO {
-  sequelize;
+const sequelize = require("../../database/configuration");
 
-  constructor(sequelize) {
-    this.sequelize = sequelize;
+class assignedDAO {
+  assigned;
+
+  constructor() {
+    this.assigned = sequelize.models.assigned;
+  }
+
+  async getAssigned() {
+    await this.assigned.sync();
+    return await this.assigned.findAll();
   }
 }
 

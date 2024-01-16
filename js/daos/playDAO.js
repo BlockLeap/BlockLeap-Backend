@@ -1,10 +1,17 @@
 "use strict";
 
-class playDAO {
-  sequelize;
+const sequelize = require("../../database/configuration");
 
-  constructor(sequelize) {
-    this.sequelize = sequelize;
+class playDAO {
+  play;
+
+  constructor() {
+    this.play = sequelize.models.play;
+  }
+
+  async getPlays() {
+    await this.play.sync();
+    return await this.play.findAll();
   }
 }
 

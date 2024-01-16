@@ -1,10 +1,17 @@
 "use strict";
 
-class groupDAO {
-  sequelize;
+const sequelize = require("../../database/configuration");
 
-  constructor(sequelize) {
-    this.sequelize = sequelize;
+class groupDAO {
+  group;
+
+  constructor() {
+    this.group = sequelize.models.group;
+  }
+
+  async getGroups() {
+    await this.group.sync();
+    return await this.group.findAll();
   }
 }
 
