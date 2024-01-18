@@ -1,11 +1,9 @@
 "use strict";
 
-const sequelize = require("../../database/configuration");
-
 class setDAO {
   set;
 
-  constructor() {
+  constructor(sequelize) {
     this.set = sequelize.models.set;
   }
 

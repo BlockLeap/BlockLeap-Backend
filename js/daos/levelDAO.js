@@ -1,11 +1,9 @@
 "use strict";
 
-const sequelize = require("../../database/configuration");
-
 class levelDAO {
   level;
 
-  constructor() {
+  constructor(sequelize) {
     this.level = sequelize.models.level;
   }
 

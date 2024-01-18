@@ -1,11 +1,9 @@
 "use strict";
 
-const sequelize = require("../../database/configuration");
-
 class categoryDAO {
   category;
 
-  constructor() {
+  constructor(sequelize) {
     this.category = sequelize.models.category;
   }
 

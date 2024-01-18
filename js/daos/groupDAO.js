@@ -1,11 +1,9 @@
 "use strict";
 
-const sequelize = require("../../database/configuration");
-
 class groupDAO {
   group;
 
-  constructor() {
+  constructor(sequelize) {
     this.group = sequelize.models.group;
   }
 

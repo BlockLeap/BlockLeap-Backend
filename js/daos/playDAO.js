@@ -1,11 +1,9 @@
 "use strict";
 
-const sequelize = require("../../database/configuration");
-
 class playDAO {
   play;
 
-  constructor() {
+  constructor(sequelize) {
     this.play = sequelize.models.play;
   }
 
