@@ -13,8 +13,8 @@ class categoryDAO {
   }
 
   async getCategoryById(id) {
-    await Category.sync();
-    return await Category.findAll({
+    await this.category.sync();
+    return await this.category.findAll({
       where: {
         id: id,
       },
