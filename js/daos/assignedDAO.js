@@ -1,11 +1,15 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const assignedQueries = require("./queries/assignedQueries");
+class assignedDAO {
+  assigned;
 
-class assignedDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.assigned = sequelize.models.assigned;
+  }
+
+  async getAssigned() {
+    await this.assigned.sync();
+    return await this.assigned.findAll();
   }
 }
 

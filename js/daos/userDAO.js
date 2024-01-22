@@ -1,15 +1,15 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const userQueries = require("./queries/userQueries");
+class userDAO {
+  user;
 
-class userDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.user = sequelize.models.user;
   }
 
-  async getUserById(id) {
-    return await this.query(userQueries.getUserById, [id]);
+  async getUsers() {
+    await this.user.sync();
+    return await this.user.findAll();
   }
 }
 

@@ -1,11 +1,15 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const accessQueries = require("./queries/accessQueries");
+class accessDAO {
+  access;
 
-class accessDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.access = sequelize.models.access;
+  }
+
+  async getAccess() {
+    await this.access.sync();
+    return await this.access.findAll();
   }
 }
 

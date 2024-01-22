@@ -1,11 +1,15 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const groupQueries = require("./queries/groupQueries");
+class groupDAO {
+  group;
 
-class groupDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.group = sequelize.models.group;
+  }
+
+  async getGroups() {
+    await this.group.sync();
+    return await this.group.findAll();
   }
 }
 

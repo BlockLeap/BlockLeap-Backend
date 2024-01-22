@@ -1,19 +1,24 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const categoryQueries = require("./queries/categoryQueries");
+class categoryDAO {
+  category;
 
-class categoryDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.category = sequelize.models.category;
   }
 
   async getCategories() {
-    return await this.query(categoryQueries.getCategories);
+    await this.category.sync();
+    return await this.category.findAll();
   }
 
   async getCategoryById(id) {
-    return await this.query(categoryQueries.getCategoryById, [id]);
+    await this.category.sync();
+    return await this.category.findAll({
+      where: {
+        id: id,
+      },
+    });
   }
 }
 

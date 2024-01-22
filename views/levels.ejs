@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        <link href="/css/style.css" rel="stylesheet">
-        <link href="/images/logo.png" rel="shortcut icon">
-        <title>Articoding</title>
+        <%- include("fragments/header") %>
     </head>
     <body class="bg-secondary">
-        <%- include("navbar") %>
+        <%- include("fragments/navbar") %>
         <div class="container-fluid below">
             <% levels.forEach((level) => { %>
                 <div class="row">
                     <div class="card border-dark">
                         <div class="card-header">
-                            <%= level.id %>
+                            <%= level.id %>. <%= level.title %>
                         </div>
                         <div class="card-body">
-                            Categoría: <%= level.category %>
+                            Miniatura: 
                         </div>
                     </div>
                 </div>

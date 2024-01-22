@@ -1,27 +1,34 @@
 "use strict";
 
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 
-const levelRouter = require("./router/levelRouter");
-const userRouter = require("./router/userRouter");
+const levelRouter = require("./routes/levelRouter");
+const userRouter = require("./routes/userRouter");
+
 const app = express();
-
-app.use("/level", levelRouter);
-app.use("/user", userRouter);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", function (request, response) {
-  response.redirect("/level/all");
+app.use("/api/level", levelRouter);
+app.use("/api/user", userRouter);
+
+app.use((error, request, response, next) => {
+  console.error("Error inesperado:", error.message);
+  response.status(500).json({ error: "Error interno del servidor" });
 });
 
-app.listen(3000, function (error) {
+app.listen(process.env.DB_PORT, function (error) {
   if (error) console.log("The server could not be connected");
-  else console.log("Server listening port", 3000);
+  else console.log("Server listening port", process.env.DB_PORT);
 });

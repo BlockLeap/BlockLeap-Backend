@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2023 a las 17:03:11
+-- Tiempo de generación: 25-11-2023 a las 17:12:10
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -91,7 +91,7 @@ CREATE TABLE `level` (
   `category` int(11) NOT NULL,
   `self` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `data` int(11) NOT NULL
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -99,8 +99,8 @@ CREATE TABLE `level` (
 --
 
 INSERT INTO `level` (`id`, `user`, `category`, `self`, `title`, `data`) VALUES
-(1, 1, 1, 1, 'El secreto de Pascual', 0),
-(2, 2, 1, 2, 'Vigila por donde pisas', 0);
+(1, 1, 1, 1, 'El secreto de Pascual', '0'),
+(2, 2, 1, 2, 'Vigila por donde pisas', '0');
 
 -- --------------------------------------------------------
 

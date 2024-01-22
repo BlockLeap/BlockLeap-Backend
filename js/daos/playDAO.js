@@ -1,11 +1,15 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const playQueries = require("./queries/playQueries");
+class playDAO {
+  play;
 
-class playDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.play = sequelize.models.play;
+  }
+
+  async getPlays() {
+    await this.play.sync();
+    return await this.play.findAll();
   }
 }
 

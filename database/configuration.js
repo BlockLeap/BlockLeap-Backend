@@ -1,16 +1,19 @@
-const mysql = require("mysql");
+require("dotenv").config();
 
-const connection = {
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "articoding",
-};
+const { Sequelize } = require("sequelize");
 
-const pool = mysql.createPool(connection);
+const init = require("./model/init");
 
-exports.getPool = () => {
-  return pool;
-};
+const sequelize = new Sequelize(
+  process.env.DB_SCHEMA,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+  }
+);
 
-exports.connection = connection;
+init(sequelize);
+
+module.exports = sequelize;

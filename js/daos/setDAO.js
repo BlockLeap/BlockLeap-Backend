@@ -1,11 +1,15 @@
 "use strict";
 
-const BaseDAO = require("./baseDAO");
-const setQueries = require("./queries/setQueries");
+class setDAO {
+  set;
 
-class setDAO extends BaseDAO {
-  constructor(pool) {
-    super(pool);
+  constructor(sequelize) {
+    this.set = sequelize.models.set;
+  }
+
+  async getSets() {
+    await this.set.sync();
+    return await this.set.findAll();
   }
 }
 
