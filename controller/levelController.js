@@ -24,6 +24,17 @@ class levelController {
     });*/
   };
 
+  getLevel = async (request, response) => {
+    const id = request.params.id;
+    const level = await this.levelDAO.getLevel(id);
+    if(level == null){
+      response.status(404).json({ error: 'Not Found' });
+    }
+    else{
+      response.json(level);
+    }
+  }
+
   // ESTO DE ABAJO HAY QUE PASARLO AL CLIENTE
 
   categoryDiv = (category) => {
