@@ -1,9 +1,8 @@
-import { ErrorCode } from "./errorCode"
-import { ErrorException } from "./ErrorException"
+const { ErrorCode } = require ("./errorCode")
+const { ErrorException } = require ("./ErrorException")
 
-export const errorHandler = (err, req, res, next) => {
+function errorHandler  (err, req, res, next){
   console.log("Error handling middleware called.")
-  console.log("Path:", req.path)
   console.error("Error occured:", err)
   if (err instanceof ErrorException) {
     console.log("Error is known.")
@@ -16,3 +15,7 @@ export const errorHandler = (err, req, res, next) => {
     })
   }
 }
+
+module.exports = {
+  errorHandler
+};

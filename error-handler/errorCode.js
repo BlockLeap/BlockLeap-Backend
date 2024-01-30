@@ -12,4 +12,7 @@ class ErrorCode {
     }
 }
 
-export {ErrorCode};
+module.exports = {
+    ErrorCode
+};
+

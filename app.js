@@ -9,6 +9,8 @@ const cors = require("cors");
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
 const { errorHandler } = require("./error-handler/errorHandler");
+const { ErrorCode } = require("./error-handler/errorCode");
+const { ErrorException } = require("./error-handler/ErrorException");
 
 const app = express();
 
@@ -24,7 +26,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 
-app.use(errorHandler);
+// Example
+// app.get('/error', (req, res) => {
+//   throw new ErrorException(ErrorCode.Unauthenticated);
+// });
+
+app.use((err, req, res, next) => {
+  errorHandler(err, req, res, next);
+});
 
 app.listen(process.env.DB_PORT, function (error) {
   if (error) console.log("The server could not be connected");

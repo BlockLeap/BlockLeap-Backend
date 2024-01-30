@@ -6,4 +6,6 @@ class ErrorModel {
     }
 }
 
-export { ErrorModel };
+module.exports = {
+    ErrorModel
+};
