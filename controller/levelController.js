@@ -24,14 +24,13 @@ class levelController {
     });*/
   };
 
-  getLevel = async (request, response) => {
+  getLevel = async (request, response, next) => {
     const id = request.params.id;
-    const level = await this.levelDAO.getLevel(id);
-    if(level == null){
-      response.status(404).json({ error: 'Not Found' });
-    }
-    else{
+    try{
+      const level = await this.levelDAO.getLevel(id);
       response.json(level);
+    } catch(err) {
+      next(err);
     }
   }
 
