@@ -8,6 +8,7 @@ const cors = require("cors");
 
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
+const { errorHandler } = require("./error-handler/errorHandler");
 
 const app = express();
 
@@ -23,10 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 
-app.use((error, request, response, next) => {
-  console.error("Error inesperado:", error.message);
-  response.status(500).json({ error: "Error interno del servidor" });
-});
+app.use(errorHandler);
 
 app.listen(process.env.DB_PORT, function (error) {
   if (error) console.log("The server could not be connected");
