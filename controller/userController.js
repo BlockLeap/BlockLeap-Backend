@@ -1,7 +1,7 @@
 "use strict";
 
-const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
+
 const bcrypt = require("bcrypt");
 
 class userController {

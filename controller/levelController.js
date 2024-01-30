@@ -1,20 +1,15 @@
 "use strict";
 
-const views = require("../js/viewConfiguration");
 const DAOFactory = require("../js/daos/DAOFactory");
 
 class levelController {
-  #levels;
-
   constructor() {
     const factory = new DAOFactory();
     this.levelDAO = factory.getLevelDAO();
     this.categoryDAO = factory.getCategoryDAO();
-    this.#levels = 3;
   }
 
   getCategories = async (request, response) => {
-    console.log("He llegado");
     const categories = await this.categoryDAO.getCategories();
     console.log(categories);
     response.json(categories);
