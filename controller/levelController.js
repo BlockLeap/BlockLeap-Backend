@@ -14,6 +14,17 @@ class levelController {
     console.log(categories);
     response.json(categories);
   };
+
+  getLevel = async (request, response, next) => {
+    const id = request.params.id;
+    try{
+      const level = await this.levelDAO.getLevel(id);
+      response.json(level);
+    } catch(err) {
+      next(err);
+    }
+  }
+
 }
 
 module.exports = levelController;
