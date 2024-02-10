@@ -10,15 +10,19 @@ class ErrorException extends Error {
     this.status = 500
     this.metaData = metaData
     switch (code) {
-      case ErrorCode.Unauthenticated:
+      case ErrorCode.Unauthorized:
         this.status = 401
         break
+      case ErrorCode.NotUserFound:
       case ErrorCode.NotFound:
         this.status = 404
         break
-      default:
+      case ErrorCode.InternalServerError:
+      case ErrorCode.CantCreate:
         this.status = 500
         break
+      default:
+        this.status = 500
     }
   }
 }
