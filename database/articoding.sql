@@ -199,8 +199,9 @@ ALTER TABLE `play`
 -- Indices de la tabla `set`
 --
 ALTER TABLE `set`
-  ADD KEY `group` (`group`,`user`),
-  ADD KEY `user` (`user`);
+  ADD PRIMARY KEY (`group`,`user`),
+  ADD KEY `user` (`user`),
+  ADD KEY `group` (`group`) USING BTREE;
 
 --
 -- Indices de la tabla `user`
