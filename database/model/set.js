@@ -5,6 +5,8 @@ module.exports = function (sequelize, DataTypes) {
       group: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true, 
+        autoIncrement: false, 
         references: {
           model: "group",
           key: "id",
@@ -13,6 +15,8 @@ module.exports = function (sequelize, DataTypes) {
       user: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true, 
+        autoIncrement: false, 
         references: {
           model: "user",
           key: "id",
@@ -29,9 +33,15 @@ module.exports = function (sequelize, DataTypes) {
       timestamps: false,
       indexes: [
         {
-          name: "group",
+          name: "PRIMARY",
+          unique: true,
           using: "BTREE",
           fields: [{ name: "group" }, { name: "user" }],
+        },
+        {
+          name: "group",
+          using: "BTREE",
+          fields: [{ name: "group" }],
         },
         {
           name: "user",
