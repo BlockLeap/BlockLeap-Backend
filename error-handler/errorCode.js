@@ -1,15 +1,28 @@
 class ErrorCode {
-    static get Unauthenticated() {
-        return 'Unauthenticated';
+    static get Unauthorized() {
+        return 'Credenciales inválidas';
     }
     
     static get NotFound() {
         return 'NotFound';
     }
     
-    static get UnknownError() {
-        return 'UnknownError';
+    static get InternalServerError() {
+        return 'Error interno del servidor';
     }
+
+    static get NotUserFound() {
+        return 'Usuario no existe';
+    }
+
+    static get CantCreate(){
+        return 'Error al crear';
+    }
+
+    static get WrongPassword() {
+        return 'Usuario no existe';
+    }
+
 }
 
 module.exports = {

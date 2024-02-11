@@ -1,8 +1,11 @@
 "use strict";
 
 const DAOFactory = require("../js/daos/DAOFactory");
-
+const util = require('util');
 const bcrypt = require("bcrypt");
+const bcryptCompareAsync = util.promisify(bcrypt.compare);
+const { ErrorCode } = require("../error-handler/errorCode");
+const { ErrorException } = require("../error-handler/ErrorException");
 
 class userController {
   constructor() {
@@ -16,21 +19,42 @@ class userController {
     response.render(views.profile, { user });
   };
 
-  registerUser = async (request, response) => {
+  registerUser = async (request, response, next) => {
     try {
       let user = {};
       user.name = request.body.userName;
       user.role = "Estudiante";
       user.password = bcrypt.hashSync(request.body.userPassword, 11);
       let result = await this.userDAO.createUser(user);
-      response.json(result.insertID);
+      response.json(result);
     } catch (error) {
-      console.error("Error al registrar usuario:", error);
-      response
-        .status(500)
-        .json({ error: "Error interno al registrar usuario" });
+      next(error);
     }
   };
+
+  loginUser = async (request, response, next) => {
+    const {id, password} = request.body;
+    try{
+      const userFound = await this.userDAO.searchById(id);
+      const user = userFound.dataValues
+      console.log(password);
+      console.log(user.password);
+      const valid = await bcryptCompareAsync(password, user.password);
+      if(!valid){
+        throw new ErrorException(ErrorCode.Unauthorized);
+      } else {
+        const result = {};
+        result.id = user.id;
+        result.name = user.name;
+        result.roles = user.role;
+        response.json(result); 
+      }
+    }catch(error){
+      next(error);
+    }
+  } 
+
+
 }
 
 module.exports = userController;
