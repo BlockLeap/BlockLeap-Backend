@@ -27,18 +27,45 @@ class groupController {
   };
 
   getAllGroups = async (request, response, next) => {
-
-    response.status(200);
+    try{
+      const allGroups = await this.groupDAO.getAllGroups();
+      response.json(allGroups)
+    } catch (error){
+      next(error);
+    }
   };
 
   getGroupById = async (request, response, next) => {
-    response.status(200);
+    try {
+      const groupId = request.params.groupId;
+      const foundGroup = await this.groupDAO.getGroupById(groupId);
+      response.json(foundGroup);
+    } catch (error){
+      next(error);
+    }
   };
 
   resgisterUserInAGroup = async (request, response, next) => {
-    response.status(200);
+    try {
+      const setData = {};
+      setData.groupId = request.params.groupId;
+      setData.userId = request.params.userId;
+      setData.role = "Miembro";
+      let setCreated = await this.setDAO.createSet(setData);
+      response.json(setCreated);      
+    } catch (error){
+      next(error);
+    }
   };
-
+  getGroupMembers = async (request, response, next) => {
+    try {
+      const groupId = request.params.groupId;
+      const foundMembers = await this.setDAO.fingByGroupId(groupId);
+      response.json({members:foundMembers})
+    } catch (error){
+      next(error);
+    }
+  };
 }
 
 module.exports = groupController;

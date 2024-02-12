@@ -7,8 +7,9 @@ const GroupController = require("../controller/groupController");
 const groupController = new GroupController();
 
 groupRouter.post("/create", groupController.createGroup);
-groupRouter.post(":idGroup/:idUser", groupController.resgisterUserInAGroup);
+groupRouter.post("/:groupId/:userId", groupController.resgisterUserInAGroup);
 groupRouter.get("/all", groupController.getAllGroups);
-groupRouter.get("/:idGruop", groupController.getGroupById);
+groupRouter.get("/:groupId", groupController.getGroupById);
+groupRouter.get("/:groupId/members", groupController.getGroupMembers);
 
 module.exports = groupRouter;

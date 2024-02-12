@@ -23,9 +23,20 @@ class groupDAO {
     return createdGroup;
   }
 
-  async getGroups() {
+  async getAllGroups() {
     await this.group.sync();
     return await this.group.findAll();
+  }
+
+  async getGroupById(id){
+    await this.group.sync();
+    const foundGroup = await this.group.findByPk(id)
+   
+    if (!foundGroup) {
+      throw new ErrorException(ErrorCode.NotFound);
+    }
+
+    return foundGroup;
   }
 
 

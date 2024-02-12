@@ -30,6 +30,22 @@ class setDAO {
     await this.set.sync();
     return await this.set.findAll();
   }
+
+  async fingByGroupId(id){
+    await this.set.sync();
+    const foundMembers = await this.set.findAll({
+      where: {
+        group: id
+      }
+    });
+
+    if (!foundMembers) {
+      throw new ErrorException(ErrorCode.NotFound);
+    }
+
+    return foundMembers;
+  }
+
 }
 
 module.exports = setDAO;
