@@ -16,4 +16,13 @@ const sequelize = new Sequelize(
 
 init(sequelize);
 
+// Decomentar para sincronizar todo el modelo
+// sequelize.sync()
+//   .then(() => {
+//     console.log('¡Base de datos sincronizada correctamente!');
+//   })
+//   .catch(err => {
+//     console.error('Error al sincronizar la base de datos:', err);
+//   });
+
 module.exports = sequelize;

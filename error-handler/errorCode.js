@@ -4,7 +4,7 @@ class ErrorCode {
     }
     
     static get NotFound() {
-        return 'NotFound';
+        return 'No se ha podido encontrar';
     }
     
     static get InternalServerError() {

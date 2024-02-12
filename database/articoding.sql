@@ -76,8 +76,9 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 --
 
 CREATE TABLE `group` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -198,8 +199,9 @@ ALTER TABLE `play`
 -- Indices de la tabla `set`
 --
 ALTER TABLE `set`
-  ADD KEY `group` (`group`,`user`),
-  ADD KEY `user` (`user`);
+  ADD PRIMARY KEY (`group`,`user`),
+  ADD KEY `user` (`user`),
+  ADD KEY `group` (`group`) USING BTREE;
 
 --
 -- Indices de la tabla `user`

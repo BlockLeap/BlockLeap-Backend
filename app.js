@@ -8,6 +8,7 @@ const cors = require("cors");
 
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
+const groupRouter = require("./routes/groupRouter");
 const { errorHandler } = require("./error-handler/errorHandler");
 
 const app = express();
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
+app.use("/api/group", groupRouter);
+
 
 
 app.use((err, req, res, next) => {
