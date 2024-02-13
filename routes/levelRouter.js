@@ -8,9 +8,9 @@ const levelController = new LevelController();
 
 levelRouter.get("/categories", levelController.getCategories);
 levelRouter.get("/:id", levelController.getLevel);
+levelRouter.post("/create", levelController.createLevel);
 
 //.get("/levelsByCategory/:id", levelController.getLevelsByCategory)
 //.get("/:id", levelController.getLevelById)
-//.post("/create", levelController.createLevel);
 
 module.exports = levelRouter;
