@@ -11,22 +11,6 @@ class levelDAO {
     this.level = sequelize.models.level;
   }
 
-  async getLevels() {
-    await this.level.sync();
-    return await this.level.findAll();
-  }
-
-  async getLevel(id){
-    await this.level.sync();
-    const foundLevel= await this.level.findByPk(id)
-   
-    if (!foundLevel) {
-      throw new ErrorException(ErrorCode.NotFound);
-    }
-
-    return foundLevel;
-  }
-
   async createLevel(level){
     await this.level.sync();
     const createdLevel = await this.level.create({
@@ -43,6 +27,25 @@ class levelDAO {
 
     return createdLevel;
   }
+
+  async getAllLevels() {
+    await this.level.sync();
+    return await this.level.findAll({
+      attributes: ['id', 'user', 'category', 'self', 'title']
+    });
+  }
+
+  async getLevel(id){
+    await this.level.sync();
+    const foundLevel= await this.level.findByPk(id)
+   
+    if (!foundLevel) {
+      throw new ErrorException(ErrorCode.NotFound);
+    }
+
+    return foundLevel;
+  }
+
 
 }
 
