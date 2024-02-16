@@ -1,0 +1,25 @@
+openapi: '3.0.2'
+info:
+  title: API Articoding
+  description: This API is used to handle requests to the backend of the Articoding video game.
+  version: '1.0.0'
+servers:
+  - url: http://localhost:3001
+tags:
+  - name: level
+    description: Everything about a level
+paths:
+  /api/level/categories:
+    get:
+      tags:
+      - level
+      summary: The result will be all the information for each category
+      responses:
+        '200':
+          description: OK
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error
