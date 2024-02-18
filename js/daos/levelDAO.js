@@ -46,7 +46,23 @@ class levelDAO {
     return foundLevel;
   }
 
+  async getLevelsByCategory(id) {
+    await this.level.sync();
+    return await this.level.findAll({
+      where: {
+        category: id,
+      },
+    });
+  }
 
+  async countLevelsByCategory(id) {
+    await this.level.sync();
+    return await this.level.count({
+      where: {
+        category: id,
+      },
+    });
+  }
 }
 
 module.exports = levelDAO;

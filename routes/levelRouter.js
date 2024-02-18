@@ -10,6 +10,8 @@ levelRouter.get("/categories", levelController.getCategories);
 levelRouter.get("/all", levelController.getAllLevels)
 levelRouter.get("/:id", levelController.getLevel);
 levelRouter.post("/create", levelController.createLevel);
+levelRouter.get("/levelsByCategory/:id", levelController.getLevelsByCategory)
+levelRouter.get("/countByCategory/:id", levelController.countLevelsByCategory);
 
 //.get("/levelsByCategory/:id", levelController.getLevelsByCategory)
 //.get("/:id", levelController.getLevelById)

@@ -51,6 +51,16 @@ class levelController {
     }
   }
 
+  getLevelsByCategory = async (request, response) => {
+    const levels = await this.levelDAO.getLevelsByCategory(request.params.id);
+    console.log(levels);
+    response.json(levels);
+  };
+
+  countLevelsByCategory = async (request, response) => {
+    const number = await this.levelDAO.countLevelsByCategory(request.params.id);
+    response.json(number);
+  };
 }
 
 module.exports = levelController;
