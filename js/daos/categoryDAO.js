@@ -1,5 +1,8 @@
 "use strict";
 
+const { ErrorCode } = require("../../error-handler/errorCode");
+const { ErrorException } = require("../../error-handler/ErrorException");
+
 class categoryDAO {
   category;
 
@@ -14,11 +17,9 @@ class categoryDAO {
 
   async getCategoryById(id) {
     await this.category.sync();
-    return await this.category.findAll({
-      where: {
-        id: id,
-      },
-    });
+    const found = await this.category.findByPK(id);
+    if (!found) throw new ErrorException(ErrorCode.NotFound);
+    return found;
   }
 }
 
