@@ -5,6 +5,7 @@ info:
   version: '1.0.0'
 servers:
   - url: http://localhost:3001
+    description: 'Entorno de desarrollo de apis'
 tags:
   - name: level
     description: Everything about a level
@@ -17,6 +18,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryArray' 
         '500':
           $ref: '#/components/responses/InternalServerError'
   /api/level/create:
@@ -24,10 +29,63 @@ paths:
       tags:
       - level
       summary: Insert a level in the DataBase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Level'
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Level' 
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   responses:
     InternalServerError:
       description: Internal Server Error
+  schemas:
+    Level:
+      type: object
+      required: 
+       - user
+       - category
+       - self
+       - title
+       - data 
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        user:
+          type: integer
+        category:
+          type: integer
+        self:
+          type: integer
+        title:
+          type: string
+        data:
+          type: string
+    Category:
+      type: object
+      properties: 
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+    CategoryArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+        
+        
+        
