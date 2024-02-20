@@ -24,6 +24,30 @@ paths:
                 $ref: '#/components/schemas/CategoryArray' 
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /api/level/{id}:
+    get:
+      tags:
+      - level
+      summary: Get an specific level
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The level ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Level' 
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /api/level/create:
     post:
       tags:
@@ -47,6 +71,8 @@ components:
   responses:
     InternalServerError:
       description: Internal Server Error
+    NotFound:
+      description: Can't be found
   schemas:
     Level:
       type: object
