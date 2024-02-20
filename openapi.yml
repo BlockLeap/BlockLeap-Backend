@@ -13,12 +13,20 @@ paths:
     get:
       tags:
       - level
-      summary: The result will be all the information for each category
+      summary: Get all the categories
       responses:
         '200':
           description: OK
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /api/level/create:
+    post:
+      tags:
+      - level
+      summary: Insert a level in the DataBase
+      responses:
+        '200':
+          description: OK
 components:
   responses:
     InternalServerError:
