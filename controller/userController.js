@@ -21,11 +21,15 @@ class userController {
 
   registerUser = async (request, response, next) => {
     try {
-      let user = {};
+      const user = {};
       user.name = request.body.userName;
       user.role = "Estudiante";
       user.password = bcrypt.hashSync(request.body.userPassword, 11);
-      let result = await this.userDAO.createUser(user);
+      const createdUser = await this.userDAO.createUser(user);
+      const result = {};
+      result.id = createdUser.id;
+      result.name = createdUser.name;
+      result.role = createdUser.role;
       response.json(result);
     } catch (error) {
       next(error);
@@ -44,7 +48,7 @@ class userController {
         const result = {};
         result.id = user.id;
         result.name = user.name;
-        result.roles = user.role;
+        result.role = user.role;
         response.json(result); 
       }
     }catch(error){
