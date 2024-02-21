@@ -5,10 +5,11 @@ info:
   version: '1.0.0'
 servers:
   - url: http://localhost:3001
-    description: 'Entorno de desarrollo de apis'
+    description: 'Dev'
 tags:
   - name: level
-    description: Everything about a level
+  - name: user
+  - name: group
 paths:
   /api/level/categories:
     get:
@@ -48,12 +49,27 @@ paths:
           $ref: '#/components/responses/InternalServerError'
         '404':
           $ref: '#/components/responses/NotFound'
+  /api/level/all:
+    get:
+      tags:
+      - level
+      summary: Get all the levels, except de Json level data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LevelArray' 
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /api/level/create:
     post:
       tags:
       - level
-      summary: Insert a level in the DataBase
+      summary: Insert a level in the DB
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -67,12 +83,134 @@ paths:
                 $ref: '#/components/schemas/Level' 
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /api/user/create:
+    post:
+      tags:
+      - user
+      summary: Insert a user in the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+              - userName
+              - userPassword
+              properties: 
+                userName:
+                  type: string
+                userPassword:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User' 
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/user/login: 
+    post:
+      tags:
+      - user
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+              - id
+              - password
+              properties: 
+                id:
+                  type: integer
+                password:
+                  type: string
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/group/{groupId}:
+    get:
+      tags:
+      - group
+      summary: Get an specific group
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The group ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group' 
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/group/all:
+    get:
+      tags:
+      - group
+      summary: Get all the groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupArray'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/group/{groupId}/members:
+    get:
+      tags:
+      - group
+      summary: Get the members of the group
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The group ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberArray'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   responses:
     InternalServerError:
       description: Internal Server Error
     NotFound:
       description: Can't be found
+    Unauthorized:
+      description: Invalid credentials
   schemas:
     Level:
       type: object
@@ -81,7 +219,7 @@ components:
        - category
        - self
        - title
-       - data 
+       - data
       properties:
         id:
           type: integer
@@ -112,6 +250,63 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Category'
-        
-        
-        
+    LevelArray:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: uuid
+            readOnly: true
+          user:
+            type: integer
+          category:
+            type: integer
+          self:
+            type: integer
+          title:
+            type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        role:
+          type: string
+          enum: [Estudiante, Admin, Profesor, Investigador]
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+    GroupArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Group'  
+    Member:
+      type: object
+      properties:
+        group:
+          type: integer
+          format: uuid
+        user:
+          type: integer
+          format: uuid
+        role:
+          type: string
+          enum: [Miembro, Anfitrión]
+    MemberArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Member'  
+      
+      

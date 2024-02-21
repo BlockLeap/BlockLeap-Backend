@@ -12,7 +12,7 @@ class groupController {
   }
 
   createGroup = async (request, response, next) => {
-    try{
+    try {
       const groupName = request.body.name;
       const setData = {};
       setData.userId = request.body.userId;
@@ -20,17 +20,17 @@ class groupController {
       let groupCreated = await this.groupDAO.createGroup(groupName);
       setData.groupId = groupCreated.id;
       let setCreated = await this.setDAO.createSet(setData);
-      response.json({ group: groupCreated, set: setCreated });      
-    } catch (error){
+      response.json({ group: groupCreated, set: setCreated });
+    } catch (error) {
       next(error);
     }
   };
 
   getAllGroups = async (request, response, next) => {
-    try{
+    try {
       const allGroups = await this.groupDAO.getAllGroups();
-      response.json(allGroups)
-    } catch (error){
+      response.json(allGroups);
+    } catch (error) {
       next(error);
     }
   };
@@ -40,7 +40,7 @@ class groupController {
       const groupId = request.params.groupId;
       const foundGroup = await this.groupDAO.getGroupById(groupId);
       response.json(foundGroup);
-    } catch (error){
+    } catch (error) {
       next(error);
     }
   };
@@ -52,8 +52,8 @@ class groupController {
       setData.userId = request.params.userId;
       setData.role = "Miembro";
       let setCreated = await this.setDAO.createSet(setData);
-      response.json(setCreated);      
-    } catch (error){
+      response.json(setCreated);
+    } catch (error) {
       next(error);
     }
   };
@@ -61,8 +61,8 @@ class groupController {
     try {
       const groupId = request.params.groupId;
       const foundMembers = await this.setDAO.fingByGroupId(groupId);
-      response.json({members:foundMembers})
-    } catch (error){
+      response.json(foundMembers);
+    } catch (error) {
       next(error);
     }
   };
