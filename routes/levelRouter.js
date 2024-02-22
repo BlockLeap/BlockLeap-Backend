@@ -15,6 +15,4 @@ levelRouter
   .get("/community/levels", levelController.getCommunityLevels)
   .get("/countByCategory/:id", levelController.countLevelsByCategory);
 
-//.get("/:id", levelController.getLevelById)
-
 module.exports = levelRouter;
