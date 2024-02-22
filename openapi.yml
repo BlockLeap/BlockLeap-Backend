@@ -139,6 +139,8 @@ paths:
                   $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /api/group/{groupId}:
@@ -203,6 +205,73 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /api/group/create:
+    post:
+      tags:
+      - group
+      summary: Create a new group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+              - name
+              - userId
+              properties: 
+                name:
+                  type: string
+                  example: grupo prueba
+                userId:
+                  type: integer
+                  example: 4
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group:
+                    $ref: '#/components/schemas/Group' 
+                  set:
+                    $ref: '#/components/schemas/Member' 
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/group/register:
+    post:
+      tags:
+      - group
+      summary: Resgister an user in a group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+              - groupId
+              - userId
+              properties: 
+                groupId:
+                  type: integer
+                  example: 14
+                userId:
+                  type: integer
+                  example: 4
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Member'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   responses:
     InternalServerError:
@@ -235,6 +304,7 @@ components:
           type: string
         data:
           type: string
+          example: JSON string
     Category:
       type: object
       properties: 
@@ -286,8 +356,10 @@ components:
           type: integer
           format: uuid
           readOnly: true
+          example: 14
         name:
           type: string
+          example: grupo prueba
     GroupArray:
       type: array
       items:
@@ -298,15 +370,19 @@ components:
         group:
           type: integer
           format: uuid
+          example: 14
         user:
           type: integer
           format: uuid
+          example: 4
         role:
           type: string
           enum: [Miembro, Anfitrión]
+          example: Miembro | Anfitrión
     MemberArray:
       type: array
       items:
-        $ref: '#/components/schemas/Member'  
+        $ref: '#/components/schemas/Member'
+
       
       

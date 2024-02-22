@@ -9,6 +9,7 @@ class groupController {
     const factory = new DAOFactory();
     this.groupDAO = factory.getGroupDAO();
     this.setDAO = factory.getSetDAO();
+    this.userDAO = factory.getUserDAO();
   }
 
   createGroup = async (request, response, next) => {
@@ -48,10 +49,16 @@ class groupController {
   resgisterUserInAGroup = async (request, response, next) => {
     try {
       const setData = {};
-      setData.groupId = request.params.groupId;
-      setData.userId = request.params.userId;
+      setData.groupId = request.body.groupId;
+      setData.userId = request.body.userId;
       setData.role = "Miembro";
+
+      //Check id exist in DB
+      await this.groupDAO.getGroupById(setData.groupId);
+      await this.userDAO.searchById(setData.userId);
+
       let setCreated = await this.setDAO.createSet(setData);
+      console.log(setCreated);
       response.json(setCreated);
     } catch (error) {
       next(error);
