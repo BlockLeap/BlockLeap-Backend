@@ -1,13 +1,16 @@
 "use strict";
 
+const { Op } = require("sequelize");
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
 class levelDAO {
   level;
+  user;
 
   constructor(sequelize) {
     this.level = sequelize.models.level;
+    this.user = sequelize.models.user;
   }
 
   async createLevel(level) {
@@ -49,11 +52,17 @@ class levelDAO {
   async getCommunityLevels() {
     await this.level.sync();
     return await this.level.findAll({
-      where: {
-        role: {
-          [Op.ne]: "Admin",
+      include: [
+        {
+          model: this.user,
+          as: "user_user",
+          where: {
+            role: {
+              [Op.ne]: "Admin",
+            },
+          },
         },
-      },
+      ],
     });
   }
 
