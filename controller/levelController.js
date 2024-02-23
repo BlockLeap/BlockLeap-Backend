@@ -9,57 +9,76 @@ class levelController {
     this.categoryDAO = factory.getCategoryDAO();
   }
 
-
   getAllLevels = async (request, response, next) => {
-    try{
+    try {
       const allLevels = await this.levelDAO.getAllLevels();
-      response.json(allLevels)
-    } catch (error){
+      response.json(allLevels);
+    } catch (error) {
       next(error);
     }
-  }
+  };
 
-  getCategories = async (request, response) => {
-    const categories = await this.categoryDAO.getCategories();
-    console.log(categories);
-    response.json(categories);
+  getCategories = async (request, response, next) => {
+    try {
+      const categories = await this.categoryDAO.getCategories();
+      response.json(categories);
+    } catch (error) {
+      next(error);
+    }
   };
 
   getLevel = async (request, response, next) => {
-    const id = request.params.id;
-    try{
-      const level = await this.levelDAO.getLevel(id);
+    try {
+      const level = await this.levelDAO.getLevel(request.params.id);
       response.json(level);
-    } catch(err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
-  }
+  };
 
   createLevel = async (request, response, next) => {
-    try{
+    try {
       const levelData = {};
       levelData.user = request.body.user;
       levelData.category = request.body.category;
       levelData.self = request.body.self;
       levelData.title = request.body.title;
       levelData.data = request.body.data;
-      console.log(levelData.data );
+      console.log(levelData.data);
       const createdLevel = await this.levelDAO.createLevel(levelData);
       response.json(createdLevel);
-    } catch(err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
-  }
-
-  getLevelsByCategory = async (request, response) => {
-    const levels = await this.levelDAO.getLevelsByCategory(request.params.id);
-    console.log(levels);
-    response.json(levels);
   };
 
-  countLevelsByCategory = async (request, response) => {
-    const number = await this.levelDAO.countLevelsByCategory(request.params.id);
-    response.json(number);
+  getLevelsByCategory = async (request, response, next) => {
+    try {
+      const levels = await this.levelDAO.getLevelsByCategory(request.params.id);
+      response.json(levels);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getCommunityLevels = async (request, response) => {
+    try {
+      const levels = await this.levelDAO.getCommunityLevels();
+      response.json(levels);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  countLevelsByCategory = async (request, response, next) => {
+    try {
+      const number = await this.levelDAO.countLevelsByCategory(
+        request.params.id
+      );
+      response.json(number);
+    } catch (error) {
+      next(error);
+    }
   };
 }
 
