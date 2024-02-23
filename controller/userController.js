@@ -1,7 +1,7 @@
 "use strict";
 
 const DAOFactory = require("../js/daos/DAOFactory");
-const util = require('util');
+const util = require("util");
 const bcrypt = require("bcrypt");
 const bcryptCompareAsync = util.promisify(bcrypt.compare);
 const { ErrorCode } = require("../error-handler/errorCode");
@@ -37,26 +37,24 @@ class userController {
   };
 
   loginUser = async (request, response, next) => {
-    const {id, password} = request.body;
-    try{
+    const { id, password } = request.body;
+    try {
       const userFound = await this.userDAO.searchById(id);
-      const user = userFound.dataValues
+      const user = userFound.dataValues;
       const valid = await bcryptCompareAsync(password, user.password);
-      if(!valid){
+      if (!valid) {
         throw new ErrorException(ErrorCode.Unauthorized);
       } else {
         const result = {};
         result.id = user.id;
         result.name = user.name;
         result.role = user.role;
-        response.json(result); 
+        response.json(result);
       }
-    }catch(error){
+    } catch (error) {
       next(error);
     }
-  } 
-
-
+  };
 }
 
 module.exports = userController;
