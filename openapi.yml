@@ -37,7 +37,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: The level ID
+          description: The level id
       responses:
         "200":
           description: OK
@@ -83,6 +83,28 @@ paths:
                 $ref: "#/components/schemas/Level"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /api/level/levelsByCategory/{id}:
+    get:
+      tags:
+        - level
+      summary: Get all the levels of a specific category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The category id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LevelArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /api/level/community/levels:
     get:
       tags:
@@ -109,7 +131,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: The category ID
+          description: The category id
       responses:
         "200":
           description: OK
@@ -191,7 +213,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: The group ID
+          description: The group id
       responses:
         "200":
           description: OK
@@ -229,7 +251,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: The group ID
+          description: The group id
       responses:
         "200":
           description: OK
