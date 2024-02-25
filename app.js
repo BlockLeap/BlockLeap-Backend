@@ -5,7 +5,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
 const groupRouter = require("./routes/groupRouter");
@@ -21,12 +21,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
-
-
 
 app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
