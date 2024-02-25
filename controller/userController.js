@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const bcryptCompareAsync = util.promisify(bcrypt.compare);
 const { ErrorCode } = require("../error-handler/errorCode");
 const { ErrorException } = require("../error-handler/ErrorException");
+const jwt = require("jsonwebtoken");
 
 class userController {
   constructor() {
@@ -44,11 +45,19 @@ class userController {
       if (!valid) {
         throw new ErrorException(ErrorCode.Unauthorized);
       } else {
-        const result = {};
-        result.id = user.id;
-        result.name = user.name;
-        result.role = user.role;
-        response.json(result);
+        const tokenPayload = {
+          id: user.id,
+          name: user.name,
+          role: user.role,
+        };
+        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY);
+        response.cookie("jwt", token, {
+          httpOnly: true,
+        });
+        response.json({
+          data: tokenPayload,
+          message: "Login exitoso",
+        });
       }
     } catch (error) {
       next(error);

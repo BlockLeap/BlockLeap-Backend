@@ -7,6 +7,7 @@ const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 
+const cookieParser = require("cookie-parser");
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
 const groupRouter = require("./routes/groupRouter");
