@@ -26,6 +26,15 @@ class levelDAO {
     return createdLevel;
   }
 
+  async deleteLevel(id) {
+    await this.level.sync();
+    this.level.destroy({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async getAllLevels() {
     await this.level.sync();
     return await this.level.findAll({
