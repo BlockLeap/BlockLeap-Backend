@@ -3,6 +3,7 @@
 const { Op } = require("sequelize");
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
+const { create } = require("domain");
 
 class levelDAO {
   level;
@@ -28,7 +29,7 @@ class levelDAO {
 
   async deleteLevel(id) {
     await this.level.sync();
-    this.level.destroy({
+    await this.level.destroy({
       where: {
         id: id,
       },

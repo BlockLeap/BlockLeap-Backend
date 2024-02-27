@@ -3,11 +3,10 @@ class LevelDAOStub {
 
   constructor() {
     if (typeof LevelDAOStub.instance === "object") return LevelDAOStub.instance;
-
     LevelDAOStub.instance = this;
   }
 
-  setDAOData(data) {
+  setData(data) {
     this.levels = data;
   }
 

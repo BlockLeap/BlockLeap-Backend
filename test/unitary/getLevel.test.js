@@ -27,7 +27,7 @@ const levels = [
 ];
 
 describe("Test unitario: Obtener nivel por id", () => {
-  new DAOFactory().getLevelDAO().setDAOData(levels);
+  new DAOFactory().getLevelDAO().setData(levels);
 
   const levelController = new LevelController();
 
