@@ -8,4 +8,6 @@ export class playController {
     this.accessDAO = factory.getAccessDAO();
     this.playDAO = factory.getPlayDAO();
   }
+
+  saveLevelStatistics = async (request, response, next) => {};
 }
