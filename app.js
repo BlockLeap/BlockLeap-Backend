@@ -16,7 +16,12 @@ const { errorHandler } = require("./error-handler/errorHandler");
 
 const app = express();
 
-app.use(cors());
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
