@@ -119,28 +119,6 @@ paths:
                 $ref: "#/components/schemas/LevelArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/level/countByCategory/{id}:
-    get:
-      tags:
-        - level
-      summary: Get the number of levels inside a category
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: integer
-            minimum: 1
-          description: The category id
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Number"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
   /api/user/create:
     post:
       tags:
