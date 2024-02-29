@@ -6,10 +6,12 @@ const { ErrorException } = require("../../error-handler/ErrorException");
 const { create } = require("domain");
 
 class levelDAO {
+  sequelize;
   level;
   user;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.level = sequelize.models.level;
     this.user = sequelize.models.user;
   }
@@ -73,15 +75,6 @@ class levelDAO {
           },
         },
       ],
-    });
-  }
-
-  async countLevelsByCategory(id) {
-    await this.level.sync();
-    return await this.level.count({
-      where: {
-        category: id,
-      },
     });
   }
 }

@@ -4,9 +4,11 @@ const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
 class setDAO {
+  sequelize;
   set;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.set = sequelize.models.set;
   }
 
