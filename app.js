@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
 });
 
-app.listen(process.env.DB_PORT, function (error) {
+app.listen(process.env.APP_PORT, function (error) {
   if (error) console.log("The server could not be connected");
-  else console.log("Server listening port", process.env.DB_PORT);
+  else console.log("Server listening port", process.env.APP_PORT);
 });
