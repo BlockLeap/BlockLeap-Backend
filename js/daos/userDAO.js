@@ -4,9 +4,11 @@ const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
 class userDAO {
+  sequelize;
   user;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.user = sequelize.models.user;
   }
 

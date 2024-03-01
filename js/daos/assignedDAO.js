@@ -1,9 +1,11 @@
 "use strict";
 
 class assignedDAO {
+  sequelize;
   assigned;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.assigned = sequelize.models.assigned;
   }
 

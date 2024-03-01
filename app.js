@@ -26,8 +26,6 @@ app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
 
-
-
 app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
 });
