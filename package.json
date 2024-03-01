@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "jest"
   },
   "dependencies": {
     "ajax": "^0.0.4",
@@ -12,13 +13,15 @@
     "express-promise-router": "^4.1.1",
     "html": "^1.0.0",
     "http": "^0.0.1-security",
+    "iconv-lite": "^0.6.3",
     "mysql": "^2.18.1",
-    "mysql2": "^3.6.5",
+    "mysql2": "^3.9.2",
     "node": "^21.1.0",
     "path": "^0.12.7",
     "sequelize": "^6.35.2"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0"
   }
 }
