@@ -58,3 +58,5 @@ app.listen(process.env.APP_PORT, function (error) {
 });
 
 registerServiceWorker();
+
+module.exports = app;

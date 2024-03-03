@@ -4,12 +4,11 @@ import app from "../../app";
 describe("Category Component", () => {
   let category;
 
-  describe("GET /level/categories", () => {
+  describe("GET /api/level/categories", () => {
     it("should return all categories", async () => {
-      const response = await request(app).get("/level/categories");
-      console.log(response);
+      const response = await request(app).get("/api/level/categories");
       expect(response.statusCode).toBe(200);
-      expect(res.body.length).toBe(1);
+      expect(response.body.length).toBe(7);
     });
   });
 });
