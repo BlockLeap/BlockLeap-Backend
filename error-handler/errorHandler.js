@@ -8,7 +8,7 @@ function errorHandler  (err, req, res, next){
     console.log("Error is known.")
     res.status(err.status).send(err)
   } else {
-    // For unhandled errors.
+    // For unhandled errors
     res.status(500).send({
       code: ErrorCode.UnknownError,
       status: 500
