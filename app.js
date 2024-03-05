@@ -22,28 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const registerServiceWorker = async () => {
-  if ("serviceWorker" in navigator) {
-    try {
-      const registration = await navigator.serviceWorker.register(
-        "/worker.js",
-        {
-          scope: "./",
-        }
-      );
-      if (registration.installing) {
-        console.log("Service worker installing");
-      } else if (registration.waiting) {
-        console.log("Service worker installed");
-      } else if (registration.active) {
-        console.log("Service worker active");
-      }
-    } catch (error) {
-      console.error(`Registration failed with ${error}`);
-    }
-  }
-};
-
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
@@ -56,7 +34,5 @@ app.listen(process.env.APP_PORT, function (error) {
   if (error) console.log("The server could not be connected");
   else console.log("Server listening port", process.env.APP_PORT);
 });
-
-registerServiceWorker();
 
 module.exports = app;

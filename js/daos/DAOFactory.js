@@ -12,7 +12,7 @@ const userDAO = require("./userDAO");
 
 class DAOFactory {
   getLevelDAO() {
-    if (process.env.NODE === "testing") return new levelDAOStub();
+    if (process.env.NODE_ENV === "testing") return new levelDAOStub();
     else return new levelDAO(sequelize);
   }
 

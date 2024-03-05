@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "nodemon app.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles --watchAll"
   },
   "dependencies": {
     "ajax": "^0.0.4",

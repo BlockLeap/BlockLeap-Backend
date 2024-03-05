@@ -5,7 +5,7 @@ const LevelController = require("../../controller/levelController");
 
 const DAOFactory = require("../../js/daos/DAOFactory");
 
-process.env.NODE = "testing";
+process.env.NODE_ENV = "testing";
 
 const levels = [
   {
