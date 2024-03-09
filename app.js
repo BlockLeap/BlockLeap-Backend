@@ -18,8 +18,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
-
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
