@@ -5,6 +5,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const helmet = require("helmet");
 
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
@@ -17,14 +18,27 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "https://fonts.googleapis.com"],
+    },
+  })
+);
+app.disable("x-powered-by");
+app.use(helmet.frameguard({ action: "deny" }));
+app.use(helmet.xssFilter());
+app.use(helmet.hsts({ maxAge: 31536000 }));
 
 app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
