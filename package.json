@@ -8,16 +8,15 @@
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
-    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
+    "helmet": "^7.1.0",
     "html": "^1.0.0",
     "http": "^0.0.1-security",
     "iconv-lite": "^0.6.3",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.2",
     "node": "^21.1.0",
-    "path": "^0.12.7",
     "sequelize": "^6.35.2"
   },
   "devDependencies": {
