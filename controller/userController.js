@@ -51,11 +51,16 @@ class userController {
           role: user.role,
         };
         const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY);
+        const twoHours = 2 * 60 * 60 * 1000;
+        const expirationDate = new Date(Date.now() + twoHours);
         response.cookie("jwt", token, {
           httpOnly: true,
+          expires: expirationDate,
+        });
+        response.cookie("session", tokenPayload, {
+          expires: expirationDate,
         });
         response.json({
-          data: tokenPayload,
           message: "Login exitoso",
         });
       }
