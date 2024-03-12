@@ -72,8 +72,8 @@ describe("Level Component", () => {
   });
 });
 
-/* describe("User Component", () => {
-  describe("POST /api/user/register", () => {
+describe("User Component", () => {
+  /* describe("POST /api/user/register", () => {
     test("should add one user", async () => {
       const response = await request(app).post("/api/user/register").send({
         name: "Prueba",
@@ -97,8 +97,18 @@ describe("Level Component", () => {
       expect(response.body.name).toBe("CodeHop");
       expect(response.body.role).toBe("Admin");
     });
+  }); */
+
+  describe("GET /api/user/userById/:id", () => {
+    test("should return one specific user", async () => {
+      let id = 1;
+      const response = await request(app).get(`/api/user/userById/${id}`);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.name).toBe("Diego");
+      expect(response.body.role).toBe("Estudiante");
+    });
   });
-}); */
+});
 
 describe("Group Component", () => {
   describe("GET /api/group/all", () => {
