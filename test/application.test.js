@@ -35,22 +35,22 @@ describe("Level Component", () => {
     });
   });
 
-  /* describe("GET /api/level/create", () => {
+  describe("POST /api/level/create", () => {
     test("should create one level", async () => {
       const response = await request(app).post("/api/level/create").send({
         user: 1,
         category: 1,
+        self: 10,
         title: "No mires abajo",
         data: "",
       });
       expect(response.statusCode).toBe(200);
-      console.log("Nivel creado:", response.body);
       expect(response.body.user).toBe(1);
       expect(response.body.category).toBe(1);
       expect(response.body.title).toBe("No mires abajo");
       expect(response.body.data).toBe("");
     });
-  }); */
+  });
 
   describe("GET /api/level/levelsByCategory/:id", () => {
     let id = 1;
@@ -73,32 +73,42 @@ describe("Level Component", () => {
 });
 
 /* describe("User Component", () => {
-  describe("GET /api/user/register", () => {
+  describe("POST /api/user/register", () => {
     test("should add one user", async () => {
-      const response = await request(app).post(`/api/user/register`).send({
+      const response = await request(app).post("/api/user/register").send({
         name: "Prueba",
         password: "1234",
       });
       expect(response.statusCode).toBe(200);
-      console.log("Usuarui añadido:", response.body);
+      console.log("Usuario añadido:", response.body);
       expect(response.body.name).toBe("Prueba");
       expect(response.body.role).toBe("Estudiante");
     });
   });
 
-  describe("GET /api/user/userById/:id", () => {
-    let id = 1;
-    test("should return one specific user", async () => {
-      const response = await request(app).get(`/api/user/userById/${id}`);
+  describe("POST /api/user/login", () => {
+    test("should login one user", async () => {
+      const response = await request(app).post("/api/user/login").send({
+        id: 6,
+        password: "",
+      });
       expect(response.statusCode).toBe(200);
-      expect(response.body.id).toBe(1);
-      expect(response.body.name).toBe("Diego");
-      expect(response.body.role).toBe("Estudiante");
+      console.log("Usuario login:", response.body);
+      expect(response.body.name).toBe("CodeHop");
+      expect(response.body.role).toBe("Admin");
     });
   });
 }); */
 
 describe("Group Component", () => {
+  describe("GET /api/group/all", () => {
+    test("should return all groups", async () => {
+      const response = await request(app).get("/api/group/all");
+      expect(response.statusCode).toBe(200);
+      expect(response.body.length).not.toBe(null);
+    });
+  });
+
   describe("GET /api/group/:groupId", () => {
     let id = 15;
     test("should return one specific group", async () => {
@@ -117,4 +127,31 @@ describe("Group Component", () => {
       expect(response.body.length).not.toBe(null);
     });
   });
+
+  describe("POST /api/group/create", () => {
+    test("should create one specific group", async () => {
+      const response = await request(app).post("/api/group/create").send({
+        userId: 1,
+        name: "Informática",
+      });
+      expect(response.statusCode).toBe(200);
+      expect(response.body.group.name).toBe("Informática");
+      expect(response.body.set.user).toBe(1);
+      expect(response.body.set.role).toBe("Anfitrión");
+    });
+  });
+
+  /* describe("POST /api/group/:groupId/:userId", () => {
+    test("should assign one user to one group", async () => {
+      const response = await request(app)
+        .post("/api/group/:groupId/:userId")
+        .send({
+          groupId: 17,
+          userId: 1,
+        });
+      console.log("Respuesta:", response.body);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.name).toBe("Informática");
+    });
+  }); */
 });

@@ -17,7 +17,6 @@ const sequelize = new Sequelize(
 
 init(sequelize);
 
-// Descomentar para sincronizar todo el modelo
 // sequelize.sync()
 //   .then(() => {
 //     console.log('¡Base de datos sincronizada correctamente!');
