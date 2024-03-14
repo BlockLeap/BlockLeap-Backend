@@ -1,9 +1,11 @@
 "use strict";
 
 class playDAO {
+  sequelize;
   play;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.play = sequelize.models.play;
   }
 

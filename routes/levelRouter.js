@@ -12,7 +12,6 @@ levelRouter
   .get("/:id", levelController.getLevel)
   .post("/create", levelController.createLevel)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
-  .get("/community/levels", levelController.getCommunityLevels)
-  .get("/countByCategory/:id", levelController.countLevelsByCategory);
+  .get("/community/levels", levelController.getCommunityLevels);
 
 module.exports = levelRouter;

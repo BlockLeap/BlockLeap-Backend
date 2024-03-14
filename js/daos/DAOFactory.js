@@ -1,6 +1,7 @@
 const sequelize = require("../../database/configuration");
 
 const levelDAO = require("./levelDAO");
+const levelDAOStub = require("../../test/stubs/levelDAOStub");
 const categoryDAO = require("./categoryDAO");
 const accessDAO = require("./accessDAO");
 const playDAO = require("./playDAO");
@@ -11,7 +12,8 @@ const userDAO = require("./userDAO");
 
 class DAOFactory {
   getLevelDAO() {
-    return new levelDAO(sequelize);
+    if (process.env.NODE === "testing") return new levelDAOStub();
+    else return new levelDAO(sequelize);
   }
 
   getCategoryDAO() {
