@@ -73,14 +73,13 @@ describe("Level Component", () => {
 });
 
 describe("User Component", () => {
-  /* describe("POST /api/user/register", () => {
+  describe("POST /api/user/register", () => {
     test("should add one user", async () => {
       const response = await request(app).post("/api/user/register").send({
-        name: "Prueba",
-        password: "1234",
+        userName: "Prueba",
+        userPassword: "1234",
       });
       expect(response.statusCode).toBe(200);
-      console.log("Usuario añadido:", response.body);
       expect(response.body.name).toBe("Prueba");
       expect(response.body.role).toBe("Estudiante");
     });
@@ -90,14 +89,14 @@ describe("User Component", () => {
     test("should login one user", async () => {
       const response = await request(app).post("/api/user/login").send({
         id: 6,
-        password: "",
+        password: "1234",
       });
       expect(response.statusCode).toBe(200);
       console.log("Usuario login:", response.body);
-      expect(response.body.name).toBe("CodeHop");
-      expect(response.body.role).toBe("Admin");
+      expect(response.body.name).toBe("Ricardo");
+      expect(response.body.role).toBe("Estudiante");
     });
-  }); */
+  });
 
   describe("GET /api/user/userById/:id", () => {
     test("should return one specific user", async () => {

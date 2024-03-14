@@ -15,7 +15,6 @@ class userController {
 
   getUserById = async (request, response) => {
     let user = await this.userDAO.searchById(request.params.id);
-    console.log(user);
     response.json(user);
   };
 
