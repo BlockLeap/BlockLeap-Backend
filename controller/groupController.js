@@ -52,7 +52,6 @@ class groupController {
       setData.userId = request.params.userId;
       setData.role = "Miembro";
       let setCreated = await this.setDAO.createSet(setData);
-      console.log("Set:", setCreated);
       response.json(setCreated);
     } catch (error) {
       next(error);

@@ -92,7 +92,6 @@ describe("User Component", () => {
         password: "1234",
       });
       expect(response.statusCode).toBe(200);
-      console.log("Usuario login:", response.body);
       expect(response.body.name).toBe("Ricardo");
       expect(response.body.role).toBe("Estudiante");
     });
@@ -151,16 +150,17 @@ describe("Group Component", () => {
   });
 
   /* describe("POST /api/group/:groupId/:userId", () => {
+    let groupId = 17;
+    let userId = 6;
     test("should assign one user to one group", async () => {
-      const response = await request(app)
-        .post("/api/group/:groupId/:userId")
-        .send({
-          groupId: 17,
-          userId: 1,
-        });
+      const response = await request(app).post(
+        `/api/group/${groupId}/${userId}`
+      );
       console.log("Respuesta:", response.body);
       expect(response.statusCode).toBe(200);
-      expect(response.body.name).toBe("Informática");
+      expect(response.body.group).toBe(17);
+      expect(response.body.user).toBe(6);
+      expect(response.body.role).toBe("Miembro");
     });
   }); */
 });
