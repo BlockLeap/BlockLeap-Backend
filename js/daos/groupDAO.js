@@ -4,22 +4,22 @@ const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
 class groupDAO {
+  sequelize;
   group;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.group = sequelize.models.group;
   }
 
-  async createGroup(groupName){
+  async createGroup(groupName) {
     await this.group.sync();
     const createdGroup = await this.group.create({
       name: groupName,
     });
-
     if (!createdGroup) {
       throw new ErrorException(ErrorCode.CantCreate);
     }
-
     return createdGroup;
   }
 
@@ -28,18 +28,14 @@ class groupDAO {
     return await this.group.findAll();
   }
 
-  async getGroupById(id){
+  async getGroupById(id) {
     await this.group.sync();
-    const foundGroup = await this.group.findByPk(id)
-   
+    const foundGroup = await this.group.findByPk(id);
     if (!foundGroup) {
       throw new ErrorException(ErrorCode.NotFound);
     }
-
     return foundGroup;
   }
-
-
 }
 
 module.exports = groupDAO;

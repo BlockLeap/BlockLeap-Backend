@@ -1,49 +1,55 @@
 "use strict";
 
-const category = require("../../database/model/category");
+const { Op } = require("sequelize");
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
+const { create } = require("domain");
 
 class levelDAO {
+  sequelize;
   level;
+  user;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.level = sequelize.models.level;
+    this.user = sequelize.models.user;
   }
 
-  async createLevel(level){
+  async createLevel(level) {
     await this.level.sync();
     const createdLevel = await this.level.create({
       user: level.user,
       category: level.category,
       self: level.self,
       title: level.title,
-      data: level.data
+      data: level.data,
     });
-
-    if (!createdLevel) {
-      throw new ErrorException(ErrorCode.CantCreate);
-    }
-
+    if (!createdLevel) throw new ErrorException(ErrorCode.CantCreate);
     return createdLevel;
+  }
+
+  async deleteLevel(id) {
+    await this.level.sync();
+    await this.level.destroy({
+      where: {
+        id: id,
+      },
+    });
   }
 
   async getAllLevels() {
     await this.level.sync();
     return await this.level.findAll({
-      attributes: ['id', 'user', 'category', 'self', 'title']
+      attributes: ["id", "user", "category", "self", "title"],
     });
   }
 
-  async getLevel(id){
+  async getLevel(id) {
     await this.level.sync();
-    const foundLevel= await this.level.findByPk(id)
-   
-    if (!foundLevel) {
-      throw new ErrorException(ErrorCode.NotFound);
-    }
-
-    return foundLevel;
+    const found = await this.level.findByPk(id);
+    if (!found) throw new ErrorException(ErrorCode.NotFound);
+    return found;
   }
 
   async getLevelsByCategory(id) {
@@ -55,12 +61,20 @@ class levelDAO {
     });
   }
 
-  async countLevelsByCategory(id) {
+  async getCommunityLevels() {
     await this.level.sync();
-    return await this.level.count({
-      where: {
-        category: id,
-      },
+    return await this.level.findAll({
+      include: [
+        {
+          model: this.user,
+          as: "user_user",
+          where: {
+            role: {
+              [Op.ne]: "Admin",
+            },
+          },
+        },
+      ],
     });
   }
 }

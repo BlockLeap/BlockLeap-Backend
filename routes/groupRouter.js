@@ -10,6 +10,6 @@ groupRouter.post("/create", groupController.createGroup);
 groupRouter.post("/register", groupController.resgisterUserInAGroup);
 groupRouter.get("/all", groupController.getAllGroups);
 groupRouter.get("/:groupId", groupController.getGroupById);
-groupRouter.get("/:groupId/members", groupController.getGroupMembers);
+groupRouter.get("/:groupId/members", groupController.getGroupMembers)
 
 module.exports = groupRouter;

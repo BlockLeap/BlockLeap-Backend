@@ -11,18 +11,19 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
+    port: process.env.DB_PORT
   }
 );
 
 init(sequelize);
 
-// Decomentar para sincronizar todo el modelo
+// Descomentar para sincronizar todo el modelo
 // sequelize.sync()
 //   .then(() => {
 //     console.log('¡Base de datos sincronizada correctamente!');
 //   })
-//   .catch(err => {
-//     console.error('Error al sincronizar la base de datos:', err);
+//   .catch(error => {
+//     console.error('Error al sincronizar la base de datos:', error);
 //   });
 
 module.exports = sequelize;

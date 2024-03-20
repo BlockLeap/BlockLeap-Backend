@@ -3,11 +3,12 @@
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
-
 class setDAO {
+  sequelize;
   set;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.set = sequelize.models.set;
   }
 
@@ -16,13 +17,10 @@ class setDAO {
     const createdSet = await this.set.create({
       group: setData.groupId,
       user: setData.userId,
-      role: setData.role
+      role: setData.role,
     });
 
-    if (!createdSet) {
-      throw new ErrorException(ErrorCode.CantCreate);
-    }
-
+    if (!createdSet) throw new ErrorException(ErrorCode.CantCreate);
     return createdSet;
   }
 
@@ -31,21 +29,17 @@ class setDAO {
     return await this.set.findAll();
   }
 
-  async fingByGroupId(id){
+  async fingByGroupId(id) {
     await this.set.sync();
     const foundMembers = await this.set.findAll({
       where: {
-        group: id
-      }
+        group: id,
+      },
     });
-
-    if (!foundMembers) {
-      throw new ErrorException(ErrorCode.NotFound);
-    }
+    if (!foundMembers) throw new ErrorException(ErrorCode.NotFound);
 
     return foundMembers;
   }
-
 }
 
 module.exports = setDAO;

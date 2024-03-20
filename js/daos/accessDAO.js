@@ -1,9 +1,11 @@
 "use strict";
 
 class accessDAO {
+  sequelize;
   access;
 
   constructor(sequelize) {
+    this.sequelize = sequelize;
     this.access = sequelize.models.access;
   }
 
