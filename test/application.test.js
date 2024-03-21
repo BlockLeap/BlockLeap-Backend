@@ -75,7 +75,7 @@ describe("Level Component", () => {
 describe("User Component", () => {
   describe("POST /api/user/register", () => {
     test("should add one user", async () => {
-      const response = await request(app).post("/api/user/register").send({
+      const response = await request(app).post("/api/user/create").send({
         userName: "Prueba",
         userPassword: "1234",
       });
@@ -92,15 +92,15 @@ describe("User Component", () => {
         password: "1234",
       });
       expect(response.statusCode).toBe(200);
-      expect(response.body.name).toBe("Ricardo");
+      expect(response.body.name).toBe("Prueba");
       expect(response.body.role).toBe("Estudiante");
     });
   });
 
-  describe("GET /api/user/userById/:id", () => {
+  describe("GET /api/user/:id", () => {
     test("should return one specific user", async () => {
       let id = 1;
-      const response = await request(app).get(`/api/user/userById/${id}`);
+      const response = await request(app).get(`/api/user/${id}`);
       expect(response.statusCode).toBe(200);
       expect(response.body.name).toBe("Diego");
       expect(response.body.role).toBe("Estudiante");
@@ -149,18 +149,17 @@ describe("Group Component", () => {
     });
   });
 
-  /* describe("POST /api/group/:groupId/:userId", () => {
-    let groupId = 17;
-    let userId = 6;
+  describe("POST /api/group/register", () => {
     test("should assign one user to one group", async () => {
-      const response = await request(app).post(
-        `/api/group/${groupId}/${userId}`
-      );
+      const response = await request(app).post("/api/group/register").send({
+        groupId: 17,
+        userId: 6,
+      });
       console.log("Respuesta:", response.body);
       expect(response.statusCode).toBe(200);
       expect(response.body.group).toBe(17);
       expect(response.body.user).toBe(6);
       expect(response.body.role).toBe("Miembro");
     });
-  }); */
+  });
 });

@@ -53,7 +53,7 @@ class groupController {
       setData.userId = request.body.userId;
       setData.role = "Miembro";
 
-      //Check id exist in DB
+      // Check id exist in DB
       await this.groupDAO.getGroupById(setData.groupId);
       await this.userDAO.searchById(setData.userId);
 
