@@ -29,16 +29,33 @@ app.use(
     },
   })
 );
+
 app.disable("x-powered-by");
 app.use(helmet.frameguard({ action: "deny" }));
 app.use(helmet.xssFilter());
 app.use(helmet.hsts({ maxAge: 31536000 }));
 
-app.use((err, req, res, next) => {
-  errorHandler(err, req, res, next);
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "https://fonts.googleapis.com"],
+    },
+  })
+);
+
+app.disable("x-powered-by");
+app.use(helmet.frameguard({ action: "deny" }));
+app.use(helmet.xssFilter());
+app.use(helmet.hsts({ maxAge: 31536000 }));
+
+app.use((error, request, response, next) => {
+  errorHandler(error, request, response, next);
 });
 
 app.listen(process.env.APP_PORT, function (error) {
   if (error) console.log("The server could not be connected");
   else console.log("Server listening port", process.env.APP_PORT);
 });
+
+module.exports = app;

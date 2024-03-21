@@ -53,22 +53,22 @@ class groupController {
       setData.userId = request.body.userId;
       setData.role = "Miembro";
 
-      //Check id exist in DB
+      // Check id exist in DB
       await this.groupDAO.getGroupById(setData.groupId);
       await this.userDAO.searchById(setData.userId);
 
       let setCreated = await this.setDAO.createSet(setData);
-      console.log(setCreated);
       response.json(setCreated);
     } catch (error) {
       next(error);
     }
   };
+
   getGroupMembers = async (request, response, next) => {
     try {
       const groupId = request.params.groupId;
       const foundMembers = await this.setDAO.fingByGroupId(groupId);
-      response.json(foundMembers);
+      response.json({ members: foundMembers });
     } catch (error) {
       next(error);
     }
