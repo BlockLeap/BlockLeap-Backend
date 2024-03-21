@@ -7,8 +7,8 @@ const UserController = require("../controller/userController");
 const userController = new UserController();
 
 userRouter
-  .post("/register", userController.registerUser)
+  .post("/create", userController.registerUser)
   .post("/login", userController.loginUser)
-  .get("/userById/:id", userController.getUserById);
+  .get("/:id", userController.getUserById);
 
 module.exports = userRouter;
