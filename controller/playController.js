@@ -22,7 +22,17 @@ class playController {
       next(error);
     }
   };
-  getLevelStatisticsByUserId = async (request, response, next) => {};
+  getLevelStatisticsByUserId = async (request, response, next) => {
+    try {
+      const idUser = request.params.idUser;
+      const levelStatistics = await this.playDAO.getAllUserLevelStatistics(
+        idUser
+      );
+      response.json(levelStatistics);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = playController;

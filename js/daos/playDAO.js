@@ -24,6 +24,18 @@ class playDAO {
     });
     if (!createdPlay) throw new ErrorException(ErrorCode.CantCreate);
   }
+
+  async getAllUserLevelStatistics(idUser) {
+    await this.play.sync();
+    const levelStatistics = await this.play.findAll({
+      where: {
+        user: idUser,
+      },
+    });
+    if (!levelStatistics) throw new ErrorException(ErrorCode.NotFound);
+
+    return levelStatistics;
+  }
 }
 
 module.exports = playDAO;

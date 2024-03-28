@@ -4,14 +4,15 @@ info:
   description: This API is used to handle requests to the backend of the Articoding video game
   version: "1.0.0"
 servers:
-  - url: http://localhost:3001
+  - url: http://localhost:3001/api
     description: "Dev"
 tags:
   - name: level
   - name: user
   - name: group
+  - name: play
 paths:
-  /api/level/categories:
+  /level/categories:
     get:
       tags:
         - level
@@ -25,7 +26,7 @@ paths:
                 $ref: "#/components/schemas/CategoryArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/level/{id}:
+  /level/{id}:
     get:
       tags:
         - level
@@ -49,7 +50,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "404":
           $ref: "#/components/responses/NotFound"
-  /api/level/all:
+  /level/all:
     get:
       tags:
         - level
@@ -63,7 +64,7 @@ paths:
                 $ref: "#/components/schemas/LevelArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/level/create:
+  /level/create:
     post:
       tags:
         - level
@@ -83,7 +84,7 @@ paths:
                 $ref: "#/components/schemas/Level"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/level/levelsByCategory/{id}:
+  /level/levelsByCategory/{id}:
     get:
       tags:
         - level
@@ -107,7 +108,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/level/community/levels:
+  /level/community/levels:
     get:
       tags:
         - level
@@ -121,7 +122,47 @@ paths:
                 $ref: "#/components/schemas/LevelArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/user/create:
+  /play:
+    post:
+      tags:
+        - play
+      summary: Adding the statistics of a played level to the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LevelStatistic'
+      responses:
+        "200":
+          description: OK
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /play/{idUser}:
+    get:
+      tags:
+        - play
+      summary: Get all levels of a specific user
+      parameters:
+        - in: path
+          name: idUser
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayLevelStatistic'
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/create:
     post:
       tags:
         - user
@@ -149,7 +190,7 @@ paths:
                 $ref: "#/components/schemas/User"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/user/login:
+  /user/login:
     post:
       tags:
         - user
@@ -181,7 +222,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/group/{groupId}:
+  /group/{groupId}:
     get:
       tags:
         - group
@@ -205,7 +246,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/group/all:
+  /group/all:
     get:
       tags:
         - group
@@ -219,7 +260,7 @@ paths:
                 $ref: "#/components/schemas/GroupArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/group/{groupId}/members:
+  /group/{groupId}/members:
     get:
       tags:
         - group
@@ -243,7 +284,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/group/create:
+  /group/create:
     post:
       tags:
         - group
@@ -278,7 +319,7 @@ paths:
                     $ref: "#/components/schemas/Member"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /api/group/register:
+  /group/register:
     post:
       tags:
         - group
@@ -319,10 +360,6 @@ components:
     Unauthorized:
       description: Invalid credentials
   schemas:
-    Number:
-      type: integer
-      readOnly: true
-      example: 2
     Level:
       type: object
       required:
@@ -425,3 +462,33 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Member"
+    LevelStatistic:
+      type: object
+      required:
+        - user
+        - level
+        - stars
+        - attempts
+      properties:
+        user:
+          type: integer
+          format: uuid
+          example: 4
+        level:
+          type: integer
+          format: uuid
+          example: 4
+        stars:
+          type: integer
+          format: uuid
+          example: 3
+        attempts:
+          type: integer
+          format: uuid
+          example: 1
+    ArrayLevelStatistic:
+      type: array
+      items:
+        $ref: "#/components/schemas/LevelStatistic"
+          
+    
