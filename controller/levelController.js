@@ -68,17 +68,6 @@ class levelController {
       next(error);
     }
   };
-
-  countLevelsByCategory = async (request, response, next) => {
-    try {
-      const number = await this.levelDAO.countLevelsByCategory(
-        request.params.id
-      );
-      response.json(number);
-    } catch (error) {
-      next(error);
-    }
-  };
 }
 
 module.exports = levelController;

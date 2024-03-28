@@ -7,7 +7,7 @@ function errorHandler(err, req, res, next) {
   if (err instanceof ErrorException) {
     res.status(err.status).send(err);
   } else {
-    // For unhandled errors.
+    // For unhandled errors
     res.status(500).send({
       code: ErrorCode.UnknownError,
       status: 500,
