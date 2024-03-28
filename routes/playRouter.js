@@ -8,4 +8,5 @@ const playController = new PlayController();
 
 playRouter.post("/", playController.saveLevelStatistics);
 playRouter.get("/:idUser", playController.getLevelStatisticsByUserId);
+playRouter.put("/update", playController.updateLevelStatistics);
 module.exports = playRouter;

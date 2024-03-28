@@ -138,6 +138,22 @@ paths:
           description: OK
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /play/update:
+    put:
+      tags:
+        - play
+      summary: Updating the statistics of a played level to the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LevelStatistic'
+      responses:
+        "200":
+          description: OK
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /play/{idUser}:
     get:
       tags:
