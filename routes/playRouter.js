@@ -2,10 +2,10 @@
 
 const playRouter = require("express-promise-router")();
 
-const PlayController = require("../controller/levelController");
+const PlayController = require("../controller/playController");
 
 const playController = new PlayController();
 
-levelRouter.post("/save", playController.saveLevelStatistics);
-
-module.exports = levelRouter;
+playRouter.post("/", playController.saveLevelStatistics);
+playRouter.get("/:idUser", playController.getLevelStatisticsByUserId);
+module.exports = playRouter;
