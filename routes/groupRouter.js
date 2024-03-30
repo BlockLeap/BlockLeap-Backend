@@ -8,7 +8,7 @@ const groupController = new GroupController();
 
 groupRouter
   .post("/create", groupController.createGroup)
-  .post("/:groupId/:userId", groupController.resgisterUserInAGroup)
+  .post("/register", groupController.resgisterUserInAGroup)
   .get("/all", groupController.getAllGroups)
   .get("/:groupId", groupController.getGroupById)
   .get("/:groupId/members", groupController.getGroupMembers);

@@ -19,7 +19,6 @@ class setDAO {
       user: setData.userId,
       role: setData.role,
     });
-
     if (!createdSet) throw new ErrorException(ErrorCode.CantCreate);
     return createdSet;
   }

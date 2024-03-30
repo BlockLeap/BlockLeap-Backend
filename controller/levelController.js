@@ -44,7 +44,6 @@ class levelController {
       levelData.self = request.body.self;
       levelData.title = request.body.title;
       levelData.data = request.body.data;
-      console.log(levelData.data);
       const createdLevel = await this.levelDAO.createLevel(levelData);
       response.json(createdLevel);
     } catch (error) {

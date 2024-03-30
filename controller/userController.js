@@ -15,9 +15,8 @@ class userController {
   }
 
   getUserById = async (request, response) => {
-    let user = await this.userDAO.getUserById(request.params.id);
-    console.log(user);
-    response.render(views.profile, { user });
+    let user = await this.userDAO.searchById(request.params.id);
+    response.json(user);
   };
 
   registerUser = async (request, response, next) => {
