@@ -7,7 +7,7 @@ const UserController = require("../controller/userController");
 const userController = new UserController();
 
 userRouter
-  .post("/create", userController.registerUser)
+  .post("/registro", userController.registerUser)
   .post("/login", userController.loginUser)
   .get("/:id", userController.getUserById);
 
