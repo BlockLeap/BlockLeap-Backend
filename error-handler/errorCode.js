@@ -22,6 +22,10 @@ class ErrorCode {
   static get WrongPassword() {
     return "Usuario no existe";
   }
+
+  static get BadRequest() {
+    return "Solicitud incorrecta";
+  }
 }
 
 module.exports = {

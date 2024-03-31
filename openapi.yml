@@ -178,6 +178,37 @@ paths:
           $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /play/categoryStatistics:
+    get:
+      tags:
+        - play
+      summary: Get all the statistics for a specific category and a user
+      parameters:
+        - in: query
+          name: category
+          required: true
+          description: The category Id
+          schema:
+            type: integer
+            example: 1
+        - in: query
+          name: user
+          required: true
+          description: The user Id
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayCategoryStatistic'
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /user/create:
     post:
       tags:
@@ -506,5 +537,26 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/LevelStatistic"
+    ArrayCategoryStatistic:
+      type: array
+      items:
+        type: object
+        required:
+          - attemps
+          - stars
+          - level
+        properties:
+          level:
+            type: integer
+            format: uuid
+            example: 4
+          stars:
+            type: integer
+            format: uuid
+            example: 3
+          attempts:
+            type: integer
+            format: uuid
+            example: 1
           
     

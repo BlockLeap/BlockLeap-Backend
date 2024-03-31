@@ -3,10 +3,12 @@
 class playDAO {
   sequelize;
   play;
-
+  level;
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.play = sequelize.models.play;
+    this.level = sequelize.models.level;
+
   }
 
   async getPlays() {
@@ -51,6 +53,21 @@ class playDAO {
     if (!levelStatistics) throw new ErrorException(ErrorCode.NotFound);
 
     return levelStatistics;
+  }
+
+  async getStatisticsByUserAndCategory(idUser, idCategory){
+    await this.play.sync();
+    const statistics = await this.play.findAll({
+      include: [{
+        model: this.level,
+        as: 'level_level', 
+        where: { category: idCategory },
+        attributes: [] 
+      }],
+      where: { user: idUser },
+      attributes: ['level', 'stars', 'attempts'],
+    });
+    return statistics;
   }
 }
 
