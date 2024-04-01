@@ -515,7 +515,6 @@ components:
         - user
         - level
         - stars
-        - attempts
       properties:
         user:
           type: integer
