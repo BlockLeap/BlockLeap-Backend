@@ -73,9 +73,9 @@ describe("Level Component", () => {
 });
 
 describe("User Component", () => {
-  describe("POST /api/user/register", () => {
+  describe("POST /api/user/registro", () => {
     test("should add one user", async () => {
-      const response = await request(app).post("/api/user/create").send({
+      const response = await request(app).post("/api/user/registro").send({
         userName: "Prueba",
         userPassword: "1234",
       });

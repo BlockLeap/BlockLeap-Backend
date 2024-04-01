@@ -3,7 +3,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const path = require('path');
+const path = require("path");
 const cors = require("cors");
 
 const cookieParser = require("cookie-parser");
@@ -19,6 +19,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
@@ -32,8 +33,18 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'", "https://blockly-demo.appspot.com/static/media/"],
-      styleSrc: ["'self'", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css", "'unsafe-inline'" ],
-      "img-src": ["'self'", "https://blockly-demo.appspot.com/static/media/", "data:", "blob:"]
+      styleSrc: [
+        "'self'",
+        "https://fonts.googleapis.com",
+        "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css",
+        "'unsafe-inline'",
+      ],
+      "img-src": [
+        "'self'",
+        "https://blockly-demo.appspot.com/static/media/",
+        "data:",
+        "blob:",
+      ],
     },
   })
 );
@@ -49,12 +60,11 @@ app.listen(process.env.APP_PORT, function (error) {
 
 // Front
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Define a catch-all route that serves index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-
 
 module.exports = app;
