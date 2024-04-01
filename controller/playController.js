@@ -10,6 +10,7 @@ class playController {
     this.playDAO = factory.getPlayDAO();
     this.userDAO = factory.getUserDAO();
     this.categoryDAO = factory.getCategoryDAO();
+    this.levelDAO = factory.getLevelDAO();
   }
 
   saveLevelStatistics = async (request, response, next) => {
@@ -18,8 +19,17 @@ class playController {
       playData.user = request.body.user;
       playData.level = request.body.level;
       playData.stars = request.body.stars;
-      playData.attempts = request.body.attempts;
-      await this.playDAO.savePlayStatistics(playData);
+
+      const foundStatistics = await this.playDAO.searchByUserAndLevel(playData.user,playData.level);
+      if(!foundStatistics){
+        playData.attempts = 1;
+        await this.playDAO.savePlayStatistics(playData);
+      } else{
+        playData.attempts = foundStatistics.attempts + 1;
+        if(playData.stars < foundStatistics.stars)        
+          playData.stars = foundStatistics.stars;
+        await this.playDAO.updatePlayStatistics(playData);
+      }
       response.status(200).send("OK");
     } catch (error) {
       next(error);
@@ -32,9 +42,6 @@ class playController {
       const levelStatistics = await this.playDAO.getAllUserLevelStatistics(
         idUser
       );
-
-      // Check id exist in DB
-      await this.userDAO.searchById(setData.userId);
 
       response.json(levelStatistics);
     } catch (error) {
@@ -50,10 +57,6 @@ class playController {
         throw new ErrorException(ErrorCode.BadRequest);
       }
       
-      // Check id exist in DB
-      await this.userDAO.searchById(user);
-      await this.categoryDAO.getCategoryById(category)
-
       const statistics = await this.playDAO.getStatisticsByUserAndCategory(user,category);
       response.json(statistics);
     } catch (error) {
@@ -68,6 +71,7 @@ class playController {
       playData.level = request.body.level;
       playData.stars = request.body.stars;
       playData.attempts = request.body.attempts;
+ 
       await this.playDAO.updatePlayStatistics(playData);
       response.status(200).send("OK");
     } catch (error) {

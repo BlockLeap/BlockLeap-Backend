@@ -16,6 +16,17 @@ class playDAO {
     return await this.play.findAll();
   }
 
+  async searchByUserAndLevel(user,level){
+    await this.play.sync();
+    const statisticsLevel = await this.play.findOne({
+      where: {
+        user,
+        level,
+      }
+    });
+    return statisticsLevel;
+  }
+
   async savePlayStatistics({ user, level, stars, attempts }) {
     await this.play.sync();
     const createdPlay = await this.play.create({
