@@ -114,7 +114,151 @@ CREATE TABLE `level` (
 
 INSERT INTO `level` (`id`, `user`, `category`, `self`, `title`, `data`) VALUES
 (1, 5, 1, 1, 'Movement', '{"phaser":{"width":5,"height":3,"theme":"default","layers":{"background":{"spriteSheet":"background","spriteSheetType":"multi","objects":[{"x":"0","y":"0","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"2","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"3","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"4","y":"0","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"1","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"1","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"2","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"2","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"2","spriteIndex":"4","properties":{"collides":true}},{"x":"3","y":"2","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"2","spriteIndex":"5","properties":{"collides":true}},{"x":"0","y":"3","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"3","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"4","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"3","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"4","spriteIndex":"5","properties":{"collides":true}}],"depth":0},"objects":[{"spriteSheet":"exit","spriteSheetType":"img","objects":[{"x":"3","y":"1","type":"exit"}],"depth":1}],"players":{"spriteSheet":"player","spriteSheetType":"multi","objects":[{"x":"1","y":"1"}],"depth":2}}},"blockly":{"maxInstances":{"start":1},"workspaceBlocks":[{"id":"movement","opts":{"isDeletable":false}},{"id":"math_number","opts":{"isDeletable":false}}]}}'),
-(2, 5, 1, 2, 'Movement - 2', '{"phaser":{"width":5,"height":5,"theme":"default","layers":{"background":{"spriteSheet":"background","spriteSheetType":"multi","objects":[{"x":"0","y":"0","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"2","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"3","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"4","y":"0","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"1","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"1","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"2","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"2","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"2","spriteIndex":"7","properties":{"collides":true}},{"x":"3","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"2","spriteIndex":"2","properties":{"collides":true}},{"x":"2","y":"3","spriteIndex":"0","properties":{"collides":true}},{"x":"3","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"3","spriteIndex":"2","properties":{"collides":true}},{"x":"2","y":"4","spriteIndex":"3","properties":{"collides":true}},{"x":"3","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"4","spriteIndex":"5","properties":{"collides":true}}],"depth":0},"objects":[{"spriteSheet":"exit","spriteSheetType":"img","objects":[{"x":"3","y":"3","type":"exit"}],"depth":1}],"players":{"spriteSheet":"player","spriteSheetType":"multi","objects":[{"x":"1","y":"1"}],"depth":2}}},"blockly":{"toolbox":{"kind":"categoryToolbox","contents":[{"kind":"category","name":"variable", "colour":"#b100cd","contents":[" {\r\n    \"type\": \"variables_get_panda\",\r\n    \"message0\": \"%1\",\r\n    \"args0\": [\r\n      {\r\n        \"type\": \"field_variable\",\r\n        \"name\": \"VAR\",\r\n        \"variable\": \"%{BKY_VARIABLES_DEFAULT_NAME}\",\r\n        \"variableTypes\": [\"Panda\"],\r\n        \"defaultType\": \"Panda\"\r\n      }\r\n    ],\r\n    \"output\": \"Panda\"\r\n  },\r\n  {\r\n    \"type\": \"variables_set_panda\",\r\n    \"message0\": \"%{BKY_VARIABLES_SET}\",\r\n    \"args0\": [\r\n      {\r\n        \"type\": \"field_variable\",\r\n        \"name\": \"VAR\",\r\n        \"variable\": \"%{BKY_VARIABLES_DEFAULT_NAME}\",\r\n        \"variableTypes\": [\"Panda\"],\r\n        \"defaultType\": \"Panda\"\r\n      },\r\n      {\r\n        \"type\": \"input_value\",\r\n        \"name\": \"VALUE\",\r\n        \"check\": \"Panda\"\r\n      }\r\n    ],\r\n    \"previousStatement\": null,\r\n    \"nextStatement\": null\r\n  }"]}{"kind":"category","name":"Actions","colour":"#745ba5","contents":[{"type":"movement","kind":"block","icons":{"comment":{"text": "This block allows you to move in any direction, any number of blocks","pinned":false,"height":80,"width":160}}},{"type":"rotate","kind":"block","icons":{"comment":{"text": "This block allows you to rotate clockwise or counterclockwise (left or right)","pinned":false,"height":80,"width":160}}},{"type":"changeStatus","kind":"block","icons":{"comment":{"text": "You can change the status of a block with this (on or off, for example)","pinned":false,"height":80,"width":160}}}]},{"kind":"category","name":"Text","colour":"#e13030","contents":[{"type":"text","kind":"block"}]},{"kind":"category","name":"Numbers","colour":"#0d44ba","contents":[{"type":"math_number","kind":"block"}]},{"kind":"category","name":"Loops","colour":"#5ba55b","contents":[{"type":"for_X_times","kind":"block"},{"type":"while_do","kind":"block"}]},{"kind":"category","name":"Logic","colour":"#5b80a5","contents":[{"type":"if_do","kind":"block"},{"type":"if_else_do","kind":"block"},{"type":"and_or","kind":"block"},{"type":"comparator","kind":"block"}]}]},"maxInstances":{"start":1},"workspaceBlocks":[]}}'),
+(2, 5, 1, 2, 'Movement - 2', '{"phaser":{"width":5,"height":5,"theme":"default","layers":{"background":{"spriteSheet":"background","spriteSheetType":"multi","objects":[{"x":"0","y":"0","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"2","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"3","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"4","y":"0","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"1","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"1","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"2","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"2","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"2","spriteIndex":"7","properties":{"collides":true}},{"x":"3","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"2","spriteIndex":"2","properties":{"collides":true}},{"x":"2","y":"3","spriteIndex":"0","properties":{"collides":true}},{"x":"3","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"3","spriteIndex":"2","properties":{"collides":true}},{"x":"2","y":"4","spriteIndex":"3","properties":{"collides":true}},{"x":"3","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"4","spriteIndex":"5","properties":{"collides":true}}],"depth":0},"objects":[{"spriteSheet":"exit","spriteSheetType":"img","objects":[{"x":"3","y":"3","type":"exit"}],"depth":1}],"players":{"spriteSheet":"player","spriteSheetType":"multi","objects":[{"x":"1","y":"1"}],"depth":2}}},"blockly": {
+        "toolbox": {
+            "kind": "categoryToolbox",
+            "contents": [
+                {
+                    "kind": "category",
+                    "name": "variable",
+                    "colour": "#b100cd",
+                    "contents": [
+                        {
+                            "type": "variables_get_panda",
+                            "kind": "block",
+                            "icons": {
+                                "comment": {
+                                    "text": "This block allows you to get a variable and use it for your blocks!",
+                                    "pinned": false,
+                                    "height": 80,
+                                    "width": 160
+                                }
+                            }
+                        },
+                        {
+                            "type": "variables_set_panda",
+                            "kind": "block",
+                            "icons": {
+                                "comment": {
+                                    "text": "With this awesome block you can set the value of any variable of your choice!",
+                                    "pinned": false,
+                                    "height": 80,
+                                    "width": 160
+                                }
+                            }
+                        }
+                    ]
+                },
+                    {
+                    "kind": "category",
+                    "name": "Actions",
+                    "colour": "#745ba5",
+                    "contents": [
+                        {
+                            "type": "movement",
+                            "kind": "block",
+                            "icons": {
+                                "comment": {
+                                    "text": "This block allows you to move in any direction, any number of blocks",
+                                    "pinned": false,
+                                    "height": 80,
+                                    "width": 160
+                                }
+                            }
+                        },
+                        {
+                            "type": "rotate",
+                            "kind": "block",
+                            "icons": {
+                                "comment": {
+                                    "text": "This block allows you to rotate clockwise or counterclockwise (left or right)",
+                                    "pinned": false,
+                                    "height": 80,
+                                    "width": 160
+                                }
+                            }
+                        },
+                        {
+                            "type": "changeStatus",
+                            "kind": "block",
+                            "icons": {
+                                "comment": {
+                                    "text": "You can change the status of a block with this (on or off, for example)",
+                                    "pinned": false,
+                                    "height": 80,
+                                    "width": 160
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "kind": "category",
+                    "name": "Text",
+                    "colour": "#e13030",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "kind": "block"
+                        }
+                    ]
+                },
+                {
+                    "kind": "category",
+                    "name": "Numbers",
+                    "colour": "#0d44ba",
+                    "contents": [
+                        {
+                            "type": "math_number",
+                            "kind": "block"
+                        }
+                    ]
+                },
+                {
+                    "kind": "category",
+                    "name": "Loops",
+                    "colour": "#5ba55b",
+                    "contents": [
+                        {
+                            "type": "for_X_times",
+                            "kind": "block"
+                        },
+                        {
+                            "type": "while_do",
+                            "kind": "block"
+                        }
+                    ]
+                },
+                {
+                    "kind": "category",
+                    "name": "Logic",
+                    "colour": "#5b80a5",
+                    "contents": [
+                        {
+                            "type": "if_do",
+                            "kind": "block"
+                        },
+                        {
+                            "type": "if_else_do",
+                            "kind": "block"
+                        },
+                        {
+                            "type": "and_or",
+                            "kind": "block"
+                        },
+                        {
+                            "type": "comparator",
+                            "kind": "block"
+                        }
+                    ]
+                }
+            ]
+        },
+        "maxInstances": {
+            "start": 1
+        },
+        "workspaceBlocks": []
+    }}'),
 (3, 5, 1, 3, 'Trap', '{"phaser":{"width":5,"height":4,"theme":"default","layers":{"background":{"spriteSheet":"background","spriteSheetType":"multi","objects":[{"x":"0","y":"0","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"2","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"3","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"4","y":"0","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"1","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"1","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"2","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"2","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"3","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"3","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"3","spriteIndex":"4","properties":{"collides":true}},{"x":"3","y":"3","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"3","spriteIndex":"5","properties":{"collides":true}}],"depth":0},"objects":[{"spriteSheet":"trap","spriteSheetType":"multi","objects":[{"x":"2","y":"1","type":"trap","properties":{"enabled":true}}],"depth":1},{"spriteSheet":"exit","spriteSheetType":"img","objects":[{"x":"3","y":"1","type":"exit"}],"depth":1}],"players":{"spriteSheet":"player","spriteSheetType":"multi","objects":[{"x":"1","y":"1"}],"depth":2}}},"blockly":{"toolbox":{"kind":"categoryToolbox","contents":[{"kind":"category","name":"Actions","colour":"#745ba5","contents":[{"type":"movement","kind":"block"},{"type":"rotate","kind":"block"},{"type":"changeStatus","kind":"block"}]},{"kind":"category","name":"Text","colour":"#e13030","contents":[{"type":"text","kind":"block"}]},{"kind":"category","name":"Numbers","colour":"#0d44ba","contents":[{"type":"math_number","kind":"block"}]},{"kind":"category","name":"Loops","colour":"#5ba55b","contents":[{"type":"for_X_times","kind":"block"},{"type":"while_do","kind":"block"}]},{"kind":"category","name":"Logic","colour":"#5b80a5","contents":[{"type":"if_do","kind":"block"},{"type":"if_else_do","kind":"block"},{"type":"and_or","kind":"block"},{"type":"comparator","kind":"block"}]}]},"maxInstances":{"start":1},"workspaceBlocks":[]}}'),
 (4, 5, 1, 4, 'Trap - 2', '{"phaser":{"width":7,"height":5,"theme":"default","layers":{"background":{"spriteSheet":"background","spriteSheetType":"multi","objects":[{"x":"0","y":"0","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"2","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"3","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"4","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"5","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"6","y":"0","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"1","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"5","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"6","y":"1","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"2","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"5","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"6","y":"2","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"3","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"5","y":"3","spriteIndex":"6","properties":{"collides":false}},{"x":"6","y":"3","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"4","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"3","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"5","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"6","y":"4","spriteIndex":"5","properties":{"collides":true}}],"depth":0},"objects":[{"spriteSheet":"trap","spriteSheetType":"multi","objects":[{"x":"2","y":"1","type":"trap","properties":{"enabled":true}},{"x":"4","y":"1","type":"trap","properties":{"enabled":true}},{"x":"4","y":"3","type":"trap","properties":{"enabled":true}}],"depth":1},{"spriteSheet":"exit","spriteSheetType":"img","objects":[{"x":"5","y":"1","type":"exit"}],"depth":1},{"spriteSheet":"wall","spriteSheetType":"img","objects":[{"x":"2","y":"2","type":"wall"}],"depth":1}],"players":{"spriteSheet":"player","spriteSheetType":"multi","objects":[{"x":"1","y":"1"}],"depth":2}}},"blockly":{"toolbox":{"kind":"categoryToolbox","contents":[{"kind":"category","name":"Actions","colour":"#745ba5","contents":[{"type":"movement","kind":"block"},{"type":"rotate","kind":"block"},{"type":"changeStatus","kind":"block"}]},{"kind":"category","name":"Text","colour":"#e13030","contents":[{"type":"text","kind":"block"}]},{"kind":"category","name":"Numbers","colour":"#0d44ba","contents":[{"type":"math_number","kind":"block"}]},{"kind":"category","name":"Loops","colour":"#5ba55b","contents":[{"type":"for_X_times","kind":"block"},{"type":"while_do","kind":"block"}]},{"kind":"category","name":"Logic","colour":"#5b80a5","contents":[{"type":"if_do","kind":"block"},{"type":"if_else_do","kind":"block"},{"type":"and_or","kind":"block"},{"type":"comparator","kind":"block"}]}]},"maxInstances":{"start":1},"workspaceBlocks":[]}}'),
 (5, 5, 1, 5, 'Enemy', '{"phaser":{"width":5,"height":4,"theme":"default","layers":{"background":{"spriteSheet":"background","spriteSheetType":"multi","objects":[{"x":"0","y":"0","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"2","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"3","y":"0","spriteIndex":"1","properties":{"collides":true}},{"x":"4","y":"0","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"1","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"1","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"1","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"2","spriteIndex":"0","properties":{"collides":true}},{"x":"1","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"2","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"3","y":"2","spriteIndex":"6","properties":{"collides":false}},{"x":"4","y":"2","spriteIndex":"2","properties":{"collides":true}},{"x":"0","y":"3","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"3","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"3","spriteIndex":"4","properties":{"collides":true}},{"x":"3","y":"3","spriteIndex":"4","properties":{"collides":true}},{"x":"4","y":"3","spriteIndex":"5","properties":{"collides":true}},{"x":"0","y":"4","spriteIndex":"3","properties":{"collides":true}},{"x":"1","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"2","y":"4","spriteIndex":"4","properties":{"collides":true}},{"x":"3","y":"4","spriteIndex":"4","properties":{"collides":true}}],"depth":0},"objects":[{"spriteSheet":"enemy","spriteSheetType":"multi","objects":[{"x":"2","y":"1","type":"enemy"}],"depth":1},{"spriteSheet":"exit","spriteSheetType":"img","objects":[{"x":"3","y":"1","type":"exit"}],"depth":1}],"players":{"spriteSheet":"player","spriteSheetType":"multi","objects":[{"x":"1","y":"1"}],"depth":2}}},"blockly":{"toolbox":{"kind":"categoryToolbox","contents":[{"kind":"category","name":"Actions","colour":"#745ba5","contents":[{"type":"movement","kind":"block"},{"type":"rotate","kind":"block"},{"type":"changeStatus","kind":"block"}]},{"kind":"category","name":"Text","colour":"#e13030","contents":[{"type":"text","kind":"block"}]},{"kind":"category","name":"Numbers","colour":"#0d44ba","contents":[{"type":"math_number","kind":"block"}]},{"kind":"category","name":"Loops","colour":"#5ba55b","contents":[{"type":"for_X_times","kind":"block"},{"type":"while_do","kind":"block"}]},{"kind":"category","name":"Logic","colour":"#5b80a5","contents":[{"type":"if_do","kind":"block"},{"type":"if_else_do","kind":"block"},{"type":"and_or","kind":"block"},{"type":"comparator","kind":"block"}]}]},"maxInstances":{"start":1},"workspaceBlocks":[]}}'),
