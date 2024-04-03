@@ -68,7 +68,7 @@ class groupController {
     try {
       const groupId = request.params.groupId;
       const foundMembers = await this.setDAO.fingByGroupId(groupId);
-      response.json({ members: foundMembers });
+      response.json(foundMembers);
     } catch (error) {
       next(error);
     }

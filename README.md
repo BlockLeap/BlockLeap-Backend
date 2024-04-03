@@ -11,6 +11,7 @@
   - APP_PORT=
   - DB_PASSWORD= ""
   - DB_DIALECT = ""
+  - JWT_SECRET_KEY= ""
 - For the database, you may need install XAMMP with MariaDB
 
 ## Available Commands

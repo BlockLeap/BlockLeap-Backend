@@ -10,6 +10,9 @@ class ErrorException extends Error {
     this.status = 500;
     this.metaData = metaData;
     switch (code) {
+      case ErrorCode.BadRequest:
+        this.status = 400;
+        break;
       case ErrorCode.Unauthorized:
         this.status = 401;
         break;

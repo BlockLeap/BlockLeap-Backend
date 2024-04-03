@@ -35,7 +35,7 @@ class categoryDAO {
 
   async getCategoryById(id) {
     await this.category.sync();
-    const found = await this.category.findByPK(id);
+    const found = await this.category.findByPk(id);
     if (!found) throw new ErrorException(ErrorCode.NotFound);
     return found;
   }
