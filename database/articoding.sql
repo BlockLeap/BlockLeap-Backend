@@ -294,6 +294,13 @@ CREATE TABLE `play` (
   `attempts` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `play`
+--
+
+INSERT INTO `play` (`user`, `level`, `stars`, `attempts`) VALUES
+(11, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -338,7 +345,9 @@ INSERT INTO `user` (`id`, `name`, `role`, `password`) VALUES
 (2, 'Samuel', 'Admin', '12345'),
 (3, 'abcd', 'Estudiante', '$2b$11$nB8ZtM/0MGOwISU4fmbpJu/pmT7QhZqak5ZTo3tlwyvDI4kHAlLye'),
 (4, 'prueba', 'Estudiante', '$2b$11$HBfvRL4YVYSD5KdtWAmKQOq0SQQn2TC/GEQNoN0iaWwvsGESY1Ejm'),
-(5, 'BlockLeap', 'Admin', '$2b$11$o5RezMu.bSkDldrmyyvV6ew8N7khRHu4UZDJj3zwHl1xF2HAU01Pi');
+(5, 'BlockLeap', 'Admin', '$2b$11$o5RezMu.bSkDldrmyyvV6ew8N7khRHu4UZDJj3zwHl1xF2HAU01Pi'),
+(11, 'cuenta', 'Estudiante', '$2b$11$61nWy0DqZmOy5I4t4U5SXuN.8oj2tqDXUVqinG86l/JcEix0PkAxW'),
+(12, 'cuenta', 'Estudiante', '$2b$11$qhlD5YQ.kIgHGL73WYh7ROWW4ZAXxbZ.dxBkueiF6P6ItPHH.vFU.');
 
 --
 -- Índices para tablas volcadas
@@ -383,8 +392,8 @@ ALTER TABLE `level`
 -- Indices de la tabla `play`
 --
 ALTER TABLE `play`
-  ADD KEY `user` (`user`,`level`),
-  ADD KEY `level` (`level`);
+  ADD PRIMARY KEY (`user`,`level`),
+  ADD KEY `user` (`user`,`level`);
 
 --
 -- Indices de la tabla `set`
@@ -420,13 +429,13 @@ ALTER TABLE `group`
 -- AUTO_INCREMENT de la tabla `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
