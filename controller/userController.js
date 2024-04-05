@@ -37,10 +37,12 @@ class userController {
   };
 
   loginUser = async (request, response, next) => {
-    const { id, password } = request.body;
+    const { username, password } = request.body;
     try {
-      const userFound = await this.userDAO.searchById(id);
+      const userFound = await this.userDAO.searchByUsername(username);
       const user = userFound.dataValues;
+      console.log("🚀 ~ userController ~ loginUser= ~ user:", user)
+      
       const valid = await bcryptCompareAsync(password, user.password);
       if (!valid) {
         throw new ErrorException(ErrorCode.Unauthorized);

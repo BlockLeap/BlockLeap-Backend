@@ -20,6 +20,9 @@ class ErrorException extends Error {
       case ErrorCode.NotFound:
         this.status = 404;
         break;
+      case ErrorCode.Conflict:
+        this.status = 409;
+        break;
       case ErrorCode.InternalServerError:
       case ErrorCode.CantCreate:
         this.status = 500;

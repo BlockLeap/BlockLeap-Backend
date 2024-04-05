@@ -24,13 +24,20 @@ class userDAO {
       role: user.role,
       password: user.password,
     });
-    if (!createdUser) throw new ErrorException(ErrorCode.CantCreate);
+    if (!createdUser) throw new ErrorException(ErrorCode.Conflict);
     return createdUser;
   }
 
   async searchById(id) {
     await this.user.sync();
     const foundUser = await this.user.findByPk(id);
+    if (!foundUser) throw new ErrorException(ErrorCode.UserNotFound);
+    return foundUser;
+  }
+
+  async searchByUsername(username){
+    await this.user.sync();
+    const foundUser = await this.user.findOne({ where: { name: username } });
     if (!foundUser) throw new ErrorException(ErrorCode.UserNotFound);
     return foundUser;
   }

@@ -235,6 +235,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/InternalServerError"
   /user/login:
@@ -249,11 +251,11 @@ paths:
             schema:
               type: object
               required:
-                - id
+                - username
                 - password
               properties:
-                id:
-                  type: integer
+                username:
+                  type: string
                 password:
                   type: string
       responses:
@@ -406,6 +408,8 @@ components:
       description: Can't be found
     Unauthorized:
       description: Invalid credentials
+    Conflict:
+      description: Conflict with the current state of a resource
   schemas:
     Level:
       type: object
