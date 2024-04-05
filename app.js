@@ -15,8 +15,9 @@ const playRouter = require("./routes/playRouter");
 const { errorHandler } = require("./error-handler/errorHandler");
 
 const app = express();
+const CLIENT_URL = `${process.env.CORS_CLIENT_PROTOCOL}://${process.env.CORS_CLIENT_DOMAIN}:${process.env.CORS_CLIENT_PORT}`;
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: CLIENT_URL}));
 
 app.use(express.static(path.join(__dirname, "public")));
 

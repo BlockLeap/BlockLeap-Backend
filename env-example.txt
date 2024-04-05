@@ -1,0 +1,11 @@
+DB_HOST="localhost"
+DB_SCHEMA="articoding"
+DB_USER="root"
+DB_PORT=3306
+APP_PORT=3001
+DB_PASSWORD=""
+DB_DIALECT="mysql" 
+JWT_SECRET_KEY="mysecretkey"
+CORS_CLIENT_PROTOCOL="http"
+CORS_CLIENT_DOMAIN="localhost"
+CORS_CLIENT_PORT=3000
