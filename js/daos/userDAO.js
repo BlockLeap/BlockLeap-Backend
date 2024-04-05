@@ -19,13 +19,19 @@ class userDAO {
 
   async createUser(user) {
     await this.user.sync();
-    const createdUser = await this.user.create({
-      name: user.name,
-      role: user.role,
-      password: user.password,
-    });
-    if (!createdUser) throw new ErrorException(ErrorCode.Conflict);
-    return createdUser;
+    try{
+      const createdUser = await this.user.create({
+        name: user.name,
+        role: user.role,
+        password: user.password,
+      });
+      return createdUser;
+    } catch(err){
+      if(err.name === "SequelizeUniqueConstraintError")
+        throw new ErrorException(ErrorCode.Conflict)
+      else
+        throw new ErrorException(ErrorCode.BadRequest)
+    }
   }
 
   async searchById(id) {
