@@ -7,7 +7,6 @@ const bcryptCompareAsync = util.promisify(bcrypt.compare);
 const { ErrorCode } = require("../error-handler/errorCode");
 const { ErrorException } = require("../error-handler/ErrorException");
 const jwt = require("jsonwebtoken");
-
 class userController {
   constructor() {
     const factory = new DAOFactory();
@@ -70,6 +69,17 @@ class userController {
       next(error);
     }
   };
+
+  logout = async (request, res, next) => {
+    try{
+      res.clearCookie("jwt", { path: "/" });
+      res.clearCookie("session", { path: "/" });
+      res.status(200).json({ message: "Cookies eliminadas correctamente" });
+    }
+    catch(error){
+      next(error)
+    }
+  }
 }
 
 module.exports = userController;
