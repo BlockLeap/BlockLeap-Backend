@@ -84,14 +84,7 @@ CREATE TABLE `group` (
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `group`
---
 
-INSERT INTO `group` (`id`, `name`) VALUES
-(15, 'Grupo 5'),
-(16, 'Grupo 5'),
-(17, 'A:K');
 
 -- --------------------------------------------------------
 
@@ -294,12 +287,6 @@ CREATE TABLE `play` (
   `attempts` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `play`
---
-
-INSERT INTO `play` (`user`, `level`, `stars`, `attempts`) VALUES
-(11, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -312,18 +299,6 @@ CREATE TABLE `set` (
   `user` int(11) NOT NULL,
   `role` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `set`
---
-
-INSERT INTO `set` (`group`, `user`, `role`) VALUES
-(15, 3, 'Miembro'),
-(15, 4, 'Anfitrión'),
-(16, 4, 'Anfitrión'),
-(17, 3, 'Anfitrión');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `user`
@@ -341,13 +316,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `role`, `password`) VALUES
-(1, 'Diego', 'Estudiante', '1234'),
-(2, 'Samuel', 'Admin', '12345'),
-(3, 'abcd', 'Estudiante', '$2b$11$nB8ZtM/0MGOwISU4fmbpJu/pmT7QhZqak5ZTo3tlwyvDI4kHAlLye'),
-(4, 'prueba', 'Estudiante', '$2b$11$HBfvRL4YVYSD5KdtWAmKQOq0SQQn2TC/GEQNoN0iaWwvsGESY1Ejm'),
-(5, 'BlockLeap', 'Admin', '$2b$11$o5RezMu.bSkDldrmyyvV6ew8N7khRHu4UZDJj3zwHl1xF2HAU01Pi'),
-(11, 'cuenta', 'Estudiante', '$2b$11$61nWy0DqZmOy5I4t4U5SXuN.8oj2tqDXUVqinG86l/JcEix0PkAxW'),
-(12, 'cuenta', 'Estudiante', '$2b$11$qhlD5YQ.kIgHGL73WYh7ROWW4ZAXxbZ.dxBkueiF6P6ItPHH.vFU.');
+(5, 'BlockLeap', 'Admin', '$2b$11$oeMxnShud.K9HOIokkwNa./h8ELQkx4nNk5XMO.RxJezaIBol5qcu');
 
 --
 -- Índices para tablas volcadas
@@ -436,7 +405,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Restricciones para tablas volcadas
