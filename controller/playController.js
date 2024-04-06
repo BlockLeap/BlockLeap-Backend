@@ -30,7 +30,7 @@ class playController {
           playData.stars = foundStatistics.stars;
         await this.playDAO.updatePlayStatistics(playData);
       }
-      response.status(200).send("OK");
+      response.status(200).json({ok : "OK"});
     } catch (error) {
       next(error);
     }

@@ -26,6 +26,10 @@ class ErrorCode {
   static get BadRequest() {
     return "Solicitud incorrecta";
   }
+
+  static get Conflict() {
+    return "Ya existe";
+  }
 }
 
 module.exports = {
