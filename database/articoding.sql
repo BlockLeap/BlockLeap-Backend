@@ -71,7 +71,8 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 (4, 'Operadores básicos', 'Aprende las distintas operaciones que puedes hacer con los distintos tipos de datos.'),
 (5, 'Bucles', 'Aprende a programar código que se repetirá un número determinado de veces concreto o mientras se cumpla una condición.'),
 (6, 'Condiciones', 'Utiliza el tipo lógico visto anteriormente para crear código condicional.'),
-(7, 'Funciones', 'Aprende a organizar tu código con el uso de funciones.');
+(7, 'Funciones', 'Aprende a organizar tu código con el uso de funciones.'),
+(8, 'Comunidad', 'Niveles creados por la comunidad');
 
 -- --------------------------------------------------------
 
