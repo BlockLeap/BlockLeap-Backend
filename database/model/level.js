@@ -26,7 +26,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       self: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: "level",
           key: "id",
