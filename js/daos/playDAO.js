@@ -1,19 +1,16 @@
 "use strict";
 
-const { stat } = require("fs");
 const { Op } = require("sequelize");
 
 class playDAO {
   sequelize;
   play;
   level;
-  user;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.play = sequelize.models.play;
     this.level = sequelize.models.level;
-    this.user = sequelize.models.user;
   }
 
   async getPlays() {
@@ -93,11 +90,11 @@ class playDAO {
     const statistics = await this.play.findAll({
       include: [
         {
-          model: this.user,
-          as: "user_user",
+          model: this.level,
+          as: "level_level",
           where: {
-            role: {
-              [Op.ne]: "Admin",
+            category: {
+              [Op.eq]: null,
             },
           },
         },
