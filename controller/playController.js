@@ -20,17 +20,20 @@ class playController {
       playData.level = request.body.level;
       playData.stars = request.body.stars;
 
-      const foundStatistics = await this.playDAO.searchByUserAndLevel(playData.user,playData.level);
-      if(!foundStatistics){
+      const foundStatistics = await this.playDAO.searchByUserAndLevel(
+        playData.user,
+        playData.level
+      );
+      if (!foundStatistics) {
         playData.attempts = 1;
         await this.playDAO.savePlayStatistics(playData);
-      } else{
+      } else {
         playData.attempts = foundStatistics.attempts + 1;
-        if(playData.stars < foundStatistics.stars)        
+        if (playData.stars < foundStatistics.stars)
           playData.stars = foundStatistics.stars;
         await this.playDAO.updatePlayStatistics(playData);
       }
-      response.status(200).json({ok : "OK"});
+      response.status(200).json({ ok: "OK" });
     } catch (error) {
       next(error);
     }
@@ -56,8 +59,24 @@ class playController {
       if (!category || !user) {
         throw new ErrorException(ErrorCode.BadRequest);
       }
-      
-      const statistics = await this.playDAO.getStatisticsByUserAndCategory(user,category);
+
+      const statistics = await this.playDAO.getStatisticsByUserAndCategory(
+        user,
+        category
+      );
+      response.json(statistics);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getLevelsStatisticsForCommunity = async (request, response, next) => {
+    try {
+      const user = request.query.user;
+      if (!user) {
+        throw new ErrorException(ErrorCode.BadRequest);
+      }
+      const statistics = await this.playDAO.getStatisticsForCommunity(user);
       response.json(statistics);
     } catch (error) {
       next(error);
@@ -71,7 +90,7 @@ class playController {
       playData.level = request.body.level;
       playData.stars = request.body.stars;
       playData.attempts = request.body.attempts;
- 
+
       await this.playDAO.updatePlayStatistics(playData);
       response.status(200).send("OK");
     } catch (error) {

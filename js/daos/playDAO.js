@@ -1,14 +1,19 @@
 "use strict";
 
+const { stat } = require("fs");
+const { Op } = require("sequelize");
+
 class playDAO {
   sequelize;
   play;
   level;
+  user;
+
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.play = sequelize.models.play;
     this.level = sequelize.models.level;
-
+    this.user = sequelize.models.user;
   }
 
   async getPlays() {
@@ -16,13 +21,13 @@ class playDAO {
     return await this.play.findAll();
   }
 
-  async searchByUserAndLevel(user,level){
+  async searchByUserAndLevel(user, level) {
     await this.play.sync();
     const statisticsLevel = await this.play.findOne({
       where: {
         user,
         level,
-      }
+      },
     });
     return statisticsLevel;
   }
@@ -66,17 +71,39 @@ class playDAO {
     return levelStatistics;
   }
 
-  async getStatisticsByUserAndCategory(idUser, idCategory){
+  async getStatisticsByUserAndCategory(idUser, idCategory) {
     await this.play.sync();
     const statistics = await this.play.findAll({
-      include: [{
-        model: this.level,
-        as: 'level_level', 
-        where: { category: idCategory },
-        attributes: [] 
-      }],
+      include: [
+        {
+          model: this.level,
+          as: "level_level",
+          where: { category: idCategory },
+          attributes: [],
+        },
+      ],
       where: { user: idUser },
-      attributes: ['level', 'stars', 'attempts'],
+      attributes: ["level", "stars", "attempts"],
+    });
+    return statistics;
+  }
+
+  async getStatisticsForCommunity(idUser) {
+    await this.play.sync();
+    const statistics = await this.play.findAll({
+      include: [
+        {
+          model: this.user,
+          as: "user_user",
+          where: {
+            role: {
+              [Op.ne]: "Admin",
+            },
+          },
+        },
+      ],
+      where: { user: idUser },
+      attributes: ["level", "stars", "attempts"],
     });
     return statistics;
   }
