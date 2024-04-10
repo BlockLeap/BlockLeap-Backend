@@ -8,12 +8,10 @@ const { create } = require("domain");
 class levelDAO {
   sequelize;
   level;
-  user;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.level = sequelize.models.level;
-    this.user = sequelize.models.user;
   }
 
   async createLevel(level) {
@@ -64,17 +62,11 @@ class levelDAO {
   async getCommunityLevels() {
     await this.level.sync();
     return await this.level.findAll({
-      include: [
-        {
-          model: this.user,
-          as: "user_user",
-          where: {
-            role: {
-              [Op.ne]: "Admin",
-            },
-          },
+      where: {
+        category: {
+          [Op.eq]: null,
         },
-      ],
+      },
     });
   }
 }
