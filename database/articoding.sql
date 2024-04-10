@@ -95,7 +95,7 @@ CREATE TABLE `group` (
 CREATE TABLE `level` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
+  `category` int(11) NULL,
   `self` int(11) DEFAULT NULL,
   `title` varchar(50) NOT NULL,
   `data` longtext NOT NULL
