@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 const { create } = require("domain");
-
+const USER_ADMIN = 5;
 class levelDAO {
   sequelize;
   level;
@@ -66,6 +66,15 @@ class levelDAO {
         category: {
           [Op.eq]: null,
         },
+      },
+    });
+  }
+
+  async getTotalOfficialLevels(){
+    await this.level.sync();
+    return await this.level.count({
+      where: {
+        user: USER_ADMIN,
       },
     });
   }

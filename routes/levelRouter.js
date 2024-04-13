@@ -9,9 +9,9 @@ const levelController = new LevelController();
 levelRouter
   .get("/categories", levelController.getCategories)
   .get("/all", levelController.getAllLevels)
-  .get("/:id", levelController.getLevel)
   .post("/create", levelController.createLevel)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
-  .get("/community/levels", levelController.getCommunityLevels);
-
+  .get("/community/levels", levelController.getCommunityLevels)
+  .get("/totalOfficialLevels", levelController.getTotalOfficialLevels)
+  .get("/:id", levelController.getLevel);
 module.exports = levelRouter;

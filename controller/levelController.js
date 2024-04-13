@@ -68,6 +68,15 @@ class levelController {
       next(error);
     }
   };
+
+  getTotalOfficialLevels = async (req, res) => {
+    try{
+      const total = await this.levelDAO.getTotalOfficialLevels();
+      res.json(total);
+    } catch (error){
+      next(error);
+    }
+  }
 }
 
 module.exports = levelController;
