@@ -60,7 +60,7 @@ class levelController {
     }
   };
 
-  getCommunityLevels = async (request, response) => {
+  getCommunityLevels = async (request, response, next) => {
     try {
       const levels = await this.levelDAO.getCommunityLevels();
       response.json(levels);
@@ -69,7 +69,7 @@ class levelController {
     }
   };
 
-  getTotalOfficialLevels = async (req, res) => {
+  getTotalOfficialLevels = async (req, res, next) => {
     try{
       const total = await this.levelDAO.getTotalOfficialLevels();
       res.json(total);

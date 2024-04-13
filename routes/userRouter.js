@@ -10,6 +10,7 @@ const userController = new UserController();
 userRouter
   .post("/registro", userController.registerUser)
   .post("/login", userController.loginUser)
+  .get("/officialLevelsCompleted", validateToken, userController.officialLevelsCompleted)
   .get("/:id", userController.getUserById)
   .delete("/logout", validateToken, userController.logout);
 module.exports = userRouter;
