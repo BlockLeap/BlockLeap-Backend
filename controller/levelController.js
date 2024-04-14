@@ -20,7 +20,10 @@ class levelController {
 
   getCategories = async (request, response, next) => {
     try {
-      const categories = await this.categoryDAO.getCategories();
+      const user = request.query.user;
+      let categories;
+      if (user != null) categories = await this.categoryDAO.getUserCategories(user);
+      else categories = await this.categoryDAO.getCategories();
       response.json(categories);
     } catch (error) {
       next(error);
