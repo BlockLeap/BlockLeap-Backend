@@ -52,65 +52,55 @@ class categoryDAO {
     });
   
     const categoriesWithCompletionStatus = await Promise.all(categories.map(async (category, index) => {
-      console.log("Processing category", category.id);
-  
-      // Fetch levels for the current category
-      const levels = await this.level.findAll({
-        attributes: ['id'],
-        where: { category: category.id },
-        include: [
-          {
-            model: this.play,
-            as: 'plays',
-            attributes: [],
-            where: {
-              user: userId,
-              stars: 1
-            },
-            required: false
-          }
-        ],
-        raw: true
+
+      let levels = await this.level.count({
+        where: { category: category.id }
       });
 
-    let previousCategoryLevelsCompleted = true;
-    if (index > 0) {
-      // Check if all levels in the previous category are completed
-      const previousCategory = categories[index - 1];
-      console.log("Previous:", previousCategory);
-      const previousCategoryLevels = await this.level.findAll({
-        attributes: ['id'],
-        where: { category: previousCategory.id },
-        include: [
-          {
-            model: this.play,
-            as: 'plays',
-            attributes: [],
-            where: {
-              user: userId,
-              stars: 1
-            },
-            required: true // Require at least one play record for each level
-          }
-        ],
-        raw: true
+      let previousCategoryLevelsCompleted = true;
+
+      if (index > 0) {
+        const previousCategory = categories[index - 1];
+
+        // Fetch the amount of levels for the previous category
+        levels = await this.level.count({
+          where: { category: previousCategory.id }
+        });
+
+        // Check if all levels in the previous category are completed
+        const previousCategoryLevels = await this.level.findAll({
+          attributes: ['id'],
+          where: { category: previousCategory.id },
+          include: [
+            {
+              model: this.play,
+              as: 'plays',
+              attributes: [],
+              where: {
+                user: userId,
+                stars: 1
+              },
+              required: true // Require at least one play record for each level
+            }
+          ],
+          raw: true
+        });
+        previousCategoryLevelsCompleted = previousCategoryLevels.length === levels;
+      }
+
+      // we count the levels from each category
+      const count = await this.level.count({
+        where: { category: category.id }
       });
-      previousCategoryLevelsCompleted = previousCategoryLevels.length === levels.length;
-    }
 
-    console.log("RETORNO:");
-    console.log("id:", category.id);
-    console.log("name:", category.name);
-    console.log("count:", levels.length);
-    console.log("playable:", previousCategoryLevelsCompleted);
-
-    return {
-      id: category.id,
-      name: category.name,
-      description: category.description,
-      count: levels.length,
-      playable: previousCategoryLevelsCompleted
-    };
+      return {
+        id: category.id,
+        name: category.name,
+        description: category.description,
+        count: count,
+        playable: previousCategoryLevelsCompleted
+      };
+      
     }));
   
     return categoriesWithCompletionStatus;
