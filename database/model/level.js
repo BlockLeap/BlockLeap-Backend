@@ -18,7 +18,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       category: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "category",
           key: "id",
@@ -26,7 +26,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       self: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "level",
           key: "id",
@@ -39,6 +39,10 @@ module.exports = function (sequelize, DataTypes) {
       data: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      minBlocks: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
     },
     {
