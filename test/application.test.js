@@ -155,7 +155,6 @@ describe("Group Component", () => {
         groupId: 17,
         userId: 6,
       });
-      console.log("Respuesta:", response.body);
       expect(response.statusCode).toBe(200);
       expect(response.body.group).toBe(17);
       expect(response.body.user).toBe(6);

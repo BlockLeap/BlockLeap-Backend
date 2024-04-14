@@ -1,6 +1,7 @@
 "use strict";
 
 const { Op } = require("sequelize");
+const USER_ADMIN = 5;
 
 class playDAO {
   sequelize;
@@ -103,6 +104,26 @@ class playDAO {
       attributes: ["level", "stars", "attempts"],
     });
     return statistics;
+  }
+
+  async officialLevelsCompleted(userId){
+    await this.play.sync();
+    const levelsCompleted = await this.play.count({
+      include: [
+        {
+          model: this.level,
+          as: "level_level",
+          where: { user: USER_ADMIN },
+          attributes: [],
+        },
+      ],
+      where: { 
+        user: userId, 
+        stars: { [Op.gt]: 0 }
+      },
+      attributes: ["level", "stars", "attempts"],
+    });
+    return levelsCompleted;
   }
 }
 
