@@ -464,8 +464,6 @@ components:
       type: object
       required:
         - user
-        - category
-        - self
         - title
         - data
       properties:
@@ -475,15 +473,21 @@ components:
           readOnly: true
         user:
           type: integer
+          example: 1
         category:
           type: integer
+          example: 2
         self:
           type: integer
+          example: 1
         title:
           type: string
         data:
           type: string
           example: JSON string
+        minBLocks:
+         type: integer
+         example: 5
     Category:
       type: object
       properties:

@@ -22,6 +22,7 @@ class levelDAO {
       self: level.self,
       title: level.title,
       data: level.data,
+      minBlocks: level.minBlocks,
     });
     if (!createdLevel) throw new ErrorException(ErrorCode.CantCreate);
     return createdLevel;
