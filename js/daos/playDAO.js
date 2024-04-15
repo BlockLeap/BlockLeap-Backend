@@ -81,7 +81,9 @@ class playDAO {
       ],
       where: { user: idUser },
       attributes: ["level", "stars", "attempts"],
+      order: [["level", "ASC"]], // Ensure levels are ordered by ID
     });
+    
     return statistics;
   }
 

@@ -1,5 +1,6 @@
 "use strict";
 
+const { Op } = require("sequelize");
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
@@ -78,7 +79,9 @@ class categoryDAO {
               attributes: [],
               where: {
                 user: userId,
-                stars: 1
+                stars: {
+                  [Op.gt]: 0,
+                }
               },
               required: true // Require at least one play record for each level
             }
@@ -88,7 +91,7 @@ class categoryDAO {
         previousCategoryLevelsCompleted = previousCategoryLevels.length === levels;
       }
 
-      // we count the levels from each category
+      // We count the levels from each category
       const count = await this.level.count({
         where: { category: category.id }
       });
