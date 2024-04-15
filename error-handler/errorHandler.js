@@ -2,7 +2,6 @@ const { ErrorCode } = require("./errorCode");
 const { ErrorException } = require("./ErrorException");
 
 function errorHandler(err, req, res, next) {
-  console.log("Error handling middleware called.");
   console.error("Error occured:", err);
   if (err instanceof ErrorException) {
     res.status(err.status).send(err);

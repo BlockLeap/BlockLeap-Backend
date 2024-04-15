@@ -7,10 +7,12 @@ const bcryptCompareAsync = util.promisify(bcrypt.compare);
 const { ErrorCode } = require("../error-handler/errorCode");
 const { ErrorException } = require("../error-handler/ErrorException");
 const jwt = require("jsonwebtoken");
+const { response } = require("express");
 class userController {
   constructor() {
     const factory = new DAOFactory();
     this.userDAO = factory.getUserDAO();
+    this.playDAO = factory.getPlayDAO();
   }
 
   getUserById = async (request, response) => {
@@ -58,6 +60,7 @@ class userController {
         });
         response.cookie("session", tokenPayload, {
           expires: expirationDate,
+          
         });
         response.json({
           message: "Login exitoso",
@@ -76,6 +79,17 @@ class userController {
     }
     catch(error){
       next(error)
+    }
+  }
+
+  officialLevelsCompleted = async (req, res, next) =>{
+    try{
+      const token = req.cookies.jwt;
+      const {id} = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      const levelsCompleted = await this.playDAO.officialLevelsCompleted(id);
+      res.json(levelsCompleted);
+    } catch(error){
+      next(error);
     }
   }
 }

@@ -122,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/LevelArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /level/totalOfficialLevels:
+    get:
+      tags: 
+      - level
+      summary: Get the total number of official levels
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 12
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /play:
     post:
       tags:
@@ -285,6 +300,21 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /user/officialLevelsCompleted:
+    get:
+      tags:
+        - user
+      summary: Get the number of official levels completed
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 12
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /group/{groupId}:
     get:
       tags:
@@ -434,8 +464,6 @@ components:
       type: object
       required:
         - user
-        - category
-        - self
         - title
         - data
       properties:
@@ -445,15 +473,21 @@ components:
           readOnly: true
         user:
           type: integer
+          example: 1
         category:
           type: integer
+          example: 2
         self:
           type: integer
+          example: 1
         title:
           type: string
         data:
           type: string
           example: JSON string
+        minBLocks:
+         type: integer
+         example: 5
     Category:
       type: object
       properties:
