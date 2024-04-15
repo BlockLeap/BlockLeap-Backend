@@ -35,16 +35,7 @@ class categoryDAO {
       group: ["category.id"],
     });
   }
-    
-  areAllLevelsCompleted(levels) {
-    for (const level of levels) {
-      if (!level.plays || level.plays.length === 0) {
-        return false; // If any level is not completed, return false
-      }
-    }
-    return true; // All levels are completed
-  }
-
+  
   async getUserCategories(userId) {
     const categories = await this.category.findAll({
       attributes: ["id", "name", "description"],
