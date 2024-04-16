@@ -57,10 +57,11 @@ class userController {
         response.cookie("jwt", token, {
           httpOnly: true,
           expires: expirationDate,
+          sameSite: "strict",
         });
         response.cookie("session", tokenPayload, {
           expires: expirationDate,
-          
+          sameSite: "strict",
         });
         response.json({
           message: "Login exitoso",
