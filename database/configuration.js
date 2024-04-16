@@ -3,6 +3,7 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
 const init = require("./model/init");
+const logger = require('../logger');
 
 const sequelize = new Sequelize(
   (process.env.NODE_ENV == "testing") ? "testing" : process.env.DB_SCHEMA,
@@ -19,10 +20,10 @@ init(sequelize);
 
 // sequelize.sync()
 //   .then(() => {
-//     console.log('¡Base de datos sincronizada correctamente!');
+//     logger.info('¡Base de datos sincronizada correctamente!');
 //   })
 //   .catch(error => {
-//     console.error('Error al sincronizar la base de datos:', error);
+//     logger.error(`Error al sincronizar la base de datos: ${error}`);
 //   });
 
 module.exports = sequelize;

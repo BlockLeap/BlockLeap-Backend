@@ -5,14 +5,15 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-
 const cookieParser = require("cookie-parser");
+
 const helmet = require("helmet");
 const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
 const groupRouter = require("./routes/groupRouter");
 const playRouter = require("./routes/playRouter");
 const { errorHandler } = require("./error-handler/errorHandler");
+const logger = require("./logger");
 
 const app = express();
 const CLIENT_URL = `${process.env.CORS_CLIENT_PROTOCOL}://${process.env.CORS_CLIENT_DOMAIN}:${process.env.CORS_CLIENT_PORT}`;
@@ -59,8 +60,8 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(process.env.APP_PORT, function (error) {
-  if (error) console.log("The server could not be connected");
-  else console.log("Server listening port", process.env.APP_PORT);
+  if (error) logger.error("The server could not be connected");
+  else logger.info(`Server listening port ${process.env.APP_PORT}`);
 });
 
 // Front
