@@ -224,6 +224,30 @@ paths:
           $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /play/communityStatistics:
+    get:
+      tags:
+        - play
+      summary: Get all the statistics for community levels played by a user
+      parameters:
+        - in: query
+          name: user
+          required: true
+          description: The user Id
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayCategoryStatistic'
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /user/create:
     post:
       tags:
@@ -315,6 +339,30 @@ paths:
                 example: 12
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: Get an specific user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /group/{groupId}:
     get:
       tags:
