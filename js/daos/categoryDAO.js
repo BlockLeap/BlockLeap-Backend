@@ -44,25 +44,25 @@ class categoryDAO {
     });
   
     const categoriesWithCompletionStatus = await Promise.all(categories.map(async (category, index) => {
+      let playable = false;
 
-      let levels = await this.level.count({
+      const numLevelsInCat = await this.level.count({
         where: { category: category.id }
       });
 
-      let previousCategoryLevelsCompleted = true;
-
-      if (index > 0) {
-        const previousCategory = categories[index - 1];
-
+      if (index === 0)
+        playable = true;
+      else if (index > 0) {
+        const prevCatId = category.id - 1
+        
         // Fetch the amount of levels for the previous category
-        levels = await this.level.count({
-          where: { category: previousCategory.id }
+        const numLevelsInPrevCat = await this.level.count({
+          where: { category: prevCatId }
         });
-
         // Check if all levels in the previous category are completed
-        const previousCategoryLevels = await this.level.findAll({
+        const prevCatCompletedLevels = await this.level.findAll({
           attributes: ['id'],
-          where: { category: previousCategory.id },
+          where: { category: prevCatId },
           include: [
             {
               model: this.play,
@@ -79,20 +79,15 @@ class categoryDAO {
           ],
           raw: true
         });
-        previousCategoryLevelsCompleted = previousCategoryLevels.length === levels;
+        playable = prevCatCompletedLevels.length === numLevelsInPrevCat && numLevelsInCat > 0; // TODO: Eliminar check temporal de que tenga niveles?
       }
-
-      // We count the levels from each category
-      const count = await this.level.count({
-        where: { category: category.id }
-      });
 
       return {
         id: category.id,
         name: category.name,
         description: category.description,
-        count: count,
-        playable: previousCategoryLevelsCompleted
+        count: numLevelsInCat,
+        playable,
       };
       
     }));
