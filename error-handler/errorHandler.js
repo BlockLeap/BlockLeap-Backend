@@ -1,8 +1,10 @@
 const { ErrorCode } = require("./errorCode");
 const { ErrorException } = require("./ErrorException");
 
+const logger = require("../logger");
+
 function errorHandler(err, req, res, next) {
-  console.error("Error occured:", err);
+  logger.error(`Error occured: ${err}`);
   if (err instanceof ErrorException) {
     res.status(err.status).send(err);
   } else {
