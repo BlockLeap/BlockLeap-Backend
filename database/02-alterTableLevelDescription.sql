@@ -1,0 +1,1 @@
+ALTER TABLE `level` ADD `description` VARCHAR(200) NULL AFTER `self`;
