@@ -37,7 +37,7 @@ app.use(
       styleSrc: [
         "'self'",
         "https://fonts.googleapis.com",
-        "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css",
+        "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
         "'unsafe-inline'",
       ],
       "img-src": [
