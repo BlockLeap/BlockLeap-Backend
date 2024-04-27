@@ -45,6 +45,14 @@ class levelDAO {
       attributes: ["id", "user", "category", "self", "title"],
     });
   }
+  async getUserLevels(userID){
+    await this.level.sync();
+    return await this.level.findAll({
+      where: {
+        user: userID,
+      }
+    });
+  }
 
   async getLevel(id) {
     await this.level.sync();

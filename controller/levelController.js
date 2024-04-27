@@ -17,7 +17,14 @@ class levelController {
       next(error);
     }
   };
-
+  getUserLevels = async (request, response, next) => {
+    try {
+      const allLevels = await this.levelDAO.getUserLevels(request.params.id);
+      response.json(allLevels);
+    } catch (error) {
+      next(error);
+    }
+  };
   getCategories = async (request, response, next) => {
     try {
       const categories = await this.categoryDAO.getCategories();

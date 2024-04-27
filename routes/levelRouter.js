@@ -9,6 +9,7 @@ const levelController = new LevelController();
 levelRouter
   .get("/categories", levelController.getCategories)
   .get("/all", levelController.getAllLevels)
+  .get("/userLevels/:id", levelController.getUserLevels)
   .post("/create", levelController.createLevel)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
   .get("/community/levels", levelController.getCommunityLevels)

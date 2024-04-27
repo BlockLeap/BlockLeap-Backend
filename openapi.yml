@@ -64,6 +64,29 @@ paths:
                 $ref: "#/components/schemas/LevelArray"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /level/userLevels/{userId}:
+   get:
+      tags:
+        - level
+      summary: Get the levels created by the user
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LevelArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /level/create:
     post:
       tags:
@@ -329,6 +352,29 @@ paths:
       tags:
         - user
       summary: Get the number of official levels completed
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 12
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/totalStars/{idUser}:
+    get:
+      tags:
+        - user
+      summary: Get user total stars
+      parameters:
+      - in: path
+        name: idUser
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user id
       responses:
         "200":
           description: OK
