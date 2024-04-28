@@ -93,6 +93,16 @@ class userController {
       next(error);
     }
   }
+
+  totalUserStars = async (req, res, next) =>{
+    try{
+      let totalStars = await this.playDAO.totalUserStars(req.params.id);
+      if(!totalStars) totalStars = 0;
+      res.json(totalStars);
+    }catch(error){
+      next(error);
+    }
+  }
 }
 
 module.exports = userController;

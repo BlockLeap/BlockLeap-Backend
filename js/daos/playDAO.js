@@ -125,6 +125,15 @@ class playDAO {
     });
     return levelsCompleted;
   }
+  async totalUserStars(userId){
+    await this.play.sync();
+    const totalStars = await this.play.sum('stars',{
+      where: { 
+        user: userId, 
+      }
+    });
+    return totalStars;
+  }
 }
 
 module.exports = playDAO;

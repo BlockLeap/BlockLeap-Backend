@@ -17,7 +17,14 @@ class levelController {
       next(error);
     }
   };
-
+  getUserLevels = async (request, response, next) => {
+    try {
+      const allLevels = await this.levelDAO.getUserLevels(request.params.id);
+      response.json(allLevels);
+    } catch (error) {
+      next(error);
+    }
+  };
   getCategories = async (request, response, next) => {
     try {
       const categories = await this.categoryDAO.getCategories();
@@ -45,6 +52,7 @@ class levelController {
       levelData.title = request.body.title;
       levelData.data = request.body.data;
       levelData.minBLocks = request.body.minBLocks;
+      levelData.description = request.body.description;
       const createdLevel = await this.levelDAO.createLevel(levelData);
       response.json(createdLevel);
     } catch (error) {

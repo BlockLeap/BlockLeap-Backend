@@ -20,9 +20,11 @@ class levelDAO {
       user: level.user,
       category: level.category,
       self: level.self,
+      description: level.description,
       title: level.title,
       data: level.data,
       minBlocks: level.minBlocks,
+      description: level.description,
     });
     if (!createdLevel) throw new ErrorException(ErrorCode.CantCreate);
     return createdLevel;
@@ -41,6 +43,14 @@ class levelDAO {
     await this.level.sync();
     return await this.level.findAll({
       attributes: ["id", "user", "category", "self", "title"],
+    });
+  }
+  async getUserLevels(userID){
+    await this.level.sync();
+    return await this.level.findAll({
+      where: {
+        user: userID,
+      }
     });
   }
 
