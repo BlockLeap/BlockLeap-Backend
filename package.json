@@ -22,7 +22,8 @@
     "path": "^0.12.7",
     "pino": "^8.20.0",
     "sequelize": "^6.35.2",
-    "ts-jest": "^29.1.2"
+    "ts-jest": "^29.1.2",
+    "@xapi/xapi": "^2.2.5"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
