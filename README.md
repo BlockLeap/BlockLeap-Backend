@@ -15,6 +15,9 @@
   - CORS_CLIENT_PROTOCOL=
   - CORS_CLIENT_DOMAIN=
   - CORS_CLIENT_PORT=
+  - ENV_LRS_ENDPOINT= ""
+  - ENV_LRS_USERNAME= ""
+  - ENV_LRS_PASSWORD= ""
 
 - For the database, you may need install XAMMP with MariaDB
 

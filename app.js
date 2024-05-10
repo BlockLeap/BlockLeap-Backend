@@ -14,6 +14,7 @@ const groupRouter = require("./routes/groupRouter");
 const playRouter = require("./routes/playRouter");
 const { errorHandler } = require("./error-handler/errorHandler");
 const logger = require("./logger");
+const XAPISingleton = require("./xAPI/xapi");
 
 const app = express();
 const CLIENT_URL = `${process.env.CORS_CLIENT_PROTOCOL}://${process.env.CORS_CLIENT_DOMAIN}:${process.env.CORS_CLIENT_PORT}`;
@@ -49,11 +50,20 @@ app.use(
     },
   })
 );
-
 app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
 app.use("/api/play", playRouter);
+
+app.post("/api/statistics/", async(req,res,next) =>{
+  try{
+    const statement = req.body;
+    await XAPISingleton.sendStatement(statement);
+    res.json({ message: "Statement received successfully" });
+  } catch(err){
+    next(err);
+  }
+});
 
 app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
