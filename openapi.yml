@@ -1,7 +1,7 @@
 openapi: "3.0.2"
 info:
-  title: API Articoding
-  description: This API is used to handle requests to the backend of the Articoding video game
+  title: API BlockLeap
+  description: This API is used to handle requests to the backend of the BlockLeap video game
   version: "1.0.0"
 servers:
   - url: http://localhost:3001/api
