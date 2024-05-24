@@ -1,0 +1,713 @@
+openapi: "3.0.2"
+info:
+  title: API BlockLeap
+  description: This API is used to handle requests to the backend of the BlockLeap video game
+  version: "1.0.0"
+servers:
+  - url: http://localhost:3001/api
+    description: "Dev"
+tags:
+  - name: level
+  - name: user
+  - name: group
+  - name: play
+paths:
+  /level/categories:
+    get:
+      tags:
+        - level
+      summary: Get all the categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /level/{id}:
+    get:
+      tags:
+        - level
+      summary: Get an specific level
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The level id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Level"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /level/all:
+    get:
+      tags:
+        - level
+      summary: Get all the levels, except de Json level data
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LevelArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /level/userLevels/{userId}:
+   get:
+      tags:
+        - level
+      summary: Get the levels created by the user
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LevelArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /level/create:
+    post:
+      tags:
+        - level
+      summary: Insert a level in the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Level"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Level"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /level/levelsByCategory/{id}:
+    get:
+      tags:
+        - level
+      summary: Get all the levels of a specific category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The category id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LevelArray"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /level/community/levels:
+    get:
+      tags:
+        - level
+      summary: Get all community levels
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LevelArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /level/totalOfficialLevels:
+    get:
+      tags: 
+      - level
+      summary: Get the total number of official levels
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 12
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /play:
+    post:
+      tags:
+        - play
+      summary: Adding the statistics of a played level to the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LevelStatistic'
+      responses:
+        "200":
+          description: OK
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /play/update:
+    put:
+      tags:
+        - play
+      summary: Updating the statistics of a played level to the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LevelStatistic'
+      responses:
+        "200":
+          description: OK
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /play/{idUser}:
+    get:
+      tags:
+        - play
+      summary: Get all levels of a specific user
+      parameters:
+        - in: path
+          name: idUser
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayLevelStatistic'
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /play/categoryStatistics:
+    get:
+      tags:
+        - play
+      summary: Get all the statistics for a specific category and a user
+      parameters:
+        - in: query
+          name: category
+          required: true
+          description: The category Id
+          schema:
+            type: integer
+            example: 1
+        - in: query
+          name: user
+          required: true
+          description: The user Id
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayCategoryStatistic'
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /play/communityStatistics:
+    get:
+      tags:
+        - play
+      summary: Get all the statistics for community levels played by a user
+      parameters:
+        - in: query
+          name: user
+          required: true
+          description: The user Id
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayCategoryStatistic'
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/create:
+    post:
+      tags:
+        - user
+      summary: Insert a user in the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userName
+                - userPassword
+              properties:
+                userName:
+                  type: string
+                userPassword:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/logout:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Logout, clear the cookies
+      responses:
+        "200":
+          description: OK
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/officialLevelsCompleted:
+    get:
+      tags:
+        - user
+      summary: Get the number of official levels completed
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 12
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/totalStars/{idUser}:
+    get:
+      tags:
+        - user
+      summary: Get user total stars
+      parameters:
+      - in: path
+        name: idUser
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 12
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: Get an specific user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /group/{groupId}:
+    get:
+      tags:
+        - group
+      summary: Get an specific group
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The group id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /group/all:
+    get:
+      tags:
+        - group
+      summary: Get all the groups
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupArray"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /group/{groupId}/members:
+    get:
+      tags:
+        - group
+      summary: Get the members of the group
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The group id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberArray"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /group/create:
+    post:
+      tags:
+        - group
+      summary: Create a new group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - userId
+              properties:
+                name:
+                  type: string
+                  example: grupo prueba
+                userId:
+                  type: integer
+                  example: 4
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group:
+                    $ref: "#/components/schemas/Group"
+                  set:
+                    $ref: "#/components/schemas/Member"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /group/register:
+    post:
+      tags:
+        - group
+      summary: Resgister an user in a group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - groupId
+                - userId
+              properties:
+                groupId:
+                  type: integer
+                  example: 14
+                userId:
+                  type: integer
+                  example: 4
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Member"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+    NotFound:
+      description: Can't be found
+    Unauthorized:
+      description: Invalid credentials
+    Conflict:
+      description: Conflict with the current state of a resource
+  schemas:
+    Level:
+      type: object
+      required:
+        - user
+        - title
+        - data
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        user:
+          type: integer
+          example: 1
+        category:
+          type: integer
+          example: 2
+        self:
+          type: integer
+          example: 1
+        title:
+          type: string
+        data:
+          type: string
+          example: JSON string
+        minBLocks:
+         type: integer
+         example: 5
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+    CategoryArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+    LevelArray:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: uuid
+            readOnly: true
+          user:
+            type: integer
+          category:
+            type: integer
+          self:
+            type: integer
+          title:
+            type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        role:
+          type: string
+          enum: [Estudiante, Admin, Profesor, Investigador]
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+          example: 14
+        name:
+          type: string
+          example: grupo prueba
+    GroupArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/Group"
+    Member:
+      type: object
+      properties:
+        group:
+          type: integer
+          format: uuid
+          example: 14
+        user:
+          type: integer
+          format: uuid
+          example: 4
+        role:
+          type: string
+          enum: [Miembro, Anfitrión]
+          example: Miembro | Anfitrión
+    MemberArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/Member"
+    LevelStatistic:
+      type: object
+      required:
+        - user
+        - level
+        - stars
+      properties:
+        user:
+          type: integer
+          format: uuid
+          example: 4
+        level:
+          type: integer
+          format: uuid
+          example: 4
+        stars:
+          type: integer
+          format: uuid
+          example: 3
+        attempts:
+          type: integer
+          format: uuid
+          example: 1
+    ArrayLevelStatistic:
+      type: array
+      items:
+        $ref: "#/components/schemas/LevelStatistic"
+    ArrayCategoryStatistic:
+      type: array
+      items:
+        type: object
+        required:
+          - attemps
+          - stars
+          - level
+        properties:
+          level:
+            type: integer
+            format: uuid
+            example: 4
+          stars:
+            type: integer
+            format: uuid
+            example: 3
+          attempts:
+            type: integer
+            format: uuid
+            example: 1
+security:
+  - bearerAuth: [] 
+    
