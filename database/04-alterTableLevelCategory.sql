@@ -1,0 +1,1 @@
+ALTER TABLE `level` MODIFY `category` int(11) NULL;
