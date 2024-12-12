@@ -21,7 +21,7 @@ const CLIENT_URL = `${process.env.CORS_CLIENT_PROTOCOL}://${process.env.CORS_CLI
 
 app.use(cors({ credentials: true, origin: CLIENT_URL}));
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(path.dirname(__dirname), "BlockLeap-Client", "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -65,6 +65,17 @@ app.post("/api/statistics/", async(req,res,next) =>{
   }
 });
 
+
+// Front
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(path.dirname(__dirname), "BlockLeap-Client", "public")));
+
+// Define a catch-all route that serves index.html
+app.get("*", (req, res) => {
+  console.log(req.url)
+  res.sendFile(path.join(path.dirname(__dirname), "BlockLeap-Client", "public", "index.html"));
+});
+
 app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
 });
@@ -72,15 +83,6 @@ app.use((err, req, res, next) => {
 app.listen(process.env.APP_PORT, function (error) {
   if (error) logger.error("The server could not be connected");
   else logger.info(`Server listening port ${process.env.APP_PORT}`);
-});
-
-// Front
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, "public")));
-
-// Define a catch-all route that serves index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 module.exports = app;

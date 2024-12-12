@@ -71,7 +71,8 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 (4, 'Basic Operators', 'Learn the different operations you can do with different data types.'),
 (5, 'Loops', 'Learn how to code things that repeat a number of times or while a condition is met.'),
 (6, 'Conditionals', 'Use the boolean type to make conditional code.'),
-(7, 'Functions', 'Learn how to organize your code using function blocks.');
+(7, 'Functions', 'Learn how to organize your code using function blocks.'),
+(8, 'Pruebas', 'Esto es una categoria de pruebas para aprender a usar el juego.');
 
 -- --------------------------------------------------------
 
