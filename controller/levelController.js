@@ -78,6 +78,16 @@ class levelController {
     }
   };
 
+  getclassLevels = async (request, response, next) => {
+    try {
+      const group = await this.levelDAO.getUserGroup(request.params.id);
+      const levels = await this.levelDAO.getclassLevels(group[0].group);
+      response.json(levels);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   getTotalOfficialLevels = async (req, res, next) => {
     try{
       const total = await this.levelDAO.getTotalOfficialLevels();

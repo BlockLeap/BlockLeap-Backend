@@ -13,6 +13,7 @@ levelRouter
   .post("/create", levelController.createLevel)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
   .get("/community/levels", levelController.getCommunityLevels)
+  .get("/class/:id", levelController.getclassLevels)
   .get("/totalOfficialLevels", levelController.getTotalOfficialLevels)
   .get("/:id", levelController.getLevel);
 module.exports = levelRouter;

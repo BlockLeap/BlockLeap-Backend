@@ -4,6 +4,7 @@ var _assigned = require("./assigned");
 var _category = require("./category");
 var _group = require("./group");
 var _level = require("./level");
+var _classlevel = require("./classlevel");
 var _play = require("./play");
 var _set = require("./set");
 var _user = require("./user");
@@ -17,6 +18,9 @@ function init(sequelize) {
   var play = _play(sequelize, DataTypes);
   var set = _set(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
+
+  var classlevel= _classlevel(sequelize, DataTypes);
+
 
   level.belongsTo(category, {
     as: "category_category",

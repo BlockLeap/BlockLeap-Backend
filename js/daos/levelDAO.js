@@ -8,10 +8,13 @@ const USER_ADMIN = 5;
 class levelDAO {
   sequelize;
   level;
+  classLevel;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.level = sequelize.models.level;
+    this.classLevel = sequelize.models.classLevel;
+    this.set=sequelize.models.set;
   }
 
   async createLevel(level) {
@@ -49,6 +52,25 @@ class levelDAO {
     return await this.level.findAll({
       where: {
         user: userID,
+      }
+    });
+  }
+
+  async getUserGroup(userId){
+    await this.set.sync();
+    return await this.set.findAll({
+      raw:true,
+      where: {
+        user : userId,
+      }
+    });
+  }
+
+  async getclassLevels(classId){
+    await this.classLevel.sync();
+    return await this.classLevel.findAll({
+      where: {
+        idClase: classId,
       }
     });
   }
