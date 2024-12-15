@@ -81,8 +81,10 @@ class levelController {
   getclassLevels = async (request, response, next) => {
     try {
       const group = await this.levelDAO.getUserGroup(request.params.id);
+      if(group.length!=0){
       const levels = await this.levelDAO.getclassLevels(group[0].group);
       response.json(levels);
+      }else response.json(null);
     } catch (error) {
       next(error);
     }
