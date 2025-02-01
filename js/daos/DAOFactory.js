@@ -6,7 +6,7 @@ const accessDAO = require("./accessDAO");
 const playDAO = require("./playDAO");
 const assignedDAO = require("./assignedDAO");
 const groupDAO = require("./groupDAO");
-const setDAO = require("./setDAO");
+const userGroupDAO = require("./userGroupDAO");
 const userDAO = require("./userDAO");
 
 class DAOFactory {
@@ -34,8 +34,8 @@ class DAOFactory {
     return new groupDAO(sequelize);
   }
 
-  getSetDAO() {
-    return new setDAO(sequelize);
+  getUserGroupDAO() {
+    return new userGroupDAO(sequelize);
   }
 
   getUserDAO() {

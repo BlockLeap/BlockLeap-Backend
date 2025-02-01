@@ -14,7 +14,7 @@ class levelDAO {
     this.sequelize = sequelize;
     this.level = sequelize.models.level;
     this.classLevel = sequelize.models.classLevel;
-    this.set=sequelize.models.set;
+    this.userGroup=sequelize.models.usergroup;
   }
 
   async createLevel(level) {
@@ -57,8 +57,8 @@ class levelDAO {
   }
 
   async getUserGroup(userId){
-    await this.set.sync();
-    return await this.set.findAll({
+    await this.userGroup.sync();
+    return await this.userGroup.findAll({
       raw:true,
       where: {
         user : userId,

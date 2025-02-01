@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "set",
+    "usergroup",
     {
       group: {
         type: DataTypes.INTEGER,
@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     {
       sequelize,
-      tableName: "set",
+      tableName: "usergroup",
       timestamps: false,
       indexes: [
         {

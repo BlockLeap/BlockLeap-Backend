@@ -8,7 +8,7 @@ class groupController {
   constructor() {
     const factory = new DAOFactory();
     this.groupDAO = factory.getGroupDAO();
-    this.setDAO = factory.getSetDAO();
+    this.setDAO = factory.getUserGroupDAO();
     this.userDAO = factory.getUserDAO();
   }
 
@@ -20,7 +20,7 @@ class groupController {
       setData.role = "Anfitrión";
       let groupCreated = await this.groupDAO.createGroup(groupName);
       setData.groupId = groupCreated.id;
-      let setCreated = await this.setDAO.createSet(setData);
+      let setCreated = await this.setDAO.createUserGroup(setData);
       response.json({ group: groupCreated, set: setCreated });
     } catch (error) {
       next(error);
@@ -57,7 +57,7 @@ class groupController {
       await this.groupDAO.getGroupById(setData.groupId);
       await this.userDAO.searchById(setData.userId);
 
-      let setCreated = await this.setDAO.createSet(setData);
+      let setCreated = await this.setDAO.createUserGroup(setData);
       response.json(setCreated);
     } catch (error) {
       next(error);

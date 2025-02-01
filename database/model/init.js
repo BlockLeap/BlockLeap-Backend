@@ -6,7 +6,7 @@ var _group = require("./group");
 var _level = require("./level");
 var _classlevel = require("./classlevel");
 var _play = require("./play");
-var _set = require("./set");
+var _userGroup = require("./userGroup");
 var _user = require("./user");
 
 function init(sequelize) {
@@ -16,7 +16,7 @@ function init(sequelize) {
   var group = _group(sequelize, DataTypes);
   var level = _level(sequelize, DataTypes);
   var play = _play(sequelize, DataTypes);
-  var set = _set(sequelize, DataTypes);
+  var userGroup = _userGroup(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
 
   var classlevel= _classlevel(sequelize, DataTypes);
@@ -29,8 +29,8 @@ function init(sequelize) {
   category.hasMany(level, { as: "levels", foreignKey: "category" });
   assigned.belongsTo(group, { as: "group_group", foreignKey: "group" });
   group.hasMany(assigned, { as: "assigneds", foreignKey: "group" });
-  set.belongsTo(group, { as: "group_group", foreignKey: "group" });
-  group.hasMany(set, { as: "sets", foreignKey: "group" });
+  userGroup.belongsTo(group, { as: "group_group", foreignKey: "group" });
+  group.hasMany(userGroup, { as: "sets", foreignKey: "group" });
   access.belongsTo(level, { as: "level_level", foreignKey: "level" });
   level.hasMany(access, { as: "accesses", foreignKey: "level" });
   assigned.belongsTo(level, { as: "level_level", foreignKey: "level" });
@@ -45,8 +45,8 @@ function init(sequelize) {
   user.hasMany(level, { as: "levels", foreignKey: "user" });
   play.belongsTo(user, { as: "user_user", foreignKey: "user" });
   user.hasMany(play, { as: "plays", foreignKey: "user" });
-  set.belongsTo(user, { as: "user_user", foreignKey: "user" });
-  user.hasMany(set, { as: "sets", foreignKey: "user" });
+  userGroup.belongsTo(user, { as: "user_user", foreignKey: "user" });
+  user.hasMany(userGroup, { as: "sets", foreignKey: "user" });
 
   return {
     access,
@@ -55,7 +55,7 @@ function init(sequelize) {
     group,
     level,
     play,
-    set,
+    userGroup,
     user,
   };
 }
