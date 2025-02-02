@@ -43,6 +43,15 @@ class levelController {
     }
   };
 
+  getSetLevel = async (request, response, next) => {
+    try {
+      const level = await this.levelDAO.getSetLevel(request.params.id);
+      response.json(level);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   createLevel = async (request, response, next) => {
     try {
       const levelData = {};
@@ -90,7 +99,7 @@ class levelController {
     }
   };
 
-  getSetLevels = async (request, response, next) => {
+  getLevelsBySet = async (request, response, next) => {
     try {
       const res = await this.levelDAO.getsetLevelsIds(request.params.id);
       if(res.length!=0){

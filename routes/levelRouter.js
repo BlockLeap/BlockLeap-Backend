@@ -15,7 +15,8 @@ levelRouter
   .get("/community/levels", levelController.getCommunityLevels)
   .get("/class/:id", levelController.getclassLevels)
   .get("/class/:id/sets", levelController.getGroupSets)
-  .get("/sets/:id", levelController.getSetLevels)
+  .get("/sets/:id", levelController.getLevelsBySet)
+  .get("/sets/level/:id", levelController.getSetLevel)
   .get("/totalOfficialLevels", levelController.getTotalOfficialLevels)
   .get("/:id", levelController.getLevel);
 module.exports = levelRouter;

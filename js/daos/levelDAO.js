@@ -105,6 +105,13 @@ class levelDAO {
     return found;
   }
 
+  async getSetLevel(id) {
+    await this.classLevel.sync();
+    const found = await this.classLevel.findByPk(id);
+    if (!found) throw new ErrorException(ErrorCode.NotFound);
+    return found;
+  }
+
   async getLevelsByCategory(id) {
     await this.level.sync();
     return await this.level.findAll({
