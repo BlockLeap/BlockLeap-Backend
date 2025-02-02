@@ -6,8 +6,11 @@ var _group = require("./group");
 var _level = require("./level");
 var _classlevel = require("./classlevel");
 var _play = require("./play");
-var _userGroup = require("./userGroup");
+var _userGroup = require("./usergroup");
 var _user = require("./user");
+var _set = require("./set");
+var _setLevels= require("./setlevels");
+var _setGroup=require("./setgroups")
 
 function init(sequelize) {
   var access = _access(sequelize, DataTypes);
@@ -18,9 +21,10 @@ function init(sequelize) {
   var play = _play(sequelize, DataTypes);
   var userGroup = _userGroup(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
-
   var classlevel= _classlevel(sequelize, DataTypes);
-
+  var set = _set(sequelize, DataTypes);
+  var setLevels= _setLevels(sequelize, DataTypes);
+  var setGroup= _setGroup(sequelize, DataTypes);
 
   level.belongsTo(category, {
     as: "category_category",

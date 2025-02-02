@@ -9,12 +9,17 @@ class levelDAO {
   sequelize;
   level;
   classLevel;
+  set;
+  setlevels;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.level = sequelize.models.level;
     this.classLevel = sequelize.models.classLevel;
     this.userGroup=sequelize.models.usergroup;
+    this.set=sequelize.models.set;
+    this.setlevels=sequelize.models.setlevels;
+    this.setGroup=sequelize.models.setgroups;
   }
 
   async createLevel(level) {
@@ -75,6 +80,24 @@ class levelDAO {
     });
   }
 
+  async getsetLevelsIds(setId){
+    await this.setlevels.sync();
+    return await this.setlevels.findAll({
+      where: {
+        set_id: setId,
+      }
+    });
+  }
+
+  async getclassLevelsByIds(idArray){
+    await this.classLevel.sync();
+    return await this.classLevel.findAll({
+      where: {
+        id: idArray,
+      }
+    });
+  }
+
   async getLevel(id) {
     await this.level.sync();
     const found = await this.level.findByPk(id);
@@ -87,6 +110,24 @@ class levelDAO {
     return await this.level.findAll({
       where: {
         category: id,
+      },
+    });
+  }
+
+  async getsSetsByGroup(id) {
+    await this.setGroup.sync();
+    return await this.setGroup.findAll({
+      where: {
+        group_id: id,
+      },
+    });
+  }
+
+  async getsSetsById(id) {
+    await this.set.sync();
+    return await this.set.findAll({
+      where: {
+        id: id,
       },
     });
   }

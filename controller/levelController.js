@@ -90,6 +90,35 @@ class levelController {
     }
   };
 
+  getSetLevels = async (request, response, next) => {
+    try {
+      const res = await this.levelDAO.getsetLevelsIds(request.params.id);
+      if(res.length!=0){
+        let idArray= res.map(i=>i.level_id);
+        const levels = await this.levelDAO.getclassLevels(idArray);
+        response.json(levels);
+      }else response.json(null);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getGroupSets = async (request, response, next) => {
+    try {
+      const group = await this.levelDAO.getUserGroup(request.params.id);
+      if(group.length!=0){
+        const res = await this.levelDAO.getsSetsByGroup(group[0].group);
+        if(res.length!=0){
+          const ids= res.map(i=>i.group_id);
+          const sets= await this.levelDAO.getsSetsById(ids);
+          response.json(sets);
+        } else response.json(null);
+      }else response.json(null);
+    } catch (error) {
+      next(error);
+    }
+  };
+  
   getTotalOfficialLevels = async (req, res, next) => {
     try{
       const total = await this.levelDAO.getTotalOfficialLevels();
