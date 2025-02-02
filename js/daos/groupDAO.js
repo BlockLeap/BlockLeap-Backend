@@ -36,6 +36,17 @@ class groupDAO {
     }
     return foundGroup;
   }
+
+  async getGroupByCode(code) {
+    await this.group.sync();
+    const foundGroup = await this.group.findOne(
+      {where:{code:code}}
+    );
+    if (!foundGroup) {
+      throw new ErrorException(ErrorCode.NotFound);
+    }
+    return foundGroup;
+  }
 }
 
 module.exports = groupDAO;

@@ -46,16 +46,28 @@ class groupController {
     }
   };
 
+  getGroupByCode = async (request, response, next) => {
+    try {
+      const groupCode = request.params.groupCode;
+      const foundGroup = await this.groupDAO.getGroupByCode(groupId);
+      response.json(foundGroup);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   resgisterUserInAGroup = async (request, response, next) => {
     try {
       const setData = {};
-      setData.groupId = request.body.groupId;
+      setData.groupCode = request.body.groupCode;
       setData.userId = request.body.userId;
       setData.role = "Miembro";
 
       // Check id exist in DB
-      await this.groupDAO.getGroupById(setData.groupId);
+      const group=await this.groupDAO.getGroupByCode(setData.groupCode);
       await this.userDAO.searchById(setData.userId);
+
+      setData.groupId= group.id;
 
       let setCreated = await this.setDAO.createUserGroup(setData);
       response.json(setCreated);
