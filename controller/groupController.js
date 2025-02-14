@@ -85,6 +85,15 @@ class groupController {
       next(error);
     }
   };
+  findByUser = async (request, response, next) => {
+    try {
+      setData.userId = request.params.userId;
+      const foundGroup = await this.setDAO.findByUserId(groupId);
+      response.json(foundGroup);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = groupController;
