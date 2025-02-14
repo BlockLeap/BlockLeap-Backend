@@ -39,6 +39,18 @@ class userGroupDAO {
 
     return foundMembers;
   }
+  async findByUserId(id) {
+    await this.userGroup.sync();
+    const userGroups = await this.userGroup.findAll({
+      where: {
+        user: id,
+      },
+    });
+
+    if (!userGroups || userGroups.length === 0) throw new ErrorException(ErrorCode.NotFound);
+    
+    return userGroups;
+  }
 }
 
 module.exports = userGroupDAO;
