@@ -30,7 +30,12 @@ class groupDAO {
 
   async getGroupById(id) {
     await this.group.sync();
-    const foundGroup = await this.group.findByPk(id);
+    const foundGroup = await this.group.findAll({
+      where: {
+        id: id,
+      },
+      
+  });
     if (!foundGroup) {
       throw new ErrorException(ErrorCode.NotFound);
     }

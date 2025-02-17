@@ -10,8 +10,8 @@ groupRouter
   .post("/create", groupController.createGroup)
   .post("/register", groupController.resgisterUserInAGroup)
   .get("/all", groupController.getAllGroups)
-  .get("/:groupId", groupController.getGroupById)
+  .get("/:Id", groupController.getGroupById)
   .get("/:groupId/members", groupController.getGroupMembers)
-  .get("/findByUser/id", groupController.findByUser);
+  .get("/findByUser/:id", groupController.findByUser);
 
 module.exports = groupRouter;

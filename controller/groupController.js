@@ -3,6 +3,7 @@
 const DAOFactory = require("../js/daos/DAOFactory");
 const { ErrorCode } = require("../error-handler/errorCode");
 const { ErrorException } = require("../error-handler/ErrorException");
+const user = require("../database/model/user");
 
 class groupController {
   constructor() {
@@ -38,7 +39,7 @@ class groupController {
 
   getGroupById = async (request, response, next) => {
     try {
-      const groupId = request.params.groupId;
+      const groupId = request.params.Id;
       const foundGroup = await this.groupDAO.getGroupById(groupId);
       response.json(foundGroup);
     } catch (error) {
@@ -79,21 +80,25 @@ class groupController {
   getGroupMembers = async (request, response, next) => {
     try {
       const groupId = request.params.groupId;
-      const foundMembers = await this.setDAO.fingByGroupId(groupId);
+      const foundMembers = await this.setDAO.findByGroupId(groupId);
       response.json(foundMembers);
     } catch (error) {
       next(error);
     }
   };
+
   findByUser = async (request, response, next) => {
     try {
-      setData.userId = request.params.userId;
-      const foundGroup = await this.setDAO.findByUserId(groupId);
+
+      const foundGroup = await this.setDAO.findByUserId(request.params.id);
+
+
       response.json(foundGroup);
     } catch (error) {
       next(error);
     }
-  };
+  };  
+
 }
 
 module.exports = groupController;

@@ -28,7 +28,7 @@ class userGroupDAO {
     return await this.userGroup.findAll();
   }
 
-  async fingByGroupId(id) {
+  async findByGroupId(id) {
     await this.userGroup.sync();
     const foundMembers = await this.userGroup.findAll({
       where: {
@@ -39,6 +39,7 @@ class userGroupDAO {
 
     return foundMembers;
   }
+
   async findByUserId(id) {
     await this.userGroup.sync();
     const userGroups = await this.userGroup.findAll({
@@ -47,7 +48,7 @@ class userGroupDAO {
       },
     });
 
-    if (!userGroups || userGroups.length === 0) throw new ErrorException(ErrorCode.NotFound);
+    if (!userGroups) throw new ErrorException(ErrorCode.NotFound);
     
     return userGroups;
   }
