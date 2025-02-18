@@ -40,7 +40,7 @@ class groupController {
   getGroupById = async (request, response, next) => {
     try {
       const groupId = request.params.Id;
-      const foundGroup = await this.groupDAO.getGroupById(groupId);
+      const foundGroup = await this.groupDAO.getGroupById(Array.from(groupId));
       response.json(foundGroup);
     } catch (error) {
       next(error);
@@ -89,10 +89,7 @@ class groupController {
 
   findByUser = async (request, response, next) => {
     try {
-
       const foundGroup = await this.setDAO.findByUserId(request.params.id);
-
-
       response.json(foundGroup);
     } catch (error) {
       next(error);
