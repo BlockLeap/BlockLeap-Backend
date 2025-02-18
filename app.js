@@ -12,6 +12,7 @@ const levelRouter = require("./routes/levelRouter");
 const userRouter = require("./routes/userRouter");
 const groupRouter = require("./routes/groupRouter");
 const playRouter = require("./routes/playRouter");
+const setRouter = require("./routes/setRouter");
 const { errorHandler } = require("./error-handler/errorHandler");
 const logger = require("./logger");
 const XAPISingleton = require("./xAPI/xapi");
@@ -54,6 +55,8 @@ app.use("/api/level", levelRouter);
 app.use("/api/user", userRouter);
 app.use("/api/group", groupRouter);
 app.use("/api/play", playRouter);
+app.use("/api/set", setRouter);
+
 
 app.post("/api/statistics/", async(req,res,next) =>{
   try{
