@@ -29,7 +29,7 @@ class groupDAO {
   }
 
   async getGroupById(id) {
-    await this.group.sync();
+      await this.group.sync();
     const foundGroup = await this.group.findAll({
       where: {
         id: id,

@@ -15,7 +15,7 @@ class groupController {
 
   createGroup = async (request, response, next) => {
     try {
-      const groupName = request.body.name;
+      const groupName = request.body.groupName;
       const setData = {};
       setData.userId = request.body.userId;
       setData.role = "Anfitrión";
@@ -40,7 +40,8 @@ class groupController {
     getGroupById = async (request, response, next) => {
     try {
       const groupId = request.params.Id;
-      const foundGroup = await this.groupDAO.getGroupById(Array.from(groupId));
+      const array = groupId.split(",").map(num => parseInt(num.trim(), 10));
+      const foundGroup = await this.groupDAO.getGroupById(Array.from(array));
       response.json(foundGroup);
     } catch (error) {
       next(error);
