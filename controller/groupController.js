@@ -37,7 +37,7 @@ class groupController {
     }
   };
 
-  getGroupById = async (request, response, next) => {
+    getGroupById = async (request, response, next) => {
     try {
       const groupId = request.params.Id;
       const foundGroup = await this.groupDAO.getGroupById(Array.from(groupId));
