@@ -11,6 +11,7 @@ groupRouter
   .post("/register", groupController.resgisterUserInAGroup)
   .get("/all", groupController.getAllGroups)
   .get("/:Id", groupController.getGroupById)
+  .get("/findByCode/:Id", groupController.getCodeById)
   .get("/:groupId/members", groupController.getGroupMembers)
   .get("/findByUser/:id", groupController.findByUser);
 

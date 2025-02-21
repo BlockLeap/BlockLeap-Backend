@@ -27,7 +27,7 @@ class groupController {
       next(error);
     }
   };
-
+  
   getAllGroups = async (request, response, next) => {
     try {
       const allGroups = await this.groupDAO.getAllGroups();
@@ -53,6 +53,17 @@ class groupController {
       const groupCode = request.params.groupCode;
       const foundGroup = await this.groupDAO.getGroupByCode(groupId);
       response.json(foundGroup);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
+  getCodeById = async (request, response, next) => {
+    try {
+      const groupId = request.params.Id;
+      const foundCode = await this.groupDAO.getCodeById(groupId);
+      response.json(foundCode);
     } catch (error) {
       next(error);
     }

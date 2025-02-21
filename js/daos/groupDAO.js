@@ -52,6 +52,32 @@ class groupDAO {
     }
     return foundGroup;
   }
+
+  async getCodeById(id) {
+    try {
+        // Verifica si la sincronización del grupo es realmente necesaria
+        // await this.group.sync(); // Si es necesario hacerlo, mantenlo; si no, elimínalo.
+        
+        // Buscar el código asignado al grupo con el ID proporcionado
+        const foundCode = await this.group.findOne({
+            where: { id: id },  // Filtra por el ID
+            attributes: ['code'],  // Solo trae el campo 'code'
+        });
+
+        if (!foundCode) {
+            // Si no se encuentra el grupo, lanza una excepción con un error 'NotFound'
+            throw new ErrorException(ErrorCode.NotFound);
+        }
+
+        // Retorna el código encontrado
+        return foundCode;
+    } catch (error) {
+        // Si ocurre un error, lo puedes manejar de esta forma para un mejor seguimiento
+        throw error;  // O personaliza el manejo de errores aquí según tus necesidades
+    }
+}
+
+
 }
 
 module.exports = groupDAO;
