@@ -5,6 +5,7 @@ const { ErrorCode } = require("../error-handler/errorCode");
 const { ErrorException } = require("../error-handler/ErrorException");
 const user = require("../database/model/user");
 
+
 class groupController {
   constructor() {
     const factory = new DAOFactory();
@@ -27,6 +28,29 @@ class groupController {
       next(error);
     }
   };
+
+  addLevelClass = async (request, response, next) => {
+    try {
+      const level = request.body.levels;
+      const id = request.body.id;
+      let LevelAdded = await this.groupDAO.addLevelClass(level,id);
+      response.json({LevelAdded});
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  addSetClass = async (request, response, next) => {
+    try {
+     
+      let SetAdded = await this.groupDAO.addSetClass(set,id);
+      response.json({SetAdded});
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
   
   getAllGroups = async (request, response, next) => {
     try {

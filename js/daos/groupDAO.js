@@ -6,11 +6,51 @@ const { ErrorException } = require("../../error-handler/ErrorException");
 class groupDAO {
   sequelize;
   group;
+  classlevel;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.group = sequelize.models.group;
+    this.classlevel = sequelize.models.classLevel;
   }
+
+  async addLevelClass(level,groupId) {
+    
+    await this.classlevel.sync();
+  
+    const createdGroup = await this.classlevel.create({
+
+      id:level.id,       
+      user:level.user,          
+      category:level.category,      
+      self:level.self,          
+      description:level.description,   
+      title:level.title,         
+      data:level.data,         
+      minBlocks:level.minBlocks,     
+      idClase:groupId.id       
+
+    });
+
+    if (!createdClass) {
+      throw new ErrorException(ErrorCode.CantCreate);
+    }
+    return createdClass;
+  }
+  
+  async addSetClass(set_id,group_id) {
+    await this.setGroups.sync();
+    const createdGroup = await this.setGroups.create({
+      set_id: grouset_idpName,
+      group_id:group_id,
+
+    });
+    if (!createdGroup) {
+      throw new ErrorException(ErrorCode.CantCreate);
+    }
+    return createdGroup;
+  }
+
 
   async createGroup(groupName) {
     await this.group.sync();

@@ -13,6 +13,7 @@ groupRouter
   .get("/:Id", groupController.getGroupById)
   .get("/findByCode/:Id", groupController.getCodeById)
   .get("/:groupId/members", groupController.getGroupMembers)
+  .post("/addLevel", groupController.addLevelClass)
   .get("/findByUser/:id", groupController.findByUser);
 
 module.exports = groupRouter;
