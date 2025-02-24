@@ -139,16 +139,17 @@ class levelDAO {
     });
   }
 
-  async getCommunityLevels() {
-    await this.level.sync();
+  async getCommunityLevels(page=1) {
+    const perPage=5;const offset=(page-1)*perPage;  
+    await this.level.sync();  
     return await this.level.findAndCountAll({
       where: {
         category: {
           [Op.eq]: null,
         },
       },
-      limit:5,
-      offset:0
+      limit:perPage,
+      offset:offset
     });
   }
 
