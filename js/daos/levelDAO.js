@@ -141,12 +141,14 @@ class levelDAO {
 
   async getCommunityLevels() {
     await this.level.sync();
-    return await this.level.findAll({
+    return await this.level.findAndCountAll({
       where: {
         category: {
           [Op.eq]: null,
         },
       },
+      limit:5,
+      offset:0
     });
   }
 
