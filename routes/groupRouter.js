@@ -14,6 +14,8 @@ groupRouter
   .get("/findByCode/:Id", groupController.getCodeById)
   .get("/:groupId/members", groupController.getGroupMembers)
   .post("/addLevel", groupController.addLevelClass)
+  .post("/deleteLevel", groupController.deleteLevelClass)
+  .post("/addSet", groupController.addSetClass)
   .get("/findByUser/:id", groupController.findByUser);
 
 module.exports = groupRouter;

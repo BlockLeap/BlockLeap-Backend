@@ -29,6 +29,7 @@ class groupController {
     }
   };
 
+
   addLevelClass = async (request, response, next) => {
     try {
       const level = request.body.levels;
@@ -40,9 +41,22 @@ class groupController {
     }
   };
 
+  deleteLevelClass = async (request, response, next) => {
+    try {
+      const level = request.body.levels;
+      const id = request.body.id;
+      let LevelAdded = await this.groupDAO.deleteLevelClass(level,id);
+      response.json({LevelAdded});
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
+
   addSetClass = async (request, response, next) => {
     try {
-     
+      
       let SetAdded = await this.groupDAO.addSetClass(set,id);
       response.json({SetAdded});
     } catch (error) {

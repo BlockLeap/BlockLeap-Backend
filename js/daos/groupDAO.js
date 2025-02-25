@@ -14,36 +14,13 @@ class groupDAO {
     this.classlevel = sequelize.models.classLevel;
   }
 
-  async addLevelClass(level,groupId) {
-    
-    await this.classlevel.sync();
   
-    const createdGroup = await this.classlevel.create({
 
-      id:level.id,       
-      user:level.user,          
-      category:level.category,      
-      self:level.self,          
-      description:level.description,   
-      title:level.title,         
-      data:level.data,         
-      minBlocks:level.minBlocks,     
-      idClase:groupId.id       
 
-    });
-
-    if (!createdClass) {
-      throw new ErrorException(ErrorCode.CantCreate);
-    }
-    return createdClass;
-  }
-  
-  async addSetClass(set_id,group_id) {
-    await this.setGroups.sync();
-    const createdGroup = await this.setGroups.create({
-      set_id: grouset_idpName,
-      group_id:group_id,
-
+  async createGroup(groupName) {
+    await this.group.sync();
+    const createdGroup = await this.group.create({
+      name: groupName,
     });
     if (!createdGroup) {
       throw new ErrorException(ErrorCode.CantCreate);
@@ -52,10 +29,67 @@ class groupDAO {
   }
 
 
-  async createGroup(groupName) {
-    await this.group.sync();
-    const createdGroup = await this.group.create({
-      name: groupName,
+  
+  async addLevelClass(levels, group) {
+    await this.classlevel.sync(); 
+  
+    if (!levels || levels.length === 0) {
+      throw new ErrorException(ErrorCode.InvalidData); 
+    }
+  
+    const levelData = levels.map(level => ({
+      id:level.id,
+      user: level.user,          
+      category: level.category,      
+      self: level.self,          
+      description: level.description,   
+      title: level.title,         
+      data: level.data,         
+      minBlocks: level.minBlocks,     
+      idClase: group[0].id 
+    }));
+  
+   
+    const createdLevels = await this.classlevel.bulkCreate(levelData);
+  
+    if (!createdLevels || createdLevels.length === 0) {
+      throw new ErrorException(ErrorCode.CantCreate);
+    }
+  
+    return createdLevels;
+  }
+  
+  async deleteLevelClass(levels, group) {
+    await this.classlevel.sync();
+    
+    if (!levels || levels.length === 0) {
+      throw new ErrorException(ErrorCode.InvalidData);
+    }
+  
+    // Extraer todos los IDs de los niveles a eliminar
+    const levelIds = levels.map(level => level.id);
+  
+    // Ejecutar el destroy usando el operador 'in' para eliminar múltiples niveles
+    const deletedCount = await this.classlevel.destroy({
+      where: {
+        id: levelIds, // Aquí pasamos el array de IDs de los niveles
+        idClase: group[0].id
+      }
+    });
+  
+    if (!deletedCount) {
+      throw new ErrorException(ErrorCode.CantDelete);
+    }
+    
+    return { deleted: deletedCount };
+  }
+  
+  async addSetClass(set_id,group_id) {
+    await this.setGroups.sync();
+    const createdGroup = await this.setGroups.create({
+      set_id: grouset_idpName,
+      group_id:group_id,
+
     });
     if (!createdGroup) {
       throw new ErrorException(ErrorCode.CantCreate);
