@@ -41,7 +41,16 @@ class setDAO {
     const assignments = groupIds.map(groupId => ({ set_id: setId, group_id: groupId }));
     return await this.setGroups.bulkCreate(assignments);
   }
-
+/*
+  async getUserSets(userId){
+    await this.set.sync();
+    return await this.set.findAll({
+      where: {
+        user: userId,
+      }
+    });
+  }
+*/
   async getSetById(setId) {
     await this.set.sync();
     const foundSet = await this.set.findByPk(setId, {

@@ -90,7 +90,9 @@ class levelController {
   getclassLevels = async (request, response, next) => {
     try {
       const levels = await this.levelDAO.getclassLevels(request.params.id);
-      response.json(levels);
+    
+        response.json(levels);
+    
     } catch (error) {
       next(error);
     }
@@ -112,11 +114,11 @@ class levelController {
   getGroupSets = async (request, response, next) => {
     try {
         const res = await this.levelDAO.getsSetsByGroup(request.params.id);
-        if(res.length!=0){
+        
           const ids= res.map(i=>i.group_id);
           const sets= await this.levelDAO.getsSetsById(ids);
           response.json(sets);
-        } else response.json(null);
+        
     } catch (error) {
       next(error);
     }
