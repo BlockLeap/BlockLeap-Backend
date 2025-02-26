@@ -151,7 +151,7 @@ class levelDAO {
   }
 
   async getCommunityLevels(page=1) {
-    const perPage=5;const offset=(page-1)*perPage;  
+    const perPage=6;const offset=(page-1)*perPage;  
     await this.level.sync();  
     return await this.level.findAndCountAll({
       where: {
@@ -164,7 +164,7 @@ class levelDAO {
     });
   }
   async getCommunityLevelsByIds(page=1,idArray) {
-    const perPage=5;const offset=(page-1)*perPage;  
+    const perPage=6;const offset=(page-1)*perPage;  
     await this.level.sync();  
     return await this.level.findAndCountAll({
       where: {
