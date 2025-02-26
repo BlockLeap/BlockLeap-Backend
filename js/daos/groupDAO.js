@@ -38,7 +38,7 @@ class groupDAO {
     }
   
     const levelData = levels.map(level => ({
-      id:level.id,
+
       user: level.user,          
       category: level.category,      
       self: level.self,          
