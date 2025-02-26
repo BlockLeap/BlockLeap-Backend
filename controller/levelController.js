@@ -80,9 +80,15 @@ class levelController {
 
   getCommunityLevels = async (request, response, next) => {
     try {
-      let page=request.params.page;
+      const data=JSON.parse(request.params.data);
+      let page=data.page;
+      let tags=data.tags;
+      const res = await this.levelDAO.getLevelsByTag(tags);
+      let idArray= res.map(i=>i.level_id);
       if(page=='null')page=1; 
-      const levels = await this.levelDAO.getCommunityLevels(page);
+      let levels;
+      if(idArray.length>0) levels= await this.levelDAO.getCommunityLevelsByIds(page,idArray);
+      else levels= await this.levelDAO.getCommunityLevels(page);
       response.json(levels);
     } catch (error) {
       next(error);

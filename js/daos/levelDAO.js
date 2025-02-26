@@ -11,6 +11,7 @@ class levelDAO {
   classLevel;
   set;
   setlevels;
+  levelTags;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
@@ -20,6 +21,7 @@ class levelDAO {
     this.set=sequelize.models.set;
     this.setlevels=sequelize.models.setlevels;
     this.setGroup=sequelize.models.setgroups;
+    this.levelTags=sequelize.models.leveltags;
   }
 
   async createLevel(level) {
@@ -139,6 +141,15 @@ class levelDAO {
     });
   }
 
+  async getLevelsByTag(tag) {
+    await this.levelTags.sync();
+    return await this.levelTags.findAll({
+      where: {
+        tag: tag
+      },
+    });
+  }
+
   async getCommunityLevels(page=1) {
     const perPage=5;const offset=(page-1)*perPage;  
     await this.level.sync();  
@@ -147,6 +158,20 @@ class levelDAO {
         category: {
           [Op.eq]: null,
         },
+      },
+      limit:perPage,
+      offset:offset
+    });
+  }
+  async getCommunityLevelsByIds(page=1,idArray) {
+    const perPage=5;const offset=(page-1)*perPage;  
+    await this.level.sync();  
+    return await this.level.findAndCountAll({
+      where: {
+        category: {
+          [Op.eq]: null,
+        },
+        id:idArray
       },
       limit:perPage,
       offset:offset
