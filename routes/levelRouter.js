@@ -13,6 +13,7 @@ levelRouter
   .post("/create", levelController.createLevel)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
   .get("/community/levels", levelController.getCommunityLevels)
+  .get("/community/levels/:data", levelController.getCommunityLevels)
   .get("/class/:id", levelController.getclassLevels)
   .get("/class/:id/sets", levelController.getGroupSets)
   .get("/sets/:id", levelController.getLevelsBySet)
