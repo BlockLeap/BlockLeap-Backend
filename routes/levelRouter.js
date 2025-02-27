@@ -15,6 +15,7 @@ levelRouter
   .get("/community/levels", levelController.getCommunityLevels)
   .get("/community/levels/:data", levelController.getCommunityLevels)
   .get("/class/:id", levelController.getclassLevels)
+ //.get("/class/:id/:data", levelController.getclassLevels)
   .get("/class/:id/sets", levelController.getGroupSets)
   .get("/sets/:id", levelController.getLevelsBySet)
   .get("/sets/level/:id", levelController.getSetLevel)

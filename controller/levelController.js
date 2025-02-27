@@ -97,6 +97,21 @@ class levelController {
 
   getclassLevels = async (request, response, next) => {
     try {
+      /*
+      const data=JSON.parse(request.params.data);
+      const id = request.param.id;
+      let page=data.page;
+      let tags=data.tags;
+      if(page=='null')page=1; 
+      levels= await this.levelDAO.getclassLevels(id,page);
+            
+      response.json(levels);
+    
+    } catch (error) {
+      next(error);
+    }
+      */
+     
       const levels = await this.levelDAO.getclassLevels(request.params.id);
     
         response.json(levels);

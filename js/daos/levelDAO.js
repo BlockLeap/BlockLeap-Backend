@@ -82,6 +82,26 @@ class levelDAO {
     });
   }
 
+  /*
+
+    async getclassLevels(classId,page){
+     const perPage=6;const offset=(page-1)*perPage;  
+    await this.classLevel.sync();
+    return await this.classlevel.findAndCountAll({
+      where: {
+        category: {
+          [Op.eq]: null,
+        },
+        idClase:classId
+      },
+      limit:perPage,
+      offset:offset
+
+    });
+  }
+
+  */
+
   async getsetLevelsIds(setId){
     await this.setlevels.sync();
     return await this.setlevels.findAll({
