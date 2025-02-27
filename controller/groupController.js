@@ -137,6 +137,17 @@ class groupController {
     }
   };
 
+  getStudentsById = async (request, response, next) => {
+    try {
+      const groupId = request.params.id;
+      const students = await this.setDAO.findAllStudents(groupId);
+      response.json(students);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
   findByUser = async (request, response, next) => {
     try {
       const foundGroup = await this.setDAO.findByUserId(request.params.id);

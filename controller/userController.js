@@ -103,6 +103,15 @@ class userController {
       next(error);
     }
   }
+  getNamesById = async (req, res, next) =>{
+    try{
+      let ids = req.params.userIds;
+      let name = await this.userDAO.getNames(ids);
+      res.json(name);
+    }catch(error){
+      next(error);
+    }
+  }
 }
 
 module.exports = userController;

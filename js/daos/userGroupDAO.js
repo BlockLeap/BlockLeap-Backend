@@ -1,5 +1,6 @@
 "use strict";
 
+const { group } = require("console");
 const { ErrorCode } = require("../../error-handler/errorCode");
 const { ErrorException } = require("../../error-handler/ErrorException");
 
@@ -38,6 +39,19 @@ class userGroupDAO {
     if (!foundMembers) throw new ErrorException(ErrorCode.NotFound);
 
     return foundMembers;
+  }
+
+  async findAllStudents(id) {
+    await this.userGroup.sync();
+    const students = await this.userGroup.findAll({
+      where: {
+        group: id,
+      },
+    });
+
+    if (!students) throw new ErrorException(ErrorCode.NotFound);
+    
+    return students;
   }
 
   async findByUserId(id) {

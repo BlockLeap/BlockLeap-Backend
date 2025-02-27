@@ -134,6 +134,7 @@ class playDAO {
     });
     return totalStars;
   }
+
 }
 
 module.exports = playDAO;
