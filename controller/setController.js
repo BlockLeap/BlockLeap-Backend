@@ -54,14 +54,14 @@ class setController {
       next(error);
     }
   };
-/*
+
   getUserSets = async (request, response, next) => {
     try {
-      const userId = request.params.userId;
+      const userId = request.params.id;
       if (!userId) {
         throw new ErrorException(ErrorCode.BadRequest, "Error");
       }
-      const foundSet = await this.setDAO.getSetById(userId);
+      const foundSet = await this.setDAO.getUserSets(userId);
       if (!foundSet) throw new ErrorException(ErrorCode.NotFound, "Set no encontrado");
       response.json(foundSet);
     } catch (error) {
@@ -69,7 +69,7 @@ class setController {
     }
   };
 
-  */
+  
 
   getSetById = async (request, response, next) => {
     try {

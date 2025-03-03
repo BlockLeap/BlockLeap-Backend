@@ -7,15 +7,14 @@ class groupDAO {
   sequelize;
   group;
   classlevel;
+  setGroups;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.group = sequelize.models.group;
     this.classlevel = sequelize.models.classLevel;
+    this.setGroups = sequelize.models.setgroups;
   }
-
-  
-
 
   async createGroup(groupName) {
     await this.group.sync();
@@ -84,18 +83,43 @@ class groupDAO {
     return { deleted: deletedCount };
   }
   
-  async addSetClass(set_id,group_id) {
-    await this.setGroups.sync();
-    const createdGroup = await this.setGroups.create({
-      set_id: grouset_idpName,
-      group_id:group_id,
-
-    });
-    if (!createdGroup) {
+  async addSetClass(set_ids, group_id) {
+    await this.setGroups.sync(); 
+  
+    if (!Array.isArray(set_ids) || set_ids.length === 0) {
+      throw new Error("El array de sets está vacío o no es válido.");
+    }
+    const setsToInsert = set_ids.map(set_id => ({
+      set_id: set_id,
+      group_id: group_id
+    }));
+  
+    const createdGroups = await this.setGroups.bulkCreate(setsToInsert);
+  
+    if (!createdGroups || createdGroups.length === 0) {
       throw new ErrorException(ErrorCode.CantCreate);
     }
-    return createdGroup;
+  
+    return createdGroups;
   }
+  
+  async deleteSetClass(set_id, group_id) {
+    await this.setGroups.sync();
+    
+    const deletedRows = await this.setGroups.destroy({
+      where: {
+        set_id: set_id,
+        group_id: group_id
+      }
+    });
+  
+    if (deletedRows === 0) {
+      throw new Error("No se encontró la relación set-group para eliminar."); 
+    }
+  
+    return { message: "Registro eliminado correctamente." };
+  }
+  
 
   async getAllGroups() {
     await this.group.sync();

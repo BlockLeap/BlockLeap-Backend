@@ -126,7 +126,7 @@ class levelController {
       const res = await this.levelDAO.getsetLevelsIds(request.params.id);
       if(res.length!=0){
         let idArray= res.map(i=>i.level_id);
-        const levels = await this.levelDAO.getclassLevels(idArray);
+        const levels = await this.levelDAO.getLevels(idArray);
         response.json(levels);
       }else response.json(null);
     } catch (error) {
@@ -138,7 +138,7 @@ class levelController {
     try {
         const res = await this.levelDAO.getsSetsByGroup(request.params.id);
         
-          const ids= res.map(i=>i.group_id);
+          const ids= res.map(i=>i.set_id);
           const sets= await this.levelDAO.getsSetsById(ids);
           response.json(sets);
         

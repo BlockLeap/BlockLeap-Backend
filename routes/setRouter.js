@@ -11,7 +11,7 @@ setRouter
   .post("/assignGroups", setController.assignSetToGroups)
   .get("/all", setController.getAllSets)
   .get("/:setId", setController.getSetById)
-  //.get("/:userId", setController.getUserSets)
+  .get("/userSets/:id", setController.getUserSets)
   .delete("/:setId", setController.deleteSet);
 
 

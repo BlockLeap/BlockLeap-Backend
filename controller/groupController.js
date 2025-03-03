@@ -56,8 +56,20 @@ class groupController {
 
   addSetClass = async (request, response, next) => {
     try {
-      
-      let SetAdded = await this.groupDAO.addSetClass(set,id);
+      const setid = request.body.sets;
+      const id = request. body.id;
+      let SetAdded = await this.groupDAO.addSetClass(setid,id);
+      response.json({SetAdded});
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteSetClass = async (request, response, next) => {
+    try {
+      const setid = request.body.sets;
+      const id = request. body.id;
+      let SetAdded = await this.groupDAO.deleteSetClass(setid,id);
       response.json({SetAdded});
     } catch (error) {
       next(error);

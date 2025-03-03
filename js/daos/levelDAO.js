@@ -127,6 +127,26 @@ class levelDAO {
     return found;
   }
 
+  async getLevels(ids) {
+    await this.level.sync();  // Sincronizar la tabla
+  
+    if (!Array.isArray(ids) || ids.length === 0) {
+      throw new Error("El parámetro debe ser un array de IDs válido.");
+    }
+  
+    const foundLevels = await this.level.findAll({
+      where: {
+        id: ids  // Buscar niveles cuyo ID esté en el array
+      }
+    });
+  
+    if (foundLevels.length === 0) {
+      throw new ErrorException(ErrorCode.NotFound);  // Si no se encuentran niveles
+    }
+  
+    return foundLevels;  // Devolver los niveles encontrados
+  }
+  
   async getSetLevel(id) {
     await this.classLevel.sync();
     const found = await this.classLevel.findByPk(id);

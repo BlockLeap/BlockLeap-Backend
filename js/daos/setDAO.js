@@ -10,6 +10,7 @@ class setDAO {
   setGroups;
   level;
   userGroup;
+  levelSets;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
@@ -18,6 +19,7 @@ class setDAO {
     this.setGroups = sequelize.models.setGroups;
     this.level = sequelize.models.level;
     this.userGroup = sequelize.models.usergroup;
+    this.levelSets = sequelize.models.levelsets;
   }
 
   async createSet(setData) {
@@ -41,16 +43,18 @@ class setDAO {
     const assignments = groupIds.map(groupId => ({ set_id: setId, group_id: groupId }));
     return await this.setGroups.bulkCreate(assignments);
   }
-/*
-  async getUserSets(userId){
-    await this.set.sync();
-    return await this.set.findAll({
+
+  async getUserSets(id){
+    await this.levelSets.sync();
+    const foundSet = await this.levelSets.findAll({
       where: {
-        user: userId,
+        owner_id: id,
       }
     });
+    if (!foundSet) throw new ErrorException(ErrorCode.NotFound);
+    return foundSet;
   }
-*/
+
   async getSetById(setId) {
     await this.set.sync();
     const foundSet = await this.set.findByPk(setId, {
