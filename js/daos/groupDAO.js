@@ -8,12 +8,14 @@ class groupDAO {
   group;
   classlevel;
   setGroups;
+  classLevels;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.group = sequelize.models.group;
     this.classlevel = sequelize.models.classLevel;
     this.setGroups = sequelize.models.setgroups;
+    this.classLevels = sequelize.models.classlevels;
   }
 
   async createGroup(groupName) {
@@ -29,58 +31,42 @@ class groupDAO {
 
 
   
-  async addLevelClass(levels, group) {
-    await this.classlevel.sync(); 
-  
-    if (!levels || levels.length === 0) {
-      throw new ErrorException(ErrorCode.InvalidData); 
-    }
-  
-    const levelData = levels.map(level => ({
+  async addLevelClass(id_nivel, id_clase) {
 
-      user: level.user,          
-      category: level.category,      
-      self: level.self,          
-      description: level.description,   
-      title: level.title,         
-      data: level.data,         
-      minBlocks: level.minBlocks,     
-      idClase: group[0].id 
+    await this.classLevels.sync(); 
+    if (!Array.isArray(id_nivel) || id_nivel.length === 0) {
+      throw new Error("El array de levels está vacío o no es válido.");
+    }
+    const classToInsert = id_nivel.map(id_nivel => ({
+      id_nivel: id_nivel,
+      id_clase: id_clase
     }));
   
-   
-    const createdLevels = await this.classlevel.bulkCreate(levelData);
+    const addedLevels = await this.classLevels.bulkCreate(classToInsert);
   
-    if (!createdLevels || createdLevels.length === 0) {
+    if (!addedLevels || addedLevels.length === 0) {
       throw new ErrorException(ErrorCode.CantCreate);
     }
   
-    return createdLevels;
+    return addedLevels;
   }
   
-  async deleteLevelClass(levels, group) {
-    await this.classlevel.sync();
-    
-    if (!levels || levels.length === 0) {
-      throw new ErrorException(ErrorCode.InvalidData);
-    }
-  
-    // Extraer todos los IDs de los niveles a eliminar
-    const levelIds = levels.map(level => level.id);
-  
-    // Ejecutar el destroy usando el operador 'in' para eliminar múltiples niveles
-    const deletedCount = await this.classlevel.destroy({
+  async deleteLevelClass(id_nivel, id_clase) {
+    await this.classLevels.sync();
+
+    const deletedRows = await this.classLevels.destroy({
       where: {
-        id: levelIds, // Aquí pasamos el array de IDs de los niveles
-        idClase: group[0].id
+        id_nivel: id_nivel,
+        id_clase: id_clase
       }
     });
   
-    if (!deletedCount) {
-      throw new ErrorException(ErrorCode.CantDelete);
+    if (deletedRows === 0) {
+      throw new Error("No se encontró la relación set-group para eliminar."); 
     }
+  
+    return { message: "Registro eliminado correctamente." };
     
-    return { deleted: deletedCount };
   }
   
   async addSetClass(set_ids, group_id) {

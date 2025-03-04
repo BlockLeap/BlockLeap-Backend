@@ -28,13 +28,19 @@ class groupController {
       next(error);
     }
   };
-
-
+  
   addLevelClass = async (request, response, next) => {
     try {
-      const level = request.body.levels;
+      const levels = request.body.levels;
       const id = request.body.id;
-      let LevelAdded = await this.groupDAO.addLevelClass(level,id);
+
+      if (!Array.isArray(levels)) {
+        return response.status(400).json({ error: "Levels must be an array" });
+      }
+  
+      const levelIds = levels.map(level => level.id); // Extrae los IDs de los niveles
+
+      let LevelAdded = await this.groupDAO.addLevelClass(levelIds,id[0].id);
       response.json({LevelAdded});
     } catch (error) {
       next(error);
@@ -43,15 +49,21 @@ class groupController {
 
   deleteLevelClass = async (request, response, next) => {
     try {
-      const level = request.body.levels;
-      const id = request.body.id;
-      let LevelAdded = await this.groupDAO.deleteLevelClass(level,id);
-      response.json({LevelAdded});
+      const levels = request.body.levels; // Suponiendo que es un array de objetos con un id
+      const classId = request.body.id; // ID de la clase
+  
+      if (!Array.isArray(levels)) {
+        return response.status(400).json({ error: "Levels must be an array" });
+      }
+  
+      const levelIds = levels.map(level => level.id); // Extrae los IDs de los niveles
+  
+      let LevelAdded = await this.groupDAO.deleteLevelClass(levelIds, classId[0].id);
+      response.json({ LevelAdded });
     } catch (error) {
       next(error);
     }
   };
-
 
 
   addSetClass = async (request, response, next) => {

@@ -12,6 +12,7 @@ class levelDAO {
   set;
   setlevels;
   levelTags;
+  classLevels;
 
   constructor(sequelize) {
     this.sequelize = sequelize;
@@ -22,6 +23,7 @@ class levelDAO {
     this.setlevels=sequelize.models.setlevels;
     this.setGroup=sequelize.models.setgroups;
     this.levelTags=sequelize.models.leveltags;
+    this.classLevels = sequelize.models.classlevels;
   }
 
   async createLevel(level) {
@@ -55,8 +57,8 @@ class levelDAO {
     });
   }
   async getUserLevels(userID){
-    await this.level.sync();
-    return await this.level.findAll({
+    await this.classLevel.sync();
+    return await this.classLevel.findAll({
       where: {
         user: userID,
       }
@@ -73,34 +75,20 @@ class levelDAO {
     });
   }
 
-  async getclassLevels(classId){
-    await this.classLevel.sync();
-    return await this.classLevel.findAll({
+  async getclassLevels(id_clase){
+
+    await this.classLevels.sync();
+
+    const foundLevels =  await this.classLevels.findAll({
       where: {
-        idClase: classId,
+        id_clase: id_clase,
       }
-    });
-  }
-
-  /*
-
-    async getclassLevels(classId,page){
-     const perPage=6;const offset=(page-1)*perPage;  
-    await this.classLevel.sync();
-    return await this.classlevel.findAndCountAll({
-      where: {
-        category: {
-          [Op.eq]: null,
-        },
-        idClase:classId
-      },
-      limit:perPage,
-      offset:offset
 
     });
-  }
 
-  */
+    return foundLevels;
+
+  }
 
   async getsetLevelsIds(setId){
     await this.setlevels.sync();
