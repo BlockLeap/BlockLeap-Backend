@@ -116,13 +116,13 @@ class levelDAO {
   }
 
   async getLevels(ids) {
-    await this.level.sync();  // Sincronizar la tabla
+    await this.classLevel.sync();  // Sincronizar la tabla
   
     if (!Array.isArray(ids) || ids.length === 0) {
       throw new Error("El parámetro debe ser un array de IDs válido.");
     }
   
-    const foundLevels = await this.level.findAll({
+    const foundLevels = await this.classLevel.findAll({
       where: {
         id: ids  // Buscar niveles cuyo ID esté en el array
       }
