@@ -90,6 +90,18 @@ class levelDAO {
 
   }
 
+  async getclassLevelsPaginated(id_clase,page=1) {
+    const perPage=6;const offset=(page-1)*perPage;  
+    await this.classLevels.sync();
+    return await this.classLevels.findAndCountAll({
+      where: {
+        id_clase: id_clase,
+      },
+      limit:perPage,
+      offset:offset
+    });
+  }
+
   async getsetLevelsIds(setId){
     await this.setlevels.sync();
     return await this.setlevels.findAll({
