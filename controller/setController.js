@@ -14,15 +14,19 @@ class setController {
     try {
       const name = request.body.name;
       const description = request.body.description;
-      const level = request.body.level;
+      const user = request.body.user;
+      const levels = request.body.levels;
+      
       if (!name) {
         throw new ErrorException(ErrorCode.BadRequest, "El nombre del set es obligatorio");
       }
-      const createdSet = await this.setDAO.createSet(name, description);
+      const createdSet = await this.setDAO.createSet(name, description,user);
+      if(levels.length>0){
+        let levelsAdded = await this.setDAO.assignLevelsToSet(levels,createdSet.id);
+      }
+      
 
-      let SetAdded = await this.setDAO.assignLevelsToSet(level,createdSet);
-
-      response.json(SetAdded);
+      response.json(createdSet);
     } catch (error) {
       next(error);
     }
