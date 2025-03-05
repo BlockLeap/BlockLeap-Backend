@@ -22,18 +22,59 @@ class setController {
       next(error);
     }
   };
+/**
+ *   addLevelClass = async (request, response, next) => {
+    try {
+      const levels = request.body.levels;
+      const id = request.body.id;
 
+      if (!Array.isArray(levels)) {
+        return response.status(400).json({ error: "Levels must be an array" });
+      }
+  
+      const levelIds = levels.map(level => level.id); // Extrae los IDs de los niveles
+
+      let LevelAdded = await this.groupDAO.addLevelClass(levelIds,id[0].id);
+      response.json({LevelAdded});
+    } catch (error) {
+      next(error);
+    }
+  };
+ * 
+ * 
+ */
   assignLevelsToSet = async (request, response, next) => {
     try {
-      const { setId, levelIds } = request.body;
-      if (!setId) {
+      const levels = request.body.levels;
+      const id = request.body.id;
+      if (!id) {
         throw new ErrorException(ErrorCode.BadRequest, "El setId es obligatorio");
       }
-      if (!Array.isArray(levelIds) || levelIds.length === 0) {
+      if (!Array.isArray(levels) || levels.length === 0) {
         throw new ErrorException(ErrorCode.BadRequest, "Debe proporcionar una lista válida de niveles");
       }
-      const assignment = await this.setDAO.assignLevelsToSet(setId, levelIds);
-      response.json({ message: "Niveles asignados correctamente", assignment });
+     
+      let LevelAdded = await this.setDAO.assignLevelsToSet(levels,id);
+      response.json({LevelAdded});
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
+  deleteLevelsToSet = async (request, response, next) => {
+    try {
+      const levels = request.body.levels;
+      const id = request.body.id;
+      if (!id) {
+        throw new ErrorException(ErrorCode.BadRequest, "El setId es obligatorio");
+      }
+      if (!Array.isArray(levels) || levels.length === 0) {
+        throw new ErrorException(ErrorCode.BadRequest, "Debe proporcionar una lista válida de niveles");
+      }
+     
+      let LevelAdded = await this.setDAO.removeLevelsFromSet(levels,id);
+      response.json({LevelAdded});
     } catch (error) {
       next(error);
     }

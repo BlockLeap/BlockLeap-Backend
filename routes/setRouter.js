@@ -8,6 +8,7 @@ const setController = new SetController();
 setRouter
   .post("/create", setController.createSet)
   .post("/assignLevels", setController.assignLevelsToSet)
+  .post("/deleteLevels", setController.deleteLevelsToSet)
   .post("/assignGroups", setController.assignSetToGroups)
   .get("/all", setController.getAllSets)
   .get("/:setId", setController.getSetById)

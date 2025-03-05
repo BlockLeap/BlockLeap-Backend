@@ -15,7 +15,7 @@ class setDAO {
   constructor(sequelize) {
     this.sequelize = sequelize;
     this.set = sequelize.models.set;
-    this.setLevels = sequelize.models.setLevels;
+    this.setLevels = sequelize.models.setlevels;
     this.setGroups = sequelize.models.setGroups;
     this.level = sequelize.models.level;
     this.userGroup = sequelize.models.usergroup;
@@ -32,11 +32,35 @@ class setDAO {
     return createdSet;
   }
 
-  async assignLevelsToSet(setId, levelIds) {
-    await this.setLevels.sync();
-    const assignments = levelIds.map(levelId => ({ set_id: setId, level_id: levelId }));
-    return await this.setLevels.bulkCreate(assignments);
+  async assignLevelsToSet(levelIds, setId) {
+    await this.setLevels.sync(); // Asegurar que la tabla está sincronizada
+  
+    // Crear los objetos con set_id y level_id
+    const assignments = levelIds.map(levelId => ({
+      set_id: setId,
+      level_id: levelId
+    }));
+  
+    // Insertar los datos sin duplicados
+    return await this.setLevels.bulkCreate(assignments, {
+      ignoreDuplicates: true // Evita insertar si ya existe
+    });
   }
+
+  async removeLevelsFromSet(levelIds, setId) {
+    if (!levelIds.length) return "No levels to remove."; // Evita llamadas vacías
+  
+    await this.setLevels.sync(); // Asegurar que la tabla está sincronizada
+  
+    return await this.setLevels.destroy({
+      where: {
+        set_id: setId,
+        level_id: levelIds // Sequelize automáticamente genera `IN (levelIds)`
+      }
+    });
+  }
+  
+  
 
   async assignSetToGroups(setId, groupIds) {
     await this.setGroups.sync();
@@ -56,18 +80,10 @@ class setDAO {
   }
 
   async getSetById(setId) {
-    await this.set.sync();
-    const foundSet = await this.set.findByPk(setId, {
-      include: [
-        {
-          model: this.level,
-          as: "levels",
-        },
-        {
-          model: this.userGroup,
-          as: "userGroups",
-        },
-      ],
+    const foundSet = await this.levelSets.findAll({
+      where: {
+        id: setId,
+      }
     });
     if (!foundSet) throw new ErrorException(ErrorCode.NotFound);
     return foundSet;
