@@ -12,12 +12,17 @@ class setController {
 
   createSet = async (request, response, next) => {
     try {
-      const { name, description } = request.body;
+      const name = request.body.name;
+      const description = request.body.description;
+      const level = request.body.level;
       if (!name) {
         throw new ErrorException(ErrorCode.BadRequest, "El nombre del set es obligatorio");
       }
-      const createdSet = await this.setDAO.createSet({ name, description });
-      response.json(createdSet);
+      const createdSet = await this.setDAO.createSet(name, description);
+
+      let SetAdded = await this.setDAO.assignLevelsToSet(level,createdSet);
+
+      response.json(SetAdded);
     } catch (error) {
       next(error);
     }

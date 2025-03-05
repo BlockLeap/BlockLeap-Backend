@@ -22,11 +22,11 @@ class setDAO {
     this.levelSets = sequelize.models.levelsets;
   }
 
-  async createSet(setData) {
-    await this.set.sync();
-    const createdSet = await this.set.create({
-      name: setData.name,
-      description: setData.description,
+  async createSet(name,description) {
+    await this.levelSets.sync();
+    const createdSet = await this.levelSets.create({
+      name: name,
+      description: description,
     });
     if (!createdSet) throw new ErrorException(ErrorCode.CantCreate);
     return createdSet;
