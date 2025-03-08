@@ -41,6 +41,20 @@ class levelDAO {
     return createdLevel;
   }
 
+  async updateLevel(level) {
+    await this.level.sync();
+    const modifiedLevel = await this.level.update({
+      category: level.category,
+      self: level.self,
+      description: level.description,
+      title: level.title,
+      data: level.data,
+      minBlocks: level.minBlocks
+    },{where: {id:level.id,user:level.user}});
+    if (!modifiedLevel) throw new ErrorException(ErrorCode.CantUpdate);
+    return modifiedLevel;
+  }
+
   async deleteLevel(id) {
     await this.level.sync();
     await this.level.destroy({

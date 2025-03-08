@@ -69,6 +69,24 @@ class levelController {
     }
   };
 
+  updateLevel = async (request, response, next) => {
+    try {
+      const levelData = {};
+      levelData.id = request.body.level_id;
+      levelData.user = request.body.user;
+      levelData.category = request.body.category;
+      levelData.self = request.body.self;
+      levelData.title = request.body.title;
+      levelData.data = request.body.data;
+      levelData.minBLocks = request.body.minBLocks;
+      levelData.description = request.body.description;
+      const createdLevel = await this.levelDAO.updateLevel(levelData);
+      response.json(createdLevel);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   getLevelsByCategory = async (request, response, next) => {
     try {
       const levels = await this.levelDAO.getLevelsByCategory(request.params.id);
