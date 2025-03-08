@@ -27,29 +27,31 @@ class levelDAO {
   }
 
   async createLevel(level) {
-    await this.level.sync();
-    const createdLevel = await this.level.create({
+    await this.classLevel.sync();
+    const createdLevel = await this.classLevel.create({
       user: level.user,
       category: level.category,
       self: level.self,
       description: level.description,
       title: level.title,
       data: level.data,
-      minBlocks: level.minBlocks
+      minBlocks: level.minBlocks,
+      published: level.published
     });
     if (!createdLevel) throw new ErrorException(ErrorCode.CantCreate);
     return createdLevel;
   }
 
   async updateLevel(level) {
-    await this.level.sync();
-    const modifiedLevel = await this.level.update({
+    await this.classLevel.sync();
+    const modifiedLevel = await this.classLevel.update({
       category: level.category,
       self: level.self,
       description: level.description,
       title: level.title,
       data: level.data,
-      minBlocks: level.minBlocks
+      minBlocks: level.minBlocks,
+      published: level.published
     },{where: {id:level.id,user:level.user}});
     if (!modifiedLevel) throw new ErrorException(ErrorCode.CantUpdate);
     return modifiedLevel;
@@ -206,12 +208,13 @@ class levelDAO {
 
   async getCommunityLevels(page=1) {
     const perPage=6;const offset=(page-1)*perPage;  
-    await this.level.sync();  
-    return await this.level.findAndCountAll({
+    await this.classLevel.sync();  
+    return await this.classLevel.findAndCountAll({
       where: {
         category: {
           [Op.eq]: null,
         },
+        published:true
       },
       limit:perPage,
       offset:offset
@@ -219,12 +222,13 @@ class levelDAO {
   }
   async getCommunityLevelsByIds(page=1,idArray) {
     const perPage=6;const offset=(page-1)*perPage;  
-    await this.level.sync();  
-    return await this.level.findAndCountAll({
+    await this.classLevel.sync();  
+    return await this.classLevel.findAndCountAll({
       where: {
         category: {
           [Op.eq]: null,
         },
+        published:true,
         id:idArray
       },
       limit:perPage,
