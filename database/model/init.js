@@ -59,6 +59,8 @@ function init(sequelize) {
   user.hasMany(play, { as: "plays", foreignKey: "user" });
   userGroup.belongsTo(user, { as: "user_user", foreignKey: "user" });
   user.hasMany(userGroup, { as: "sets", foreignKey: "user" });
+  classlevel.hasMany(levelTags, { as: "tags", foreignKey: "level_id" });
+
 
   return {
     access,

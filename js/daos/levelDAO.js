@@ -206,6 +206,18 @@ class levelDAO {
     });
   }
 
+
+  async deleteLevelsTags(level_id) {
+    await this.levelTags.sync();
+    return await this.levelTags.destroy({
+      where:{level_id:level_id}
+    });
+  }
+  async createLevelsTag(data) {
+    await this.levelTags.sync();
+    return await this.levelTags.bulkCreate (data);
+  }
+
   async getCommunityLevels(page=1) {
     const perPage=6;const offset=(page-1)*perPage;  
     await this.classLevel.sync();  
