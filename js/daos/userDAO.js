@@ -62,7 +62,10 @@ class userDAO {
 
   await this.user.sync();
   const names = await this.user.findAll({
-    where: { id: { [Op.in]: userIds } },
+    where: { 
+      id: { [Op.in]: userIds },
+      role: 'estudiante' // Agregamos la condición para el rol
+    },
     attributes: ['name']
   });
 
