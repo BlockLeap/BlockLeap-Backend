@@ -98,13 +98,12 @@ class levelController {
   getclassLevels = async (request, response, next) => {
     try {
       const classId = request.params.id;
-      const levels = await this.levelDAO.getclassLevels(classId);
-    
-      const ids= levels.map(i=>i.id_nivel);
-
-      const level= await this.levelDAO.getclassLevelsByIds(ids);
-
-      response.json(level);
+      const page=request.params.page;
+      if(page===undefined)page=1;
+      const levels = await this.levelDAO.getclassLevelsPaginated(classId,page);
+      const ids= levels.rows.map(i=>i.id_nivel);
+      let level= await this.levelDAO.getclassLevelsByIds(ids);
+      response.json({count:levels.count,levels:level});
     
     } catch (error) {
       next(error);
