@@ -1,5 +1,6 @@
 "use strict";
 
+const leveltags = require("../database/model/leveltags");
 const DAOFactory = require("../js/daos/DAOFactory");
 
 class levelController {
@@ -62,7 +63,33 @@ class levelController {
       levelData.data = request.body.data;
       levelData.minBLocks = request.body.minBLocks;
       levelData.description = request.body.description;
+      levelData.published = request.body.publish;
       const createdLevel = await this.levelDAO.createLevel(levelData);
+      response.json(createdLevel);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateLevel = async (request, response, next) => {
+    try {
+      const levelData = {};
+      levelData.id = request.body.level_id;
+      levelData.user = request.body.user;
+      levelData.category = request.body.category;
+      levelData.self = request.body.self;
+      levelData.title = request.body.title;
+      levelData.data = request.body.data;
+      levelData.minBLocks = request.body.minBLocks;
+      levelData.description = request.body.description;
+      let tags= request.body.tags;
+      let levelTags=[];
+      tags.forEach(tag => {
+         levelTags.push({level_id:levelData.id,tag:tag});
+      });
+      const deletedTags= await this.levelDAO.deleteLevelsTags(levelData.id);
+      const createdTags = await this.levelDAO.createLevelsTag(levelTags);
+      const createdLevel = await this.levelDAO.updateLevel(levelData);
       response.json(createdLevel);
     } catch (error) {
       next(error);
