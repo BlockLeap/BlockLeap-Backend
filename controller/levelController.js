@@ -122,6 +122,18 @@ class levelController {
     }
   };
 
+  getAllclassLevels = async (request, response, next) => {
+    try {
+      const classId = request.params.id;
+      const levels = await this.levelDAO.getclassLevels(classId);
+       const ids= levels.map(i=>i.id_nivel);
+      let level= await this.levelDAO.getclassLevelsByIds(ids);
+      response.json(level);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   getclassLevels = async (request, response, next) => {
     try {
       const classId = request.params.id;
