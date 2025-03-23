@@ -258,6 +258,30 @@ class levelDAO {
     });
   }
 
+  async getPaginatedUserLevels(userID,page){
+    const perPage=6;const offset=(page-1)*perPage;  
+    await this.classLevel.sync();
+    return await this.classLevel.findAndCountAll({
+      where: {
+        user: userID,
+      },
+      limit:perPage,
+      offset:offset
+    });
+  }
+  async getPaginatedUserLevelsByIds(userID,page,idArray){
+    const perPage=6;const offset=(page-1)*perPage;  
+    await this.classLevel.sync();
+    return await this.classLevel.findAndCountAll({
+      where: {
+        user: userID,
+        id:idArray
+      },
+      limit:perPage,
+      offset:offset
+    });
+  }
+
   async getTotalOfficialLevels(){
     await this.level.sync();
     return await this.level.count({

@@ -10,6 +10,7 @@ levelRouter
   .get("/categories", levelController.getCategories)
   .get("/all", levelController.getAllLevels)
   .get("/userLevels/:id", levelController.getUserLevels)
+  .get("/paginatedUserLevels/:data", levelController.getPaginatedUserLevels)
   .post("/create", levelController.createLevel)
   .post("/update", levelController.updateLevel)
   .get("/levelsByCategory/:id", levelController.getLevelsByCategory)
