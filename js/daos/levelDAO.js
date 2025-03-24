@@ -113,6 +113,16 @@ class levelDAO {
 
   }
 
+  async getclassLevels(id_clase) {
+   
+    await this.classLevels.sync();
+    return await this.classLevels.findAll({
+      where: {
+        id_clase: id_clase,
+      },
+    });
+  }
+
   async getclassLevelsPaginated(id_clase,page=1) {
     const perPage=6;const offset=(page-1)*perPage;  
     await this.classLevels.sync();
@@ -248,6 +258,30 @@ class levelDAO {
           [Op.eq]: null,
         },
         published:true,
+        id:idArray
+      },
+      limit:perPage,
+      offset:offset
+    });
+  }
+
+  async getPaginatedUserLevels(userID,page){
+    const perPage=6;const offset=(page-1)*perPage;  
+    await this.classLevel.sync();
+    return await this.classLevel.findAndCountAll({
+      where: {
+        user: userID,
+      },
+      limit:perPage,
+      offset:offset
+    });
+  }
+  async getPaginatedUserLevelsByIds(userID,page,idArray){
+    const perPage=6;const offset=(page-1)*perPage;  
+    await this.classLevel.sync();
+    return await this.classLevel.findAndCountAll({
+      where: {
+        user: userID,
         id:idArray
       },
       limit:perPage,

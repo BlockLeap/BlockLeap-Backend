@@ -91,6 +91,7 @@ class levelController {
       levelData.data = request.body.data;
       levelData.minBLocks = request.body.minBLocks;
       levelData.description = request.body.description;
+      levelData.published = request.body.publish;
       let tags= request.body.tags;
       let levelTags=[];
       tags.forEach(tag => {
@@ -126,6 +127,41 @@ class levelController {
       if(idArray.length>0) levels= await this.levelDAO.getCommunityLevelsByIds(page,idArray);
       else levels= await this.levelDAO.getCommunityLevels(page);
       response.json(levels);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getPaginatedUserLevels = async (request, response, next) => {
+    try {
+      const data=JSON.parse(request.params.data);
+      let page=data.page;
+      let tags=data.tags;
+      let user_id=data.user_id;
+      const res = await this.levelDAO.getLevelsByTag(tags);
+      let idArray= res.map(i=>i.level_id);
+      if(page){
+        let levels;
+        if(idArray.length>0) levels= await this.levelDAO.getPaginatedUserLevelsByIds(user_id,page,idArray);
+        else levels= await this.levelDAO.getPaginatedUserLevels(user_id,page);
+        response.json(levels);
+      }
+      else{
+        const allLevels = await this.levelDAO.getUserLevels(user_id);
+        response.json(allLevels);
+    }
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getAllclassLevels = async (request, response, next) => {
+    try {
+      const classId = request.params.id;
+      const levels = await this.levelDAO.getclassLevels(classId);
+       const ids= levels.map(i=>i.id_nivel);
+      let level= await this.levelDAO.getclassLevelsByIds(ids);
+      response.json(level);
     } catch (error) {
       next(error);
     }
