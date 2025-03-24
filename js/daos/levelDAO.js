@@ -66,6 +66,13 @@ class levelDAO {
     });
   }
 
+  async countSetLevels (id){
+    await this.setlevels.sync();
+    return await this.setlevels.count({
+      where: {set_id: id,}
+    });
+  }
+
   async getAllLevels() {
     await this.level.sync();
     return await this.level.findAll({

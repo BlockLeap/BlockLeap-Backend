@@ -53,6 +53,15 @@ class levelController {
     }
   };
 
+  countSetLevels =async (request, response, next) => {
+    try {
+      const count = await this.levelDAO.countSetLevels(request.params.id);
+      response.json(count);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   createLevel = async (request, response, next) => {
     try {
       const levelData = {};
@@ -171,6 +180,7 @@ class levelController {
       next(error);
     }
   }
+
 }
 
 module.exports = levelController;
