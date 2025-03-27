@@ -17,10 +17,11 @@ class groupController {
   createGroup = async (request, response, next) => {
     try {
       const groupName = request.body.groupName;
+      const description = request.body.description;
       const setData = {};
       setData.userId = request.body.userId;
       setData.role = "Anfitrión";
-      let groupCreated = await this.groupDAO.createGroup(groupName);
+      let groupCreated = await this.groupDAO.createGroup(groupName,description);
       setData.groupId = groupCreated.id;
       let setCreated = await this.setDAO.createUserGroup(setData);
       response.json({ group: groupCreated, set: setCreated });
