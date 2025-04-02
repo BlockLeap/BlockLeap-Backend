@@ -4,6 +4,7 @@ const DAOFactory = require("../js/daos/DAOFactory");
 const { ErrorCode } = require("../error-handler/errorCode");
 const { ErrorException } = require("../error-handler/ErrorException");
 const user = require("../database/model/user");
+const ShortUniqueId = require('short-unique-id');
 
 
 class groupController {
@@ -21,7 +22,9 @@ class groupController {
       const setData = {};
       setData.userId = request.body.userId;
       setData.role = "Anfitrión";
-      let groupCreated = await this.groupDAO.createGroup(groupName,description);
+      const uid = new ShortUniqueId({ length: 6 });
+      let code=uid.rnd();
+      let groupCreated = await this.groupDAO.createGroup(groupName,description,code);
       setData.groupId = groupCreated.id;
       let setCreated = await this.setDAO.createUserGroup(setData);
       response.json({ group: groupCreated, set: setCreated });

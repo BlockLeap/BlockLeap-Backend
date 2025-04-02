@@ -18,11 +18,12 @@ class groupDAO {
     this.classLevels = sequelize.models.classlevels;
   }
 
-  async createGroup(groupName,description) {
+  async createGroup(groupName,description,code) {
     await this.group.sync();
     const createdGroup = await this.group.create({
       name: groupName,
-      Description: description
+      description: description,
+      code:code
     });
     if (!createdGroup) {
       throw new ErrorException(ErrorCode.CantCreate);
