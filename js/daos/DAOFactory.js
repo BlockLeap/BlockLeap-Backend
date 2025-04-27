@@ -8,7 +8,8 @@ const assignedDAO = require("./assignedDAO");
 const groupDAO = require("./groupDAO");
 const userGroupDAO = require("./userGroupDAO");
 const userDAO = require("./userDAO");
-const setDAO = require("./setDAO")
+const setDAO = require("./setDAO");
+const tutorialDAO = require("./tutorialDAO");
 
 class DAOFactory {
   getLevelDAO() {
@@ -44,6 +45,9 @@ class DAOFactory {
   }
   getSetDAO() {
     return new setDAO(sequelize);
+  }
+  getTutorialDAO() {
+    return new tutorialDAO(sequelize);
   }
 }
 
