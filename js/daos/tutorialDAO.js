@@ -23,6 +23,14 @@ class tutorialDAO {
       if (!foundTutorial) throw new ErrorException(ErrorCode.NotFound);
       return foundTutorial;
   }
+  async getAll(){
+    await this.tutorial.sync();
+    const foundTutorial = await this.tutorial.findAll({
+      order:[['prio','ASC']]
+    });
+      if (!foundTutorial) throw new ErrorException(ErrorCode.NotFound);
+      return foundTutorial;
+  }
   async updateTutorial(tutorialData){
     await this.tutorial.sync();
     const updatedTutorial = await this.tutorial.update({

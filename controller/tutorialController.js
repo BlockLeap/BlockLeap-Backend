@@ -13,6 +13,10 @@ class tutorialController {
     let tutorial = await this.tutorialDAO.searchByName(request.params.name);
     response.json(tutorial);
   };
+  getAllTutorials = async (request, response) => {
+    let tutorial = await this.tutorialDAO.getAll();
+    response.json(tutorial);
+  };
   updateTutorial = async (request, response) => {
     let tutorialData={};
     tutorialData.name= request.body.name;

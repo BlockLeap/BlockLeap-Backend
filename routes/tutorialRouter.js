@@ -5,7 +5,8 @@ const TutorialController = require("../controller/tutorialController");
 const tutorialController = new TutorialController();
 
 tutorialRouter
-  .get("/:name", tutorialController.getTutorial)
-  .post("/:name", tutorialController.updateTutorial)
+  .get("/getAll", tutorialController.getAllTutorials)
+  .get("/get/:name", tutorialController.getTutorial)
+  .post("/update/", tutorialController.updateTutorial)
 
 module.exports = tutorialRouter;
