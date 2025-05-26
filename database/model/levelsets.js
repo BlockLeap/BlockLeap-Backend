@@ -1,39 +1,33 @@
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
-      "set",
+      "levelsets",
       {
         id: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          primaryKey: true, 
-          autoIncrement: false, 
-          references: {
-            model: "id",
-            key: "id",
-          },
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        name: {
+          type: DataTypes.STRING(100), 
+          allowNull: false,
+        },
+        description: {
+          type: DataTypes.STRING(200),
+          allowNull: true,
         },
         owner_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          primaryKey: true, 
-          autoIncrement: false, 
           references: {
-            model: "owner_id",
+            model: "user", 
             key: "id",
           },
-        },
-        name: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
-        description: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
         },
       },
       {
         sequelize,
-        tableName: "levelsets",
+        tableName: "levelsets", 
         timestamps: false,
         indexes: [
           {
@@ -41,6 +35,16 @@ module.exports = function (sequelize, DataTypes) {
             unique: true,
             using: "BTREE",
             fields: [{ name: "id" }],
+          },
+          {
+            name: "name",
+            using: "BTREE",
+            fields: [{ name: "name" }],
+          },
+          {
+            name: "owner_id",
+            using: "BTREE",
+            fields: [{ name: "owner_id" }],
           },
         ],
       }

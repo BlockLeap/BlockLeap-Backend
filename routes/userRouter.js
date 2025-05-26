@@ -13,5 +13,6 @@ userRouter
   .get("/officialLevelsCompleted", validateToken, userController.officialLevelsCompleted)
   .get("/totalStars/:id", userController.totalUserStars)
   .get("/:id", userController.getUserById)
+  .get("/names/:userIds", userController.getNamesById)
   .delete("/logout", validateToken, userController.logout);
 module.exports = userRouter;

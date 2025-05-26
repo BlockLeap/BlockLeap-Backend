@@ -1,46 +1,38 @@
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
-      "set",
+      "setgroups",
       {
-        id: {
+        set_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true, 
           autoIncrement: false, 
           references: {
-            model: "id",
+            model: "set_id",
             key: "id",
           },
         },
-        owner_id: {
+        group_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true, 
           autoIncrement: false, 
           references: {
-            model: "owner_id",
+            model: "group_id",
             key: "id",
           },
-        },
-        name: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
-        description: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
         },
       },
       {
         sequelize,
-        tableName: "levelsets",
+        tableName: "setgroups",
         timestamps: false,
         indexes: [
-          {
+            {
             name: "PRIMARY",
             unique: true,
             using: "BTREE",
-            fields: [{ name: "id" }],
+            fields: [{ name: "set_id" }, { name: "group_id" }],
           },
         ],
       }

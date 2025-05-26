@@ -19,6 +19,10 @@ class ErrorCode {
     return "Error al crear";
   }
 
+  static get CantUpdate() {
+    return "Error al modificar";
+  }
+
   static get WrongPassword() {
     return "Usuario no existe";
   }

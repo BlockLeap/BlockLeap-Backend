@@ -4,9 +4,19 @@ var _assigned = require("./assigned");
 var _category = require("./category");
 var _group = require("./group");
 var _level = require("./level");
+var _classlevel = require("./classlevel");
 var _play = require("./play");
-var _set = require("./set");
+var _userGroup = require("./usergroup");
+var _levelSets = require("./levelsets");
 var _user = require("./user");
+var _set = require("./set");
+var _setLevels= require("./setlevels");
+var _setGroups=require("./setgroups");
+var _levelTags=require("./leveltags");
+var _classLevels=require("./classlevels");
+var _tutorial=require("./tutorial");
+
+
 
 function init(sequelize) {
   var access = _access(sequelize, DataTypes);
@@ -15,8 +25,17 @@ function init(sequelize) {
   var group = _group(sequelize, DataTypes);
   var level = _level(sequelize, DataTypes);
   var play = _play(sequelize, DataTypes);
-  var set = _set(sequelize, DataTypes);
+  var userGroup = _userGroup(sequelize, DataTypes);
+  var levelSets = _levelSets(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
+  var classlevel= _classlevel(sequelize, DataTypes);
+  var set = _set(sequelize, DataTypes);
+  var setLevels= _setLevels(sequelize, DataTypes);
+  var setGroups= _setGroups(sequelize, DataTypes);
+  var levelTags= _levelTags(sequelize, DataTypes);
+  var classLevels= _classLevels(sequelize, DataTypes);
+  var tutorial= _tutorial(sequelize, DataTypes);
+
 
   level.belongsTo(category, {
     as: "category_category",
@@ -25,8 +44,8 @@ function init(sequelize) {
   category.hasMany(level, { as: "levels", foreignKey: "category" });
   assigned.belongsTo(group, { as: "group_group", foreignKey: "group" });
   group.hasMany(assigned, { as: "assigneds", foreignKey: "group" });
-  set.belongsTo(group, { as: "group_group", foreignKey: "group" });
-  group.hasMany(set, { as: "sets", foreignKey: "group" });
+  userGroup.belongsTo(group, { as: "group_group", foreignKey: "group" });
+  group.hasMany(userGroup, { as: "sets", foreignKey: "group" });
   access.belongsTo(level, { as: "level_level", foreignKey: "level" });
   level.hasMany(access, { as: "accesses", foreignKey: "level" });
   assigned.belongsTo(level, { as: "level_level", foreignKey: "level" });
@@ -41,8 +60,10 @@ function init(sequelize) {
   user.hasMany(level, { as: "levels", foreignKey: "user" });
   play.belongsTo(user, { as: "user_user", foreignKey: "user" });
   user.hasMany(play, { as: "plays", foreignKey: "user" });
-  set.belongsTo(user, { as: "user_user", foreignKey: "user" });
-  user.hasMany(set, { as: "sets", foreignKey: "user" });
+  userGroup.belongsTo(user, { as: "user_user", foreignKey: "user" });
+  user.hasMany(userGroup, { as: "sets", foreignKey: "user" });
+  classlevel.hasMany(levelTags, { as: "tags", foreignKey: "level_id" });
+
 
   return {
     access,
@@ -51,8 +72,11 @@ function init(sequelize) {
     group,
     level,
     play,
-    set,
+    levelSets,
+    userGroup,
+    setGroups,
     user,
+    classLevels,
   };
 }
 

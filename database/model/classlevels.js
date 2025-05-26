@@ -1,46 +1,38 @@
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
-      "set",
+      "classlevels",
       {
-        id: {
+        id_clase: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true, 
           autoIncrement: false, 
           references: {
-            model: "id",
+            model: "id_clase",
             key: "id",
           },
         },
-        owner_id: {
+        id_nivel: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true, 
           autoIncrement: false, 
           references: {
-            model: "owner_id",
+            model: "id_nivel",
             key: "id",
           },
-        },
-        name: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
-        description: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
         },
       },
       {
         sequelize,
-        tableName: "levelsets",
+        tableName: "classlevels",
         timestamps: false,
         indexes: [
-          {
+            {
             name: "PRIMARY",
             unique: true,
             using: "BTREE",
-            fields: [{ name: "id" }],
+            fields: [{ name: "id_clase" }, { name: "id_nivel" }],
           },
         ],
       }
